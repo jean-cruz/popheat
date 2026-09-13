@@ -1,0 +1,9 @@
+set props("Password")="PopHeat2026!" set props("PasswordNeverExpires")=1 set sc=##class(Security.Users).Modify("_SYSTEM",.props) write "1/9 password: ",$system.Status.GetErrorText(sc),!
+set svcprops("Enabled")=1 set sc=##class(Security.Services).Modify("%Service_CallIn",.svcprops) write "2/9 callin: ",$system.Status.GetErrorText(sc),!
+set nsprops("Globals")="ENSLIB" set nsprops("Routines")="ENSLIB" set nsprops("Interoperability")=1 set sc=##class(Config.Namespaces).Create("POPHEAT",.nsprops) write "3/9 namespace: ",$system.Status.GetErrorText(sc),!
+set db=##class(SYS.Database).%OpenId("/usr/irissys/mgr/enslib/") set db.ReadOnly=0 set sc=db.%Save() write "4/9 enslib rw: ",$system.Status.GetErrorText(sc),!
+set wsgiprops("NameSpace")="POPHEAT" set wsgiprops("Enabled")=1 set wsgiprops("DispatchClass")="%SYS.Python.WSGI" set wsgiprops("WSGIAppLocation")="/opt/popheat/src/python/webapp" set wsgiprops("WSGIAppName")="app" set wsgiprops("WSGICallable")="app" set wsgiprops("WSGIDebug")=1 set wsgiprops("AutheEnabled")=64 set sc=##class(Security.Applications).Create("/popheat",.wsgiprops) write "5/9 dashboard app: ",$system.Status.GetErrorText(sc),!
+set nsapp("NameSpace")="POPHEAT" set nsapp("Enabled")=1 set nsapp("CSPZENEnabled")=1 set nsapp("IsNameSpaceDefault")=1 set nsapp("MatchRoles")=":%All" set nsapp("Path")="/usr/irissys/csp/user/" set nsapp("Description")="POPHEAT namespace applications (Management Portal)" set nsapp("AutheEnabled")=96 set nsapp("GroupById")="%ISCMgtPortal" set sc=##class(Security.Applications).Create("/csp/popheat",.nsapp) write "6/9 portal app: ",$system.Status.GetErrorText(sc),!
+zn "POPHEAT"
+set sc=$system.OBJ.LoadDir("/opt/popheat/src/objectscript","ck",.errlog,1) write "7/9 rules loaded: ",$system.Status.GetErrorText(sc),!
+halt
