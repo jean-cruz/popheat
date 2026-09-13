@@ -4,7 +4,8 @@ PopHeat - Pure-Python IRIS Interoperability Production (PyProd)
 Pipeline: OverpassInAdapter -> VenueIngestService -> HeatClassifierProcess -> HeatPersistOperation
 
 Real venue locations (name/category/lat/lon) come from a dataset extracted from
-OpenStreetMap (Overpass API) for Porto, Portugal - see data/fetch_venues.py.
+OpenStreetMap (Overpass API) for a configurable bounding box (default: Sao
+Paulo, Brazil) - see data/fetch_venues.py.
 Google/Foursquare do not offer a free, ToS-safe live "how busy is this place"
 API (see project README), so the crowdedness score itself is a transparent
 synthetic model driven by category + time of day + day of week, computed fresh
@@ -40,7 +41,7 @@ from intersystems_pyprod import (
 
 iris_package_name = "PopHeat"
 
-VENUES_FILE = Path("/opt/popheat/data/porto_venues.json")
+VENUES_FILE = Path("/opt/popheat/data/venues.json")
 
 # (peak_hour, width_hours, height) bumps per category, summed with circular
 # hour distance so a peak near midnight wraps correctly (23h and 1h are close).

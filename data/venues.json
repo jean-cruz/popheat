@@ -1,0 +1,4559 @@
+[
+  {
+    "venue_id": "osm-598667067",
+    "name": "Maria Paula Bar e Restaurante",
+    "category": "restaurant",
+    "lat": -23.5520829,
+    "lon": -46.6383065
+  },
+  {
+    "venue_id": "osm-599006013",
+    "name": "Tanka",
+    "category": "restaurant",
+    "lat": -23.555258,
+    "lon": -46.6351745
+  },
+  {
+    "venue_id": "osm-629100013",
+    "name": "Mori Sushi",
+    "category": "restaurant",
+    "lat": -23.5630465,
+    "lon": -46.6708263
+  },
+  {
+    "venue_id": "osm-745720898",
+    "name": "Juanita",
+    "category": "restaurant",
+    "lat": -23.5579392,
+    "lon": -46.663391
+  },
+  {
+    "venue_id": "osm-865280465",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.573439,
+    "lon": -46.6422711
+  },
+  {
+    "venue_id": "osm-1004651487",
+    "name": "Ragazzo",
+    "category": "fast_food",
+    "lat": -23.558273,
+    "lon": -46.6372529
+  },
+  {
+    "venue_id": "osm-1056659340",
+    "name": "Lanchonete St Louis Burguer",
+    "category": "fast_food",
+    "lat": -23.5713193,
+    "lon": -46.6561324
+  },
+  {
+    "venue_id": "osm-1056659344",
+    "name": "Bar Casa de Francisca",
+    "category": "bar",
+    "lat": -23.5707183,
+    "lon": -46.6547996
+  },
+  {
+    "venue_id": "osm-1056698095",
+    "name": "Restaurante Sinha'na",
+    "category": "restaurant",
+    "lat": -23.5720041,
+    "lon": -46.656532
+  },
+  {
+    "venue_id": "osm-1056698096",
+    "name": "Boteco da Glória",
+    "category": "bar",
+    "lat": -23.5723191,
+    "lon": -46.6568567
+  },
+  {
+    "venue_id": "osm-1056714454",
+    "name": "Nobar",
+    "category": "restaurant",
+    "lat": -23.5731694,
+    "lon": -46.6577096
+  },
+  {
+    "venue_id": "osm-1056733094",
+    "name": "Restaurante Trattoria do Pietro",
+    "category": "restaurant",
+    "lat": -23.5743125,
+    "lon": -46.6587299
+  },
+  {
+    "venue_id": "osm-1056786853",
+    "name": "Washoi",
+    "category": "restaurant",
+    "lat": -23.5686122,
+    "lon": -46.649197
+  },
+  {
+    "venue_id": "osm-1056786855",
+    "name": "Restaurante Diner´s",
+    "category": "restaurant",
+    "lat": -23.5689928,
+    "lon": -46.6491029
+  },
+  {
+    "venue_id": "osm-1059213958",
+    "name": "Restaurante Natural",
+    "category": "restaurant",
+    "lat": -23.5703788,
+    "lon": -46.6484915
+  },
+  {
+    "venue_id": "osm-1059492730",
+    "name": "Restaurante Comida Chinesa",
+    "category": "restaurant",
+    "lat": -23.5682526,
+    "lon": -46.6502366
+  },
+  {
+    "venue_id": "osm-1059504594",
+    "name": "Domino's",
+    "category": "fast_food",
+    "lat": -23.5662154,
+    "lon": -46.6525925
+  },
+  {
+    "venue_id": "osm-1059504612",
+    "name": "América",
+    "category": "fast_food",
+    "lat": -23.5662178,
+    "lon": -46.6529364
+  },
+  {
+    "venue_id": "osm-1059506161",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5659178,
+    "lon": -46.6530161
+  },
+  {
+    "venue_id": "osm-1059511085",
+    "name": "La Cabaleriza",
+    "category": "restaurant",
+    "lat": -23.5660082,
+    "lon": -46.6535446
+  },
+  {
+    "venue_id": "osm-1066854995",
+    "name": "Rotisserie Santa Gema",
+    "category": "restaurant",
+    "lat": -23.5702482,
+    "lon": -46.6547807
+  },
+  {
+    "venue_id": "osm-1066862944",
+    "name": "Kuka Biruta",
+    "category": "bar",
+    "lat": -23.5693382,
+    "lon": -46.6566993
+  },
+  {
+    "venue_id": "osm-1066862947",
+    "name": "Fran's Café",
+    "category": "cafe",
+    "lat": -23.5698287,
+    "lon": -46.6567898
+  },
+  {
+    "venue_id": "osm-1066863160",
+    "name": "Casa do Lanche",
+    "category": "fast_food",
+    "lat": -23.5701061,
+    "lon": -46.6571529
+  },
+  {
+    "venue_id": "osm-1066864055",
+    "name": "Restaurante Orange",
+    "category": "restaurant",
+    "lat": -23.57033,
+    "lon": -46.656999
+  },
+  {
+    "venue_id": "osm-1066864703",
+    "name": "Pizzaria Delluccio",
+    "category": "restaurant",
+    "lat": -23.5710717,
+    "lon": -46.6564156
+  },
+  {
+    "venue_id": "osm-1201852970",
+    "name": "Café IC",
+    "category": "cafe",
+    "lat": -23.5704874,
+    "lon": -46.6459263
+  },
+  {
+    "venue_id": "osm-1480096185",
+    "name": "Prueba",
+    "category": "restaurant",
+    "lat": -23.5520663,
+    "lon": -46.64585
+  },
+  {
+    "venue_id": "osm-1722488734",
+    "name": "Choperia Opção",
+    "category": "pub",
+    "lat": -23.5615009,
+    "lon": -46.6550971
+  },
+  {
+    "venue_id": "osm-1732048734",
+    "name": "Cantina D'Amico Piolin",
+    "category": "restaurant",
+    "lat": -23.5510136,
+    "lon": -46.6490556
+  },
+  {
+    "venue_id": "osm-1747564182",
+    "name": "Pier Paulista",
+    "category": "bar",
+    "lat": -23.5666506,
+    "lon": -46.6512405
+  },
+  {
+    "venue_id": "osm-1747606013",
+    "name": "MacFil",
+    "category": "bar",
+    "lat": -23.5464307,
+    "lon": -46.6509966
+  },
+  {
+    "venue_id": "osm-1748655746",
+    "name": "Black Dog",
+    "category": "fast_food",
+    "lat": -23.56674,
+    "lon": -46.6516575
+  },
+  {
+    "venue_id": "osm-1773751435",
+    "name": "Gopala Mãdahva",
+    "category": "restaurant",
+    "lat": -23.5560353,
+    "lon": -46.6586169
+  },
+  {
+    "venue_id": "osm-1846130661",
+    "name": "Urbe Café",
+    "category": "cafe",
+    "lat": -23.5560155,
+    "lon": -46.6584189
+  },
+  {
+    "venue_id": "osm-1846135716",
+    "name": "Hamburgueria 162",
+    "category": "fast_food",
+    "lat": -23.5568208,
+    "lon": -46.6590068
+  },
+  {
+    "venue_id": "osm-1846164338",
+    "name": "Sukiya | すき家",
+    "category": "fast_food",
+    "lat": -23.5532238,
+    "lon": -46.6550407
+  },
+  {
+    "venue_id": "osm-1853450933",
+    "name": "Augusta Bakery St.",
+    "category": "restaurant",
+    "lat": -23.5521679,
+    "lon": -46.6530923
+  },
+  {
+    "venue_id": "osm-2195123498",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.5585802,
+    "lon": -46.6593523
+  },
+  {
+    "venue_id": "osm-2274548049",
+    "name": "Bar Amigo Giannotti",
+    "category": "bar",
+    "lat": -23.5541744,
+    "lon": -46.6476537
+  },
+  {
+    "venue_id": "osm-2356661316",
+    "name": "Madhu",
+    "category": "restaurant",
+    "lat": -23.5561062,
+    "lon": -46.6581768
+  },
+  {
+    "venue_id": "osm-2360726173",
+    "name": "Ibotirama",
+    "category": "fast_food",
+    "lat": -23.554896,
+    "lon": -46.6568895
+  },
+  {
+    "venue_id": "osm-2390828970",
+    "name": "Night House",
+    "category": "nightclub",
+    "lat": -23.5522175,
+    "lon": -46.6528365
+  },
+  {
+    "venue_id": "osm-2390828971",
+    "name": "Beco 203",
+    "category": "nightclub",
+    "lat": -23.5518631,
+    "lon": -46.6517568
+  },
+  {
+    "venue_id": "osm-2390828972",
+    "name": "Blitz Haus",
+    "category": "nightclub",
+    "lat": -23.551984,
+    "lon": -46.6521307
+  },
+  {
+    "venue_id": "osm-2390828973",
+    "name": "Caribe",
+    "category": "nightclub",
+    "lat": -23.5522307,
+    "lon": -46.6524089
+  },
+  {
+    "venue_id": "osm-2419408204",
+    "name": "Pizzaria Ruberto's",
+    "category": "restaurant",
+    "lat": -23.557468,
+    "lon": -46.647419
+  },
+  {
+    "venue_id": "osm-2576273169",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.562291,
+    "lon": -46.6557866
+  },
+  {
+    "venue_id": "osm-2637736270",
+    "name": "Café Creme",
+    "category": "cafe",
+    "lat": -23.566354,
+    "lon": -46.6508719
+  },
+  {
+    "venue_id": "osm-2637738149",
+    "name": "Asterix",
+    "category": "bar",
+    "lat": -23.566686,
+    "lon": -46.6512751
+  },
+  {
+    "venue_id": "osm-2637739286",
+    "name": "Tollocos",
+    "category": "restaurant",
+    "lat": -23.5567596,
+    "lon": -46.658877
+  },
+  {
+    "venue_id": "osm-2637741851",
+    "name": "Outs",
+    "category": "bar",
+    "lat": -23.5513788,
+    "lon": -46.6507134
+  },
+  {
+    "venue_id": "osm-2637741869",
+    "name": "Inferno Club",
+    "category": "bar",
+    "lat": -23.5515453,
+    "lon": -46.650771
+  },
+  {
+    "venue_id": "osm-2637743184",
+    "name": "Presidenta",
+    "category": "bar",
+    "lat": -23.5510626,
+    "lon": -46.6492444
+  },
+  {
+    "venue_id": "osm-2687705131",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5733376,
+    "lon": -46.6439306
+  },
+  {
+    "venue_id": "osm-2687705142",
+    "name": "Kyoto Oriental Fast Food",
+    "category": "fast_food",
+    "lat": -23.5716948,
+    "lon": -46.643503
+  },
+  {
+    "venue_id": "osm-2744223394",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.546653,
+    "lon": -46.6520949
+  },
+  {
+    "venue_id": "osm-2744227661",
+    "name": "Lab Club",
+    "category": "nightclub",
+    "lat": -23.5516283,
+    "lon": -46.6510366
+  },
+  {
+    "venue_id": "osm-2744231996",
+    "name": "Lanchonete Patiná",
+    "category": "bar",
+    "lat": -23.5520824,
+    "lon": -46.6524347
+  },
+  {
+    "venue_id": "osm-2744231997",
+    "name": "Mono Club",
+    "category": "nightclub",
+    "lat": -23.5513289,
+    "lon": -46.6506626
+  },
+  {
+    "venue_id": "osm-2847700929",
+    "name": "Capim Santo",
+    "category": "restaurant",
+    "lat": -23.5622275,
+    "lon": -46.6600729
+  },
+  {
+    "venue_id": "osm-2862747295",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.5588939,
+    "lon": -46.6611783
+  },
+  {
+    "venue_id": "osm-2862747298",
+    "name": "Bovinus",
+    "category": "restaurant",
+    "lat": -23.5567682,
+    "lon": -46.6586691
+  },
+  {
+    "venue_id": "osm-2862747299",
+    "name": "York grill",
+    "category": "restaurant",
+    "lat": -23.5568564,
+    "lon": -46.6587637
+  },
+  {
+    "venue_id": "osm-2869109081",
+    "name": "Planeta's",
+    "category": "restaurant",
+    "lat": -23.5500752,
+    "lon": -46.6460297
+  },
+  {
+    "venue_id": "osm-2961589538",
+    "name": "Porque Sim",
+    "category": "restaurant",
+    "lat": -23.5576837,
+    "lon": -46.6356457
+  },
+  {
+    "venue_id": "osm-2961589539",
+    "name": "Jardim Meio Hectare",
+    "category": "restaurant",
+    "lat": -23.5576858,
+    "lon": -46.6355505
+  },
+  {
+    "venue_id": "osm-2972400179",
+    "name": "Bistro Reserva",
+    "category": "restaurant",
+    "lat": -23.5655754,
+    "lon": -46.6511596
+  },
+  {
+    "venue_id": "osm-3150470662",
+    "name": "Subway",
+    "category": "fast_food",
+    "lat": -23.5658501,
+    "lon": -46.6534196
+  },
+  {
+    "venue_id": "osm-3285104521",
+    "name": "Lasagneria",
+    "category": "restaurant",
+    "lat": -23.558675,
+    "lon": -46.6746873
+  },
+  {
+    "venue_id": "osm-3408025593",
+    "name": "Chez Oscar",
+    "category": "restaurant",
+    "lat": -23.561541,
+    "lon": -46.6706392
+  },
+  {
+    "venue_id": "osm-3415424081",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.5559542,
+    "lon": -46.6749939
+  },
+  {
+    "venue_id": "osm-3418059722",
+    "name": "Casa Jaya",
+    "category": "restaurant",
+    "lat": -23.5588352,
+    "lon": -46.6747615
+  },
+  {
+    "venue_id": "osm-3441942625",
+    "name": "Japatche",
+    "category": "restaurant",
+    "lat": -23.5581082,
+    "lon": -46.6638099
+  },
+  {
+    "venue_id": "osm-3449922200",
+    "name": "Liberdade Grill",
+    "category": "restaurant",
+    "lat": -23.5621432,
+    "lon": -46.6389122
+  },
+  {
+    "venue_id": "osm-3449922201",
+    "name": "Lanchonete e Restaurante Maracangalha",
+    "category": "fast_food",
+    "lat": -23.5594552,
+    "lon": -46.6378987
+  },
+  {
+    "venue_id": "osm-3653326739",
+    "name": "Irngrid Lancheteria",
+    "category": "fast_food",
+    "lat": -23.5554189,
+    "lon": -46.6737694
+  },
+  {
+    "venue_id": "osm-3653382456",
+    "name": "Fasely",
+    "category": "pub",
+    "lat": -23.5500668,
+    "lon": -46.6537574
+  },
+  {
+    "venue_id": "osm-3698987686",
+    "name": "Nosso Ranchinho",
+    "category": "restaurant",
+    "lat": -23.5601285,
+    "lon": -46.6429489
+  },
+  {
+    "venue_id": "osm-3719540060",
+    "name": "Yūbari 夕張",
+    "category": "restaurant",
+    "lat": -23.5498093,
+    "lon": -46.6451364
+  },
+  {
+    "venue_id": "osm-3719540061",
+    "name": "Famiglia Mancini",
+    "category": "restaurant",
+    "lat": -23.5503688,
+    "lon": -46.6451046
+  },
+  {
+    "venue_id": "osm-3719540062",
+    "name": "Walter Mancini",
+    "category": "restaurant",
+    "lat": -23.5504533,
+    "lon": -46.6453592
+  },
+  {
+    "venue_id": "osm-3719540066",
+    "name": "Café Marokita",
+    "category": "cafe",
+    "lat": -23.5501573,
+    "lon": -46.6451834
+  },
+  {
+    "venue_id": "osm-3719540067",
+    "name": "Famiglia Mancini",
+    "category": "restaurant",
+    "lat": -23.5499505,
+    "lon": -46.6453105
+  },
+  {
+    "venue_id": "osm-3719540068",
+    "name": "Madreperola",
+    "category": "restaurant",
+    "lat": -23.5500135,
+    "lon": -46.6452273
+  },
+  {
+    "venue_id": "osm-3722289717",
+    "name": "Cantina C...Que Sabe!",
+    "category": "restaurant",
+    "lat": -23.5571061,
+    "lon": -46.645685
+  },
+  {
+    "venue_id": "osm-3722298679",
+    "name": "Gigetto",
+    "category": "restaurant",
+    "lat": -23.5592248,
+    "lon": -46.6465156
+  },
+  {
+    "venue_id": "osm-3722298685",
+    "name": "Cantina Roperto",
+    "category": "restaurant",
+    "lat": -23.5588093,
+    "lon": -46.646529
+  },
+  {
+    "venue_id": "osm-3722298688",
+    "name": "Lazarella",
+    "category": "restaurant",
+    "lat": -23.5582883,
+    "lon": -46.6463456
+  },
+  {
+    "venue_id": "osm-3722298690",
+    "name": "Cantina L'italiano",
+    "category": "restaurant",
+    "lat": -23.5568553,
+    "lon": -46.6467266
+  },
+  {
+    "venue_id": "osm-3722302633",
+    "name": "Templo da Carne Marcos Bassi",
+    "category": "restaurant",
+    "lat": -23.5590083,
+    "lon": -46.6466551
+  },
+  {
+    "venue_id": "osm-3756623656",
+    "name": "Fran's Café",
+    "category": "cafe",
+    "lat": -23.5688171,
+    "lon": -46.6471224
+  },
+  {
+    "venue_id": "osm-3759015390",
+    "name": "Bela Santos",
+    "category": "restaurant",
+    "lat": -23.5572882,
+    "lon": -46.6629785
+  },
+  {
+    "venue_id": "osm-3759015391",
+    "name": "Delícias do Café",
+    "category": "cafe",
+    "lat": -23.557854,
+    "lon": -46.6633002
+  },
+  {
+    "venue_id": "osm-3759018563",
+    "name": "Santa Cevada",
+    "category": "bar",
+    "lat": -23.5739568,
+    "lon": -46.6419944
+  },
+  {
+    "venue_id": "osm-3873686200",
+    "name": "Café Piu Piu",
+    "category": "bar",
+    "lat": -23.5541913,
+    "lon": -46.6469574
+  },
+  {
+    "venue_id": "osm-3886095980",
+    "name": "Tirrenos Restaurante",
+    "category": "restaurant",
+    "lat": -23.5538686,
+    "lon": -46.6532148
+  },
+  {
+    "venue_id": "osm-3886191657",
+    "name": "Luk Restaurante",
+    "category": "restaurant",
+    "lat": -23.5554257,
+    "lon": -46.6558957
+  },
+  {
+    "venue_id": "osm-3939977873",
+    "name": "Coffe Corner",
+    "category": "restaurant",
+    "lat": -23.5565657,
+    "lon": -46.6638449
+  },
+  {
+    "venue_id": "osm-3939977874",
+    "name": "Orange Point",
+    "category": "pub",
+    "lat": -23.5566942,
+    "lon": -46.6639534
+  },
+  {
+    "venue_id": "osm-3994366410",
+    "name": "Por um punhado de dólares - PPD",
+    "category": "cafe",
+    "lat": -23.5485561,
+    "lon": -46.6453462
+  },
+  {
+    "venue_id": "osm-3998266198",
+    "name": "Chicano",
+    "category": "restaurant",
+    "lat": -23.553244,
+    "lon": -46.6550789
+  },
+  {
+    "venue_id": "osm-4011501023",
+    "name": "Restaurante Gerações",
+    "category": "restaurant",
+    "lat": -23.5552154,
+    "lon": -46.6410839
+  },
+  {
+    "venue_id": "osm-4077524720",
+    "name": "Lanches Moreira",
+    "category": "fast_food",
+    "lat": -23.5702422,
+    "lon": -46.642794
+  },
+  {
+    "venue_id": "osm-4128365592",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5588018,
+    "lon": -46.6591008
+  },
+  {
+    "venue_id": "osm-4128370694",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5576364,
+    "lon": -46.6604181
+  },
+  {
+    "venue_id": "osm-4128370893",
+    "name": "Look Lanches",
+    "category": "fast_food",
+    "lat": -23.5575097,
+    "lon": -46.6605668
+  },
+  {
+    "venue_id": "osm-4128376190",
+    "name": "America",
+    "category": "restaurant",
+    "lat": -23.5572686,
+    "lon": -46.661524
+  },
+  {
+    "venue_id": "osm-4128376191",
+    "name": "Gocoffee",
+    "category": "cafe",
+    "lat": -23.5575987,
+    "lon": -46.6611506
+  },
+  {
+    "venue_id": "osm-4128501814",
+    "name": "Bar e Lanchonete Petite",
+    "category": "fast_food",
+    "lat": -23.5624185,
+    "lon": -46.6556542
+  },
+  {
+    "venue_id": "osm-4128750615",
+    "name": "Lanchonete Garoa Paulista",
+    "category": "fast_food",
+    "lat": -23.5690493,
+    "lon": -46.6468168
+  },
+  {
+    "venue_id": "osm-4128789603",
+    "name": "Bovinu's Fast Grill",
+    "category": "restaurant",
+    "lat": -23.5670011,
+    "lon": -46.650147
+  },
+  {
+    "venue_id": "osm-4128823609",
+    "name": "Pastel da Maria",
+    "category": "fast_food",
+    "lat": -23.5686659,
+    "lon": -46.6473237
+  },
+  {
+    "venue_id": "osm-4131789673",
+    "name": "AMMA",
+    "category": "cafe",
+    "lat": -23.5658198,
+    "lon": -46.664124
+  },
+  {
+    "venue_id": "osm-4134768091",
+    "name": "D.O.M.",
+    "category": "restaurant",
+    "lat": -23.5662205,
+    "lon": -46.6674763
+  },
+  {
+    "venue_id": "osm-4138893291",
+    "name": "Restaurante Yamaga",
+    "category": "restaurant",
+    "lat": -23.5578577,
+    "lon": -46.6356874
+  },
+  {
+    "venue_id": "osm-4158579149",
+    "name": "Lanches Franca Center",
+    "category": "fast_food",
+    "lat": -23.5592115,
+    "lon": -46.6668254
+  },
+  {
+    "venue_id": "osm-4203584701",
+    "name": "Bela Augusta",
+    "category": "restaurant",
+    "lat": -23.5534862,
+    "lon": -46.6554202
+  },
+  {
+    "venue_id": "osm-4208230247",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5477022,
+    "lon": -46.665134
+  },
+  {
+    "venue_id": "osm-4208230251",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5477038,
+    "lon": -46.6653596
+  },
+  {
+    "venue_id": "osm-4208230455",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5479756,
+    "lon": -46.6647753
+  },
+  {
+    "venue_id": "osm-4208230462",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5479995,
+    "lon": -46.6657474
+  },
+  {
+    "venue_id": "osm-4208230474",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5480322,
+    "lon": -46.6647533
+  },
+  {
+    "venue_id": "osm-4208230477",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5480506,
+    "lon": -46.6657645
+  },
+  {
+    "venue_id": "osm-4208230510",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5482342,
+    "lon": -46.6657598
+  },
+  {
+    "venue_id": "osm-4208230530",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5487389,
+    "lon": -46.6657524
+  },
+  {
+    "venue_id": "osm-4223880351",
+    "name": "Cuca Legal",
+    "category": "restaurant",
+    "lat": -23.5672421,
+    "lon": -46.6679402
+  },
+  {
+    "venue_id": "osm-4230738235",
+    "name": "Café e bar Pombal",
+    "category": "restaurant",
+    "lat": -23.5531114,
+    "lon": -46.6739889
+  },
+  {
+    "venue_id": "osm-4260989190",
+    "name": "Gopala Hari",
+    "category": "restaurant",
+    "lat": -23.5559475,
+    "lon": -46.6587636
+  },
+  {
+    "venue_id": "osm-4305213694",
+    "name": "Paribar",
+    "category": "restaurant",
+    "lat": -23.5464681,
+    "lon": -46.6418431
+  },
+  {
+    "venue_id": "osm-4308181690",
+    "name": "Sukiya Restaurante",
+    "category": "restaurant",
+    "lat": -23.5544485,
+    "lon": -46.6352614
+  },
+  {
+    "venue_id": "osm-4334620298",
+    "name": "Mini Coxinhas",
+    "category": "fast_food",
+    "lat": -23.5456215,
+    "lon": -46.6397666
+  },
+  {
+    "venue_id": "osm-4366660090",
+    "name": "Tatu Bola",
+    "category": "restaurant",
+    "lat": -23.5664426,
+    "lon": -46.669017
+  },
+  {
+    "venue_id": "osm-4367701911",
+    "name": "Z Deli Sandwich Shop",
+    "category": "fast_food",
+    "lat": -23.5630497,
+    "lon": -46.6671569
+  },
+  {
+    "venue_id": "osm-4392912037",
+    "name": "Feijão de Corda",
+    "category": "restaurant",
+    "lat": -23.5552879,
+    "lon": -46.6403238
+  },
+  {
+    "venue_id": "osm-4394024912",
+    "name": "Estadão Bar & Lanches",
+    "category": "fast_food",
+    "lat": -23.5487497,
+    "lon": -46.6426322
+  },
+  {
+    "venue_id": "osm-4398192524",
+    "name": "Lamen Kazu",
+    "category": "restaurant",
+    "lat": -23.55768,
+    "lon": -46.635899
+  },
+  {
+    "venue_id": "osm-4398192525",
+    "name": "Izakaya Kazu",
+    "category": "restaurant",
+    "lat": -23.5578539,
+    "lon": -46.6355684
+  },
+  {
+    "venue_id": "osm-4398192526",
+    "name": "Meu Udon",
+    "category": "restaurant",
+    "lat": -23.5578544,
+    "lon": -46.6355054
+  },
+  {
+    "venue_id": "osm-4425607793",
+    "name": "luncheonette",
+    "category": "restaurant",
+    "lat": -23.5574416,
+    "lon": -46.6442371
+  },
+  {
+    "venue_id": "osm-4472017893",
+    "name": "Pão",
+    "category": "cafe",
+    "lat": -23.5597087,
+    "lon": -46.6654883
+  },
+  {
+    "venue_id": "osm-4490913406",
+    "name": "Drosophyla",
+    "category": "restaurant",
+    "lat": -23.5490322,
+    "lon": -46.6453841
+  },
+  {
+    "venue_id": "osm-4518426497",
+    "name": "Lox deli",
+    "category": "restaurant",
+    "lat": -23.5704482,
+    "lon": -46.6574171
+  },
+  {
+    "venue_id": "osm-4523970793",
+    "name": "Bar Amigos do Zé",
+    "category": "pub",
+    "lat": -23.5491537,
+    "lon": -46.6463834
+  },
+  {
+    "venue_id": "osm-4526413323",
+    "name": "Bar e Café Crispiniano",
+    "category": "cafe",
+    "lat": -23.5467698,
+    "lon": -46.6405048
+  },
+  {
+    "venue_id": "osm-4526413331",
+    "name": "Cascais",
+    "category": "restaurant",
+    "lat": -23.5465155,
+    "lon": -46.6407264
+  },
+  {
+    "venue_id": "osm-4526413332",
+    "name": "Fazenda Grill",
+    "category": "restaurant",
+    "lat": -23.5464798,
+    "lon": -46.6407531
+  },
+  {
+    "venue_id": "osm-4526413338",
+    "name": "Nikita Lanches",
+    "category": "fast_food",
+    "lat": -23.5461614,
+    "lon": -46.6409909
+  },
+  {
+    "venue_id": "osm-4526413348",
+    "name": "Salgadinhos",
+    "category": "fast_food",
+    "lat": -23.5453765,
+    "lon": -46.6415731
+  },
+  {
+    "venue_id": "osm-4526413349",
+    "name": "Restaurante Finisteri",
+    "category": "restaurant",
+    "lat": -23.5453393,
+    "lon": -46.6416005
+  },
+  {
+    "venue_id": "osm-4526925296",
+    "name": "Casa do Pão de Queijo",
+    "category": "cafe",
+    "lat": -23.546539,
+    "lon": -46.641364
+  },
+  {
+    "venue_id": "osm-4527393081",
+    "name": "Bob's",
+    "category": "fast_food",
+    "lat": -23.5461401,
+    "lon": -46.641333
+  },
+  {
+    "venue_id": "osm-4528875793",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5679649,
+    "lon": -46.6480845
+  },
+  {
+    "venue_id": "osm-4528877492",
+    "name": "Tête à Tête Restaurante",
+    "category": "restaurant",
+    "lat": -23.5596763,
+    "lon": -46.6692053
+  },
+  {
+    "venue_id": "osm-4528895690",
+    "name": "Jiquitaia",
+    "category": "restaurant",
+    "lat": -23.5567961,
+    "lon": -46.6575305
+  },
+  {
+    "venue_id": "osm-4528907391",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5681911,
+    "lon": -46.6489224
+  },
+  {
+    "venue_id": "osm-4528920989",
+    "name": "Bar da Dona Onça",
+    "category": "bar",
+    "lat": -23.5465557,
+    "lon": -46.6448479
+  },
+  {
+    "venue_id": "osm-4532565191",
+    "name": "Cafe Duetto",
+    "category": "cafe",
+    "lat": -23.5567973,
+    "lon": -46.6590336
+  },
+  {
+    "venue_id": "osm-4535431189",
+    "name": "Charme da Paulista",
+    "category": "bar",
+    "lat": -23.5622306,
+    "lon": -46.6558687
+  },
+  {
+    "venue_id": "osm-4548016093",
+    "name": "laranjinha",
+    "category": "restaurant",
+    "lat": -23.5667888,
+    "lon": -46.6495262
+  },
+  {
+    "venue_id": "osm-4566867799",
+    "name": "Pão de Queijo",
+    "category": "restaurant",
+    "lat": -23.5631875,
+    "lon": -46.6673016
+  },
+  {
+    "venue_id": "osm-4641297791",
+    "name": "Carlino Restaurante",
+    "category": "restaurant",
+    "lat": -23.5461016,
+    "lon": -46.6457633
+  },
+  {
+    "venue_id": "osm-4644509691",
+    "name": "Ponto 26",
+    "category": "fast_food",
+    "lat": -23.5483989,
+    "lon": -46.6405455
+  },
+  {
+    "venue_id": "osm-4653755317",
+    "name": "Soho's Place",
+    "category": "restaurant",
+    "lat": -23.5468555,
+    "lon": -46.649712
+  },
+  {
+    "venue_id": "osm-4660442248",
+    "name": "Bar e Lanches Chapéu de Couro",
+    "category": "bar",
+    "lat": -23.547665,
+    "lon": -46.6390689
+  },
+  {
+    "venue_id": "osm-4660442253",
+    "name": "Tomdam Bar e Lanchonete",
+    "category": "bar",
+    "lat": -23.5475292,
+    "lon": -46.6389575
+  },
+  {
+    "venue_id": "osm-4678872008",
+    "name": "Tap Tap",
+    "category": "bar",
+    "lat": -23.5475067,
+    "lon": -46.6457071
+  },
+  {
+    "venue_id": "osm-4680455418",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5450782,
+    "lon": -46.6402185
+  },
+  {
+    "venue_id": "osm-4680455422",
+    "name": "Ragazzo",
+    "category": "fast_food",
+    "lat": -23.5452159,
+    "lon": -46.6400583
+  },
+  {
+    "venue_id": "osm-4683209991",
+    "name": "Toque de Café",
+    "category": "cafe",
+    "lat": -23.5691411,
+    "lon": -46.6506248
+  },
+  {
+    "venue_id": "osm-4703607694",
+    "name": "Hot Pork",
+    "category": "fast_food",
+    "lat": -23.54595,
+    "lon": -46.6456628
+  },
+  {
+    "venue_id": "osm-4705272107",
+    "name": "Novo Sabor",
+    "category": "fast_food",
+    "lat": -23.5510721,
+    "lon": -46.6435828
+  },
+  {
+    "venue_id": "osm-4725062498",
+    "name": "Sal Gastronomia",
+    "category": "restaurant",
+    "lat": -23.5547983,
+    "lon": -46.6648783
+  },
+  {
+    "venue_id": "osm-4746795694",
+    "name": "The Fifties",
+    "category": "restaurant",
+    "lat": -23.5662733,
+    "lon": -46.6528977
+  },
+  {
+    "venue_id": "osm-4756120622",
+    "name": "Izakaya Issa",
+    "category": "restaurant",
+    "lat": -23.5582855,
+    "lon": -46.6359355
+  },
+  {
+    "venue_id": "osm-4757124296",
+    "name": "Habib's",
+    "category": "fast_food",
+    "lat": -23.5489376,
+    "lon": -46.6356269
+  },
+  {
+    "venue_id": "osm-4787220521",
+    "name": "Ponto Chic",
+    "category": "fast_food",
+    "lat": -23.571585,
+    "lon": -46.6436216
+  },
+  {
+    "venue_id": "osm-4804638654",
+    "name": "Badaró Sucos e Lanches",
+    "category": "fast_food",
+    "lat": -23.5457636,
+    "lon": -46.6357624
+  },
+  {
+    "venue_id": "osm-4806475846",
+    "name": "Frigideira Grill",
+    "category": "restaurant",
+    "lat": -23.5460402,
+    "lon": -46.6350547
+  },
+  {
+    "venue_id": "osm-4810078920",
+    "name": "Nandemoyá",
+    "category": "restaurant",
+    "lat": -23.5571562,
+    "lon": -46.6357991
+  },
+  {
+    "venue_id": "osm-4837051419",
+    "name": "Bar Marcação",
+    "category": "pub",
+    "lat": -23.546093,
+    "lon": -46.6488933
+  },
+  {
+    "venue_id": "osm-4840470725",
+    "name": "Hot Dog Company",
+    "category": "fast_food",
+    "lat": -23.5564753,
+    "lon": -46.6585719
+  },
+  {
+    "venue_id": "osm-4878970822",
+    "name": "Le Pain Quotidien",
+    "category": "cafe",
+    "lat": -23.5613612,
+    "lon": -46.6686254
+  },
+  {
+    "venue_id": "osm-4884207021",
+    "name": "Bento House",
+    "category": "restaurant",
+    "lat": -23.5555797,
+    "lon": -46.635564
+  },
+  {
+    "venue_id": "osm-4884207022",
+    "name": "Kareya",
+    "category": "restaurant",
+    "lat": -23.555577,
+    "lon": -46.6356386
+  },
+  {
+    "venue_id": "osm-4884207321",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5580567,
+    "lon": -46.6367737
+  },
+  {
+    "venue_id": "osm-4893953627",
+    "name": "Barões do Café",
+    "category": "restaurant",
+    "lat": -23.5572592,
+    "lon": -46.662949
+  },
+  {
+    "venue_id": "osm-4893953628",
+    "name": "Bar e Cozinha Bela Santos",
+    "category": "restaurant",
+    "lat": -23.557263,
+    "lon": -46.663007
+  },
+  {
+    "venue_id": "osm-4893953630",
+    "name": "Beach Beer",
+    "category": "restaurant",
+    "lat": -23.5571602,
+    "lon": -46.663123
+  },
+  {
+    "venue_id": "osm-4893953639",
+    "name": "Mr. Pastello",
+    "category": "restaurant",
+    "lat": -23.556698,
+    "lon": -46.663701
+  },
+  {
+    "venue_id": "osm-4893953646",
+    "name": "Dali Café",
+    "category": "cafe",
+    "lat": -23.5563528,
+    "lon": -46.663554
+  },
+  {
+    "venue_id": "osm-4895364621",
+    "name": "Casa das Rosas Ristoro",
+    "category": "cafe",
+    "lat": -23.5714224,
+    "lon": -46.6453317
+  },
+  {
+    "venue_id": "osm-4899871477",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.56777,
+    "lon": -46.6493222
+  },
+  {
+    "venue_id": "osm-4899871493",
+    "name": "Rascal",
+    "category": "restaurant",
+    "lat": -23.5671378,
+    "lon": -46.6515762
+  },
+  {
+    "venue_id": "osm-4906018787",
+    "name": "Deskolado",
+    "category": "pub",
+    "lat": -23.5470654,
+    "lon": -46.6489157
+  },
+  {
+    "venue_id": "osm-4912963767",
+    "name": "Restajurante Jabuticaba",
+    "category": "restaurant",
+    "lat": -23.5555251,
+    "lon": -46.6610675
+  },
+  {
+    "venue_id": "osm-4919837924",
+    "name": "Al Janiah",
+    "category": "bar",
+    "lat": -23.5574738,
+    "lon": -46.6452074
+  },
+  {
+    "venue_id": "osm-4936262649",
+    "name": "Virô Bistrô",
+    "category": "bar",
+    "lat": -23.5545343,
+    "lon": -46.6581474
+  },
+  {
+    "venue_id": "osm-4939136891",
+    "name": "Ça-Va Restaurant",
+    "category": "restaurant",
+    "lat": -23.5603694,
+    "lon": -46.6563246
+  },
+  {
+    "venue_id": "osm-4939136895",
+    "name": "SP Bar e Restaurante",
+    "category": "restaurant",
+    "lat": -23.560432,
+    "lon": -46.6562556
+  },
+  {
+    "venue_id": "osm-4940530190",
+    "name": "Kilove Grill",
+    "category": "restaurant",
+    "lat": -23.5599549,
+    "lon": -46.6562576
+  },
+  {
+    "venue_id": "osm-4940939100",
+    "name": "Gardens Restaurante",
+    "category": "restaurant",
+    "lat": -23.5633146,
+    "lon": -46.6561158
+  },
+  {
+    "venue_id": "osm-4940939101",
+    "name": "Le Monde",
+    "category": "restaurant",
+    "lat": -23.56329,
+    "lon": -46.6561453
+  },
+  {
+    "venue_id": "osm-4940939102",
+    "name": "Menta Café",
+    "category": "cafe",
+    "lat": -23.5632736,
+    "lon": -46.656165
+  },
+  {
+    "venue_id": "osm-4940939114",
+    "name": "Benjamin",
+    "category": "restaurant",
+    "lat": -23.5624981,
+    "lon": -46.6555514
+  },
+  {
+    "venue_id": "osm-4940939115",
+    "name": "BubbleKill",
+    "category": "cafe",
+    "lat": -23.5624509,
+    "lon": -46.6556124
+  },
+  {
+    "venue_id": "osm-4944684621",
+    "name": "Alcachofra",
+    "category": "restaurant",
+    "lat": -23.5477587,
+    "lon": -46.635289
+  },
+  {
+    "venue_id": "osm-4944684721",
+    "name": "Casa da Coxinha Vegana",
+    "category": "fast_food",
+    "lat": -23.5476628,
+    "lon": -46.6353636
+  },
+  {
+    "venue_id": "osm-4945030022",
+    "name": "Pizzaria Copan",
+    "category": "restaurant",
+    "lat": -23.5467618,
+    "lon": -46.6449309
+  },
+  {
+    "venue_id": "osm-4945044212",
+    "name": "Taste and See",
+    "category": "restaurant",
+    "lat": -23.5640446,
+    "lon": -46.6515502
+  },
+  {
+    "venue_id": "osm-4945044213",
+    "name": "Restaurante Recanto 2",
+    "category": "restaurant",
+    "lat": -23.5640915,
+    "lon": -46.651565
+  },
+  {
+    "venue_id": "osm-4945044214",
+    "name": "Vita Natural",
+    "category": "restaurant",
+    "lat": -23.5641188,
+    "lon": -46.6515912
+  },
+  {
+    "venue_id": "osm-4945044215",
+    "name": "Restaurante Vila Campinas",
+    "category": "restaurant",
+    "lat": -23.5641483,
+    "lon": -46.6516194
+  },
+  {
+    "venue_id": "osm-4945785811",
+    "name": "Puppy",
+    "category": "fast_food",
+    "lat": -23.5653512,
+    "lon": -46.65219
+  },
+  {
+    "venue_id": "osm-4945788534",
+    "name": "Eu Tu Eles Bar",
+    "category": "bar",
+    "lat": -23.5667243,
+    "lon": -46.6516414
+  },
+  {
+    "venue_id": "osm-4947353938",
+    "name": "Eugenio Bar",
+    "category": "bar",
+    "lat": -23.5664582,
+    "lon": -46.6510527
+  },
+  {
+    "venue_id": "osm-4947353944",
+    "name": "Prainha Paulista",
+    "category": "bar",
+    "lat": -23.5666085,
+    "lon": -46.6511995
+  },
+  {
+    "venue_id": "osm-4947353945",
+    "name": "La Barbara Lounge",
+    "category": "restaurant",
+    "lat": -23.5667162,
+    "lon": -46.6513045
+  },
+  {
+    "venue_id": "osm-4947353955",
+    "name": "Baby Fruta",
+    "category": "fast_food",
+    "lat": -23.5672657,
+    "lon": -46.6498716
+  },
+  {
+    "venue_id": "osm-4947353957",
+    "name": "Pastel da Maria",
+    "category": "fast_food",
+    "lat": -23.5673112,
+    "lon": -46.6498183
+  },
+  {
+    "venue_id": "osm-4947353959",
+    "name": "Paulista",
+    "category": "fast_food",
+    "lat": -23.5673836,
+    "lon": -46.6497336
+  },
+  {
+    "venue_id": "osm-4947353961",
+    "name": "Lanchonete Laranjinha",
+    "category": "fast_food",
+    "lat": -23.567418,
+    "lon": -46.6496934
+  },
+  {
+    "venue_id": "osm-4949022236",
+    "name": "Fran's Café",
+    "category": "cafe",
+    "lat": -23.5540712,
+    "lon": -46.6628039
+  },
+  {
+    "venue_id": "osm-4956890676",
+    "name": "Deck 484",
+    "category": "restaurant",
+    "lat": -23.5692097,
+    "lon": -46.6490287
+  },
+  {
+    "venue_id": "osm-4956890677",
+    "name": "Restaurante Sensação",
+    "category": "restaurant",
+    "lat": -23.5689394,
+    "lon": -46.6490888
+  },
+  {
+    "venue_id": "osm-4956890679",
+    "name": "Restaurante Oliveira",
+    "category": "restaurant",
+    "lat": -23.5690723,
+    "lon": -46.6491229
+  },
+  {
+    "venue_id": "osm-4956890680",
+    "name": "Aquele Café da Rua",
+    "category": "cafe",
+    "lat": -23.5688138,
+    "lon": -46.6490682
+  },
+  {
+    "venue_id": "osm-4956890698",
+    "name": "Domínio Lanches e Restaurante",
+    "category": "restaurant",
+    "lat": -23.5682785,
+    "lon": -46.6485455
+  },
+  {
+    "venue_id": "osm-4960843326",
+    "name": "Paulista Burger",
+    "category": "fast_food",
+    "lat": -23.556697,
+    "lon": -46.6585928
+  },
+  {
+    "venue_id": "osm-4962188946",
+    "name": "Rei do Mate",
+    "category": "cafe",
+    "lat": -23.5692378,
+    "lon": -46.6465693
+  },
+  {
+    "venue_id": "osm-4962188949",
+    "name": "Restaurante Aspargus",
+    "category": "restaurant",
+    "lat": -23.5689176,
+    "lon": -46.6469897
+  },
+  {
+    "venue_id": "osm-4962188952",
+    "name": "Lanchonete La Villetto",
+    "category": "fast_food",
+    "lat": -23.5686178,
+    "lon": -46.6469961
+  },
+  {
+    "venue_id": "osm-4962188955",
+    "name": "Lanches 345",
+    "category": "fast_food",
+    "lat": -23.5684981,
+    "lon": -46.6468907
+  },
+  {
+    "venue_id": "osm-4964023947",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.566083,
+    "lon": -46.6505201
+  },
+  {
+    "venue_id": "osm-4964023964",
+    "name": "McCafé",
+    "category": "cafe",
+    "lat": -23.5659557,
+    "lon": -46.6504623
+  },
+  {
+    "venue_id": "osm-4964500735",
+    "name": "La Bárbara Forneria",
+    "category": "fast_food",
+    "lat": -23.5682545,
+    "lon": -46.6491336
+  },
+  {
+    "venue_id": "osm-4964500750",
+    "name": "Ragazzo",
+    "category": "fast_food",
+    "lat": -23.5682446,
+    "lon": -46.6494036
+  },
+  {
+    "venue_id": "osm-4964500751",
+    "name": "Snoppy Restaurante e Lanchonete",
+    "category": "restaurant",
+    "lat": -23.5682212,
+    "lon": -46.6493837
+  },
+  {
+    "venue_id": "osm-4967263118",
+    "name": "Varanda Copan",
+    "category": "restaurant",
+    "lat": -23.5466602,
+    "lon": -46.6449126
+  },
+  {
+    "venue_id": "osm-4969373422",
+    "name": "Restaurante Madrid 1",
+    "category": "restaurant",
+    "lat": -23.551339,
+    "lon": -46.6478394
+  },
+  {
+    "venue_id": "osm-4969386621",
+    "name": "La Franttine",
+    "category": "restaurant",
+    "lat": -23.5507319,
+    "lon": -46.6432455
+  },
+  {
+    "venue_id": "osm-4969390721",
+    "name": "Pizzaria Famiglia",
+    "category": "restaurant",
+    "lat": -23.5506719,
+    "lon": -46.6434418
+  },
+  {
+    "venue_id": "osm-4977500728",
+    "name": "K-Pop Chicken",
+    "category": "restaurant",
+    "lat": -23.5559126,
+    "lon": -46.6585354
+  },
+  {
+    "venue_id": "osm-4977750511",
+    "name": "Restaurante Coqueiro VI",
+    "category": "restaurant",
+    "lat": -23.5569738,
+    "lon": -46.6573191
+  },
+  {
+    "venue_id": "osm-4977917026",
+    "name": "Ragazzo",
+    "category": "fast_food",
+    "lat": -23.5568304,
+    "lon": -46.6589529
+  },
+  {
+    "venue_id": "osm-4979826245",
+    "name": "Taloá",
+    "category": "fast_food",
+    "lat": -23.5560705,
+    "lon": -46.6598642
+  },
+  {
+    "venue_id": "osm-4979826272",
+    "name": "Athenas Restaurante",
+    "category": "restaurant",
+    "lat": -23.5567044,
+    "lon": -46.6578689
+  },
+  {
+    "venue_id": "osm-4979826276",
+    "name": "Athenas Café e Restaurante",
+    "category": "restaurant",
+    "lat": -23.5563842,
+    "lon": -46.6582426
+  },
+  {
+    "venue_id": "osm-4979826278",
+    "name": "O pedaço da pizza",
+    "category": "fast_food",
+    "lat": -23.5564562,
+    "lon": -46.6583339
+  },
+  {
+    "venue_id": "osm-4980261693",
+    "name": "Nakrô",
+    "category": "restaurant",
+    "lat": -23.5540619,
+    "lon": -46.6589941
+  },
+  {
+    "venue_id": "osm-4982961223",
+    "name": "Nona d'Amore",
+    "category": "restaurant",
+    "lat": -23.5551588,
+    "lon": -46.6557046
+  },
+  {
+    "venue_id": "osm-4983144621",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5555588,
+    "lon": -46.657349
+  },
+  {
+    "venue_id": "osm-4983814621",
+    "name": "Subway",
+    "category": "fast_food",
+    "lat": -23.5649592,
+    "lon": -46.6674658
+  },
+  {
+    "venue_id": "osm-4985185141",
+    "name": "Formosa Hi-Fi",
+    "category": "pub",
+    "lat": -23.5461387,
+    "lon": -46.6388043
+  },
+  {
+    "venue_id": "osm-4990243751",
+    "name": "Estação Consolação",
+    "category": "restaurant",
+    "lat": -23.5543076,
+    "lon": -46.6603649
+  },
+  {
+    "venue_id": "osm-4990243773",
+    "name": "Restaurante Villagio",
+    "category": "restaurant",
+    "lat": -23.5537625,
+    "lon": -46.6596486
+  },
+  {
+    "venue_id": "osm-4990317745",
+    "name": "Forneria Maia",
+    "category": "restaurant",
+    "lat": -23.5544667,
+    "lon": -46.6588527
+  },
+  {
+    "venue_id": "osm-4992680228",
+    "name": "Manai Gastronomia",
+    "category": "restaurant",
+    "lat": -23.5574119,
+    "lon": -46.6592834
+  },
+  {
+    "venue_id": "osm-4992752340",
+    "name": "Its Vegan",
+    "category": "restaurant",
+    "lat": -23.5544267,
+    "lon": -46.6574419
+  },
+  {
+    "venue_id": "osm-4992752354",
+    "name": "Dona Teresa",
+    "category": "restaurant",
+    "lat": -23.5545535,
+    "lon": -46.6572306
+  },
+  {
+    "venue_id": "osm-4992752384",
+    "name": "Bambu",
+    "category": "bar",
+    "lat": -23.5546394,
+    "lon": -46.6580456
+  },
+  {
+    "venue_id": "osm-4992752408",
+    "name": "Bella's Bar",
+    "category": "fast_food",
+    "lat": -23.5540935,
+    "lon": -46.6590273
+  },
+  {
+    "venue_id": "osm-4992752411",
+    "name": "Fogão Paulista",
+    "category": "restaurant",
+    "lat": -23.5539549,
+    "lon": -46.6589065
+  },
+  {
+    "venue_id": "osm-4992804788",
+    "name": "Bella Cintra II",
+    "category": "bar",
+    "lat": -23.5539664,
+    "lon": -46.6591824
+  },
+  {
+    "venue_id": "osm-4993526524",
+    "name": "Bar e Espetinho",
+    "category": "pub",
+    "lat": -23.5546591,
+    "lon": -46.6580206
+  },
+  {
+    "venue_id": "osm-4995327824",
+    "name": "Dona Julia",
+    "category": "restaurant",
+    "lat": -23.5551893,
+    "lon": -46.6626039
+  },
+  {
+    "venue_id": "osm-4995327828",
+    "name": "Belas Artes",
+    "category": "fast_food",
+    "lat": -23.5551145,
+    "lon": -46.6625116
+  },
+  {
+    "venue_id": "osm-4998036623",
+    "name": "Habib's",
+    "category": "fast_food",
+    "lat": -23.5591075,
+    "lon": -46.6613977
+  },
+  {
+    "venue_id": "osm-5000794969",
+    "name": "Real Tamandaré",
+    "category": "restaurant",
+    "lat": -23.5642246,
+    "lon": -46.6353082
+  },
+  {
+    "venue_id": "osm-5005509053",
+    "name": "Lisboa Grill",
+    "category": "restaurant",
+    "lat": -23.5547499,
+    "lon": -46.6631679
+  },
+  {
+    "venue_id": "osm-5005509060",
+    "name": "Estilo Restaurante",
+    "category": "restaurant",
+    "lat": -23.5543638,
+    "lon": -46.6627895
+  },
+  {
+    "venue_id": "osm-5005509081",
+    "name": "Pasteis de Vento",
+    "category": "fast_food",
+    "lat": -23.552773,
+    "lon": -46.6607546
+  },
+  {
+    "venue_id": "osm-5014631207",
+    "name": "Da Franco",
+    "category": "restaurant",
+    "lat": -23.5602995,
+    "lon": -46.6607091
+  },
+  {
+    "venue_id": "osm-5015144923",
+    "name": "Panda Express Vegano",
+    "category": "restaurant",
+    "lat": -23.5482356,
+    "lon": -46.6373451
+  },
+  {
+    "venue_id": "osm-5015214122",
+    "name": "Lanches Triângulo",
+    "category": "cafe",
+    "lat": -23.5482054,
+    "lon": -46.6373275
+  },
+  {
+    "venue_id": "osm-5015216521",
+    "name": "Lanchonete Manga e Laranja",
+    "category": "cafe",
+    "lat": -23.5482941,
+    "lon": -46.6373791
+  },
+  {
+    "venue_id": "osm-5016836032",
+    "name": "Rubi Wine Bar",
+    "category": "bar",
+    "lat": -23.5596468,
+    "lon": -46.6624387
+  },
+  {
+    "venue_id": "osm-5016836224",
+    "name": "Esquina",
+    "category": "fast_food",
+    "lat": -23.5599576,
+    "lon": -46.6350391
+  },
+  {
+    "venue_id": "osm-5016836225",
+    "name": "Zucco",
+    "category": "restaurant",
+    "lat": -23.5632541,
+    "lon": -46.6673716
+  },
+  {
+    "venue_id": "osm-5016841421",
+    "name": "Lanchonete Rosa Baiana",
+    "category": "fast_food",
+    "lat": -23.5599988,
+    "lon": -46.6428154
+  },
+  {
+    "venue_id": "osm-5018554822",
+    "name": "Terraço Jardins",
+    "category": "restaurant",
+    "lat": -23.5590421,
+    "lon": -46.6624045
+  },
+  {
+    "venue_id": "osm-5018554923",
+    "name": "Living Lounge Bar & Sushi",
+    "category": "restaurant",
+    "lat": -23.5591093,
+    "lon": -46.6625337
+  },
+  {
+    "venue_id": "osm-5022212553",
+    "name": "Cubatao",
+    "category": "restaurant",
+    "lat": -23.57418,
+    "lon": -46.6443674
+  },
+  {
+    "venue_id": "osm-5029585421",
+    "name": "Saia VIP delivery",
+    "category": "restaurant",
+    "lat": -23.5707006,
+    "lon": -46.6350092
+  },
+  {
+    "venue_id": "osm-5041143690",
+    "name": "Arabia",
+    "category": "restaurant",
+    "lat": -23.5632157,
+    "lon": -46.6671174
+  },
+  {
+    "venue_id": "osm-5045519533",
+    "name": "Italy",
+    "category": "restaurant",
+    "lat": -23.5658218,
+    "lon": -46.6658017
+  },
+  {
+    "venue_id": "osm-5048609371",
+    "name": "Banca Farah;Rodeio",
+    "category": "restaurant",
+    "lat": -23.5637211,
+    "lon": -46.6678596
+  },
+  {
+    "venue_id": "osm-5049076679",
+    "name": "Botanikafé",
+    "category": "restaurant",
+    "lat": -23.5624255,
+    "lon": -46.6676536
+  },
+  {
+    "venue_id": "osm-5049076690",
+    "name": "Paradis Macarons",
+    "category": "cafe",
+    "lat": -23.5629783,
+    "lon": -46.6670824
+  },
+  {
+    "venue_id": "osm-5049076692",
+    "name": "Poke Garden",
+    "category": "restaurant",
+    "lat": -23.5630885,
+    "lon": -46.6672014
+  },
+  {
+    "venue_id": "osm-5049076696",
+    "name": "Geiko San",
+    "category": "restaurant",
+    "lat": -23.5632145,
+    "lon": -46.66733
+  },
+  {
+    "venue_id": "osm-5054079643",
+    "name": "Amsterdam Bistrô Café",
+    "category": "cafe",
+    "lat": -23.5615567,
+    "lon": -46.6711645
+  },
+  {
+    "venue_id": "osm-5058261759",
+    "name": "Pettirosso",
+    "category": "restaurant",
+    "lat": -23.5600072,
+    "lon": -46.6703878
+  },
+  {
+    "venue_id": "osm-5059317749",
+    "name": "Yakitori Mizusaka",
+    "category": "restaurant",
+    "lat": -23.5685103,
+    "lon": -46.6494564
+  },
+  {
+    "venue_id": "osm-5064529276",
+    "name": "Ragazzo Express",
+    "category": "fast_food",
+    "lat": -23.5466403,
+    "lon": -46.6353934
+  },
+  {
+    "venue_id": "osm-5064529296",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5469275,
+    "lon": -46.6355557
+  },
+  {
+    "venue_id": "osm-5065241356",
+    "name": "The Punch bar",
+    "category": "bar",
+    "lat": -23.5685499,
+    "lon": -46.6494058
+  },
+  {
+    "venue_id": "osm-5083801028",
+    "name": "Lanchonete Miguel Couto",
+    "category": "fast_food",
+    "lat": -23.546254,
+    "lon": -46.6356705
+  },
+  {
+    "venue_id": "osm-5084749333",
+    "name": "Central Kilo's Grill",
+    "category": "restaurant",
+    "lat": -23.5473168,
+    "lon": -46.6358776
+  },
+  {
+    "venue_id": "osm-5084749337",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.5471871,
+    "lon": -46.6358014
+  },
+  {
+    "venue_id": "osm-5103818949",
+    "name": "A Figueira Rubaiyat",
+    "category": "restaurant",
+    "lat": -23.5653705,
+    "lon": -46.6695678
+  },
+  {
+    "venue_id": "osm-5138039022",
+    "name": "Café Martinelli Midi",
+    "category": "cafe",
+    "lat": -23.5453773,
+    "lon": -46.6354859
+  },
+  {
+    "venue_id": "osm-5139202825",
+    "name": "Bob's",
+    "category": "fast_food",
+    "lat": -23.5704669,
+    "lon": -46.6428581
+  },
+  {
+    "venue_id": "osm-5159257321",
+    "name": "Sukya",
+    "category": "restaurant",
+    "lat": -23.5595451,
+    "lon": -46.6618206
+  },
+  {
+    "venue_id": "osm-5178957623",
+    "name": "Aconchego Carioca",
+    "category": "restaurant",
+    "lat": -23.5612098,
+    "lon": -46.6604353
+  },
+  {
+    "venue_id": "osm-5180904721",
+    "name": "Hamburgueria do Sujinho",
+    "category": "fast_food",
+    "lat": -23.5529037,
+    "lon": -46.6603647
+  },
+  {
+    "venue_id": "osm-5209256522",
+    "name": "Hakka Sushi",
+    "category": "restaurant",
+    "lat": -23.5606707,
+    "lon": -46.6584706
+  },
+  {
+    "venue_id": "osm-5226085382",
+    "name": "Nutrisom Centro",
+    "category": "restaurant",
+    "lat": -23.5488423,
+    "lon": -46.6423018
+  },
+  {
+    "venue_id": "osm-5227135021",
+    "name": "Solarium",
+    "category": "restaurant",
+    "lat": -23.5571324,
+    "lon": -46.6530804
+  },
+  {
+    "venue_id": "osm-5235155624",
+    "name": "Pizzaria Prosperitá",
+    "category": "restaurant",
+    "lat": -23.546307,
+    "lon": -46.6440172
+  },
+  {
+    "venue_id": "osm-5241416663",
+    "name": "Nobre Paladar",
+    "category": "restaurant",
+    "lat": -23.5458695,
+    "lon": -46.6502497
+  },
+  {
+    "venue_id": "osm-5241623046",
+    "name": "Gimba restaurante e bar",
+    "category": "restaurant",
+    "lat": -23.5466102,
+    "lon": -46.6490657
+  },
+  {
+    "venue_id": "osm-5266167426",
+    "name": "MASP Suplicy",
+    "category": "cafe",
+    "lat": -23.5618,
+    "lon": -46.6558
+  },
+  {
+    "venue_id": "osm-5266416225",
+    "name": "Zurich",
+    "category": "restaurant",
+    "lat": -23.5699353,
+    "lon": -46.6596163
+  },
+  {
+    "venue_id": "osm-5266416226",
+    "name": "Casinha",
+    "category": "cafe",
+    "lat": -23.5702892,
+    "lon": -46.658902
+  },
+  {
+    "venue_id": "osm-5266416229",
+    "name": "Violeta",
+    "category": "restaurant",
+    "lat": -23.5746191,
+    "lon": -46.6565574
+  },
+  {
+    "venue_id": "osm-5266445123",
+    "name": "Prato do Dia",
+    "category": "restaurant",
+    "lat": -23.5740537,
+    "lon": -46.6538899
+  },
+  {
+    "venue_id": "osm-5266445127",
+    "name": "Flying Sushi",
+    "category": "restaurant",
+    "lat": -23.5598256,
+    "lon": -46.6622404
+  },
+  {
+    "venue_id": "osm-5266445223",
+    "name": "Bem Gelada",
+    "category": "bar",
+    "lat": -23.5598936,
+    "lon": -46.6621778
+  },
+  {
+    "venue_id": "osm-5266445324",
+    "name": "Restaurante Hong Re",
+    "category": "restaurant",
+    "lat": -23.5731746,
+    "lon": -46.652716
+  },
+  {
+    "venue_id": "osm-5266445328",
+    "name": "Porto Caires",
+    "category": "restaurant",
+    "lat": -23.5704893,
+    "lon": -46.6502179
+  },
+  {
+    "venue_id": "osm-5266445341",
+    "name": "Samosa & Company",
+    "category": "restaurant",
+    "lat": -23.559336,
+    "lon": -46.6627978
+  },
+  {
+    "venue_id": "osm-5266750521",
+    "name": "O'Malley's",
+    "category": "bar",
+    "lat": -23.5583194,
+    "lon": -46.665925
+  },
+  {
+    "venue_id": "osm-5267025321",
+    "name": "At Nine",
+    "category": "bar",
+    "lat": -23.5584294,
+    "lon": -46.6657776
+  },
+  {
+    "venue_id": "osm-5268991339",
+    "name": "Pizzaría Brasil",
+    "category": "fast_food",
+    "lat": -23.5543731,
+    "lon": -46.6459393
+  },
+  {
+    "venue_id": "osm-5274199023",
+    "name": "Restaurante Panaramico",
+    "category": "restaurant",
+    "lat": -23.5625405,
+    "lon": -46.6603191
+  },
+  {
+    "venue_id": "osm-5274216421",
+    "name": "Bacurim",
+    "category": "cafe",
+    "lat": -23.5600771,
+    "lon": -46.6597898
+  },
+  {
+    "venue_id": "osm-5274265226",
+    "name": "Senafina",
+    "category": "restaurant",
+    "lat": -23.5628109,
+    "lon": -46.667215
+  },
+  {
+    "venue_id": "osm-5278298946",
+    "name": "Terraço Itália",
+    "category": "restaurant",
+    "lat": -23.5454386,
+    "lon": -46.6435572
+  },
+  {
+    "venue_id": "osm-5288478793",
+    "name": "Subway",
+    "category": "fast_food",
+    "lat": -23.5651746,
+    "lon": -46.6357678
+  },
+  {
+    "venue_id": "osm-5295470524",
+    "name": "Little Rock Coffee",
+    "category": "bar",
+    "lat": -23.5470627,
+    "lon": -46.643077
+  },
+  {
+    "venue_id": "osm-5336992023",
+    "name": "Ragazzo Express",
+    "category": "fast_food",
+    "lat": -23.5719845,
+    "lon": -46.644464
+  },
+  {
+    "venue_id": "osm-5337010921",
+    "name": "98 Cafeteria e Fast Food",
+    "category": "cafe",
+    "lat": -23.5720802,
+    "lon": -46.6444373
+  },
+  {
+    "venue_id": "osm-5371381151",
+    "name": "Habib's",
+    "category": "fast_food",
+    "lat": -23.5619189,
+    "lon": -46.6389164
+  },
+  {
+    "venue_id": "osm-5375463112",
+    "name": "Pramigos",
+    "category": "restaurant",
+    "lat": -23.5737341,
+    "lon": -46.6496693
+  },
+  {
+    "venue_id": "osm-5418171011",
+    "name": "Casa Café",
+    "category": "cafe",
+    "lat": -23.5710451,
+    "lon": -46.6564462
+  },
+  {
+    "venue_id": "osm-5448846122",
+    "name": "Pilar",
+    "category": "restaurant",
+    "lat": -23.5703117,
+    "lon": -46.6572261
+  },
+  {
+    "venue_id": "osm-5627420103",
+    "name": "The View Bar",
+    "category": "bar",
+    "lat": -23.5665034,
+    "lon": -46.6529085
+  },
+  {
+    "venue_id": "osm-5628634045",
+    "name": "Cenário Restaurante",
+    "category": "restaurant",
+    "lat": -23.5543053,
+    "lon": -46.6572859
+  },
+  {
+    "venue_id": "osm-5628634061",
+    "name": "Pop Vegan Food",
+    "category": "restaurant",
+    "lat": -23.5539244,
+    "lon": -46.6577192
+  },
+  {
+    "venue_id": "osm-5628796284",
+    "name": "O Mineiro",
+    "category": "restaurant",
+    "lat": -23.5558009,
+    "lon": -46.6571232
+  },
+  {
+    "venue_id": "osm-5628796286",
+    "name": "Buteco de Minas",
+    "category": "restaurant",
+    "lat": -23.5557103,
+    "lon": -46.6572253
+  },
+  {
+    "venue_id": "osm-5628796310",
+    "name": "Vitrini Bar",
+    "category": "pub",
+    "lat": -23.5549071,
+    "lon": -46.6566797
+  },
+  {
+    "venue_id": "osm-5629222120",
+    "name": "Fran's Café",
+    "category": "cafe",
+    "lat": -23.5534625,
+    "lon": -46.6529902
+  },
+  {
+    "venue_id": "osm-5632789746",
+    "name": "Fogo de Chão",
+    "category": "restaurant",
+    "lat": -23.5605617,
+    "lon": -46.6625808
+  },
+  {
+    "venue_id": "osm-5635273001",
+    "name": "Vegacy",
+    "category": "restaurant",
+    "lat": -23.5597403,
+    "lon": -46.6623351
+  },
+  {
+    "venue_id": "osm-5635274743",
+    "name": "Poke Me Up Jardins",
+    "category": "restaurant",
+    "lat": -23.562244,
+    "lon": -46.6631388
+  },
+  {
+    "venue_id": "osm-5638002171",
+    "name": "Paris 6",
+    "category": "restaurant",
+    "lat": -23.5617338,
+    "lon": -46.6655063
+  },
+  {
+    "venue_id": "osm-5640387292",
+    "name": "Sky Hall Restaurant Garden",
+    "category": "restaurant",
+    "lat": -23.5627618,
+    "lon": -46.6665835
+  },
+  {
+    "venue_id": "osm-5648011827",
+    "name": "Lanchonete Da Cidade",
+    "category": "restaurant",
+    "lat": -23.5628827,
+    "lon": -46.6646724
+  },
+  {
+    "venue_id": "osm-5688307598",
+    "name": "Caverna do Burge",
+    "category": "restaurant",
+    "lat": -23.5554761,
+    "lon": -46.6741648
+  },
+  {
+    "venue_id": "osm-5693008390",
+    "name": "Flôr das Clinicas",
+    "category": "fast_food",
+    "lat": -23.5552081,
+    "lon": -46.6737139
+  },
+  {
+    "venue_id": "osm-5700510546",
+    "name": "Café Plato",
+    "category": "cafe",
+    "lat": -23.555555,
+    "lon": -46.6740089
+  },
+  {
+    "venue_id": "osm-5705143521",
+    "name": "Café do Mirante",
+    "category": "cafe",
+    "lat": -23.5606459,
+    "lon": -46.6552343
+  },
+  {
+    "venue_id": "osm-5754143846",
+    "name": "Mario Galluzzi Cozinha de Afeto",
+    "category": "restaurant",
+    "lat": -23.5590576,
+    "lon": -46.6746026
+  },
+  {
+    "venue_id": "osm-5770937953",
+    "name": "Kan Suke",
+    "category": "restaurant",
+    "lat": -23.5685031,
+    "lon": -46.6494886
+  },
+  {
+    "venue_id": "osm-5796105156",
+    "name": "Caffé Latte",
+    "category": "cafe",
+    "lat": -23.568424,
+    "lon": -46.6491693
+  },
+  {
+    "venue_id": "osm-5802163996",
+    "name": "Urca Chopp e Frios",
+    "category": "bar",
+    "lat": -23.5689003,
+    "lon": -46.6493457
+  },
+  {
+    "venue_id": "osm-5808186573",
+    "name": "Yatch Club",
+    "category": "nightclub",
+    "lat": -23.5594023,
+    "lon": -46.6462249
+  },
+  {
+    "venue_id": "osm-5980471071",
+    "name": "Central Panelaço",
+    "category": "bar",
+    "lat": -23.5579204,
+    "lon": -46.6466053
+  },
+  {
+    "venue_id": "osm-6042821333",
+    "name": "Arabia Express",
+    "category": "cafe",
+    "lat": -23.5572261,
+    "lon": -46.6541245
+  },
+  {
+    "venue_id": "osm-6102850985",
+    "name": "Tag Burger",
+    "category": "fast_food",
+    "lat": -23.570183,
+    "lon": -46.6483141
+  },
+  {
+    "venue_id": "osm-6110674886",
+    "name": "Primo Pastifício",
+    "category": "fast_food",
+    "lat": -23.5634389,
+    "lon": -46.6642884
+  },
+  {
+    "venue_id": "osm-6110674887",
+    "name": "Empório Coisas de Minas",
+    "category": "cafe",
+    "lat": -23.5633468,
+    "lon": -46.6644032
+  },
+  {
+    "venue_id": "osm-6110674888",
+    "name": "Kopenhagen",
+    "category": "cafe",
+    "lat": -23.5627976,
+    "lon": -46.6650006
+  },
+  {
+    "venue_id": "osm-6177261352",
+    "name": "Laut",
+    "category": "restaurant",
+    "lat": -23.556526,
+    "lon": -46.6592826
+  },
+  {
+    "venue_id": "osm-6193942890",
+    "name": "Magg Café",
+    "category": "cafe",
+    "lat": -23.5465145,
+    "lon": -46.6441343
+  },
+  {
+    "venue_id": "osm-6357370285",
+    "name": "Casa Barbosa",
+    "category": "nightclub",
+    "lat": -23.5605075,
+    "lon": -46.6450631
+  },
+  {
+    "venue_id": "osm-6357420310",
+    "name": "89ºC Coffee Station",
+    "category": "cafe",
+    "lat": -23.5554187,
+    "lon": -46.6351967
+  },
+  {
+    "venue_id": "osm-6357420318",
+    "name": "Itiriki",
+    "category": "restaurant",
+    "lat": -23.5553415,
+    "lon": -46.6352046
+  },
+  {
+    "venue_id": "osm-6414527739",
+    "name": "Bar e Restaurante Chave de Ouro",
+    "category": "restaurant",
+    "lat": -23.5585289,
+    "lon": -46.6680066
+  },
+  {
+    "venue_id": "osm-6421985092",
+    "name": "Animalchef",
+    "category": "fast_food",
+    "lat": -23.5535267,
+    "lon": -46.6554741
+  },
+  {
+    "venue_id": "osm-6439816242",
+    "name": "Sinhá Gomide",
+    "category": "restaurant",
+    "lat": -23.5576172,
+    "lon": -46.6555124
+  },
+  {
+    "venue_id": "osm-6439881923",
+    "name": "Quintal",
+    "category": "restaurant",
+    "lat": -23.5568273,
+    "lon": -46.6570071
+  },
+  {
+    "venue_id": "osm-6463706696",
+    "name": "Restaurante 955",
+    "category": "restaurant",
+    "lat": -23.5601729,
+    "lon": -46.6709659
+  },
+  {
+    "venue_id": "osm-6463706712",
+    "name": "poru.",
+    "category": "restaurant",
+    "lat": -23.5614998,
+    "lon": -46.6693091
+  },
+  {
+    "venue_id": "osm-6463706717",
+    "name": "Gero Restaurant",
+    "category": "restaurant",
+    "lat": -23.5647809,
+    "lon": -46.6686563
+  },
+  {
+    "venue_id": "osm-6463706719",
+    "name": "Periquita & Gin Club",
+    "category": "pub",
+    "lat": -23.5648894,
+    "lon": -46.6694744
+  },
+  {
+    "venue_id": "osm-6463706720",
+    "name": "Le Manjue Jardins",
+    "category": "restaurant",
+    "lat": -23.5648633,
+    "lon": -46.6696041
+  },
+  {
+    "venue_id": "osm-6463717488",
+    "name": "Chef Rouge",
+    "category": "restaurant",
+    "lat": -23.563629,
+    "lon": -46.6698194
+  },
+  {
+    "venue_id": "osm-6463717496",
+    "name": "Da Vinci Burger",
+    "category": "fast_food",
+    "lat": -23.5606823,
+    "lon": -46.6715771
+  },
+  {
+    "venue_id": "osm-6463717497",
+    "name": "Drink & Coffee 1262",
+    "category": "pub",
+    "lat": -23.5606925,
+    "lon": -46.6715507
+  },
+  {
+    "venue_id": "osm-6463717498",
+    "name": "Vinho & Pasta Ravin",
+    "category": "restaurant",
+    "lat": -23.5615157,
+    "lon": -46.6711448
+  },
+  {
+    "venue_id": "osm-6463717507",
+    "name": "Bar Brejinho",
+    "category": "pub",
+    "lat": -23.5602371,
+    "lon": -46.6679038
+  },
+  {
+    "venue_id": "osm-6463717508",
+    "name": "Restaurante Kayomix",
+    "category": "restaurant",
+    "lat": -23.5605783,
+    "lon": -46.6680026
+  },
+  {
+    "venue_id": "osm-6463717509",
+    "name": "Fuentes",
+    "category": "restaurant",
+    "lat": -23.5587944,
+    "lon": -46.6683068
+  },
+  {
+    "venue_id": "osm-6463717510",
+    "name": "Restaurante Caldo da Roca",
+    "category": "restaurant",
+    "lat": -23.5584899,
+    "lon": -46.6680112
+  },
+  {
+    "venue_id": "osm-6463717511",
+    "name": "Chavede Ouro Bar",
+    "category": "pub",
+    "lat": -23.5584129,
+    "lon": -46.667908
+  },
+  {
+    "venue_id": "osm-6463717512",
+    "name": "Nattu Restaurante Jardins",
+    "category": "restaurant",
+    "lat": -23.5611581,
+    "lon": -46.6691454
+  },
+  {
+    "venue_id": "osm-6463717514",
+    "name": "Nagayama",
+    "category": "restaurant",
+    "lat": -23.5617938,
+    "lon": -46.6692195
+  },
+  {
+    "venue_id": "osm-6463717516",
+    "name": "La Macca",
+    "category": "restaurant",
+    "lat": -23.5645872,
+    "lon": -46.6683546
+  },
+  {
+    "venue_id": "osm-6463717517",
+    "name": "Nonno Ruggero",
+    "category": "restaurant",
+    "lat": -23.564534,
+    "lon": -46.6694481
+  },
+  {
+    "venue_id": "osm-6463717521",
+    "name": "Jonny Rockets",
+    "category": "fast_food",
+    "lat": -23.5656252,
+    "lon": -46.6662891
+  },
+  {
+    "venue_id": "osm-6463717522",
+    "name": "Toro Sushi",
+    "category": "restaurant",
+    "lat": -23.5653878,
+    "lon": -46.6662235
+  },
+  {
+    "venue_id": "osm-6463727202",
+    "name": "Minato",
+    "category": "restaurant",
+    "lat": -23.5606384,
+    "lon": -46.6694292
+  },
+  {
+    "venue_id": "osm-6463727485",
+    "name": "911 Restaurante",
+    "category": "restaurant",
+    "lat": -23.5603282,
+    "lon": -46.6701257
+  },
+  {
+    "venue_id": "osm-6463727492",
+    "name": "INSIDE Tea Connection",
+    "category": "cafe",
+    "lat": -23.5646033,
+    "lon": -46.6671331
+  },
+  {
+    "venue_id": "osm-6463727493",
+    "name": "Kazaki Sushi Bar",
+    "category": "restaurant",
+    "lat": -23.5606152,
+    "lon": -46.6699423
+  },
+  {
+    "venue_id": "osm-6463733685",
+    "name": "Oliver",
+    "category": "restaurant",
+    "lat": -23.5620765,
+    "lon": -46.6681463
+  },
+  {
+    "venue_id": "osm-6463733985",
+    "name": "Restaurante Xica",
+    "category": "restaurant",
+    "lat": -23.5621182,
+    "lon": -46.6676928
+  },
+  {
+    "venue_id": "osm-6463734185",
+    "name": "Kaisho",
+    "category": "restaurant",
+    "lat": -23.5599949,
+    "lon": -46.664012
+  },
+  {
+    "venue_id": "osm-6463734186",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5463416,
+    "lon": -46.638905
+  },
+  {
+    "venue_id": "osm-6481658285",
+    "name": "Bar dos Arcos",
+    "category": "bar",
+    "lat": -23.5453194,
+    "lon": -46.6384353
+  },
+  {
+    "venue_id": "osm-6557948386",
+    "name": "Segredo de Minas",
+    "category": "restaurant",
+    "lat": -23.555414,
+    "lon": -46.660552
+  },
+  {
+    "venue_id": "osm-6557948387",
+    "name": "Lamen ASKA",
+    "category": "restaurant",
+    "lat": -23.5597844,
+    "lon": -46.6350703
+  },
+  {
+    "venue_id": "osm-6585638186",
+    "name": "Tappo Trattoria",
+    "category": "restaurant",
+    "lat": -23.558965,
+    "lon": -46.6663254
+  },
+  {
+    "venue_id": "osm-6628695265",
+    "name": "Ristorantino",
+    "category": "restaurant",
+    "lat": -23.5626535,
+    "lon": -46.6723202
+  },
+  {
+    "venue_id": "osm-6629384292",
+    "name": "Snooker Bar",
+    "category": "bar",
+    "lat": -23.5591159,
+    "lon": -46.6668987
+  },
+  {
+    "venue_id": "osm-6693647944",
+    "name": "Big Fran's",
+    "category": "pub",
+    "lat": -23.5584522,
+    "lon": -46.635143
+  },
+  {
+    "venue_id": "osm-6712550830",
+    "name": "Sanduba's",
+    "category": "fast_food",
+    "lat": -23.5495365,
+    "lon": -46.6540592
+  },
+  {
+    "venue_id": "osm-6712659181",
+    "name": "Bye Jack Restaurante",
+    "category": "restaurant",
+    "lat": -23.549301,
+    "lon": -46.655126
+  },
+  {
+    "venue_id": "osm-6713628916",
+    "name": "& Molinos",
+    "category": "cafe",
+    "lat": -23.5613878,
+    "lon": -46.6685864
+  },
+  {
+    "venue_id": "osm-6780053285",
+    "name": "Aurora Club",
+    "category": "pub",
+    "lat": -23.5540263,
+    "lon": -46.6469669
+  },
+  {
+    "venue_id": "osm-6789357704",
+    "name": "Losteria do Piero",
+    "category": "restaurant",
+    "lat": -23.5593631,
+    "lon": -46.6666488
+  },
+  {
+    "venue_id": "osm-6807938053",
+    "name": "Bar do índio",
+    "category": "fast_food",
+    "lat": -23.547775,
+    "lon": -46.6493508
+  },
+  {
+    "venue_id": "osm-6807938077",
+    "name": "Villa Imperial",
+    "category": "restaurant",
+    "lat": -23.5457161,
+    "lon": -46.6516068
+  },
+  {
+    "venue_id": "osm-6812469936",
+    "name": "Lanchonete Estação Higienopolis",
+    "category": "fast_food",
+    "lat": -23.5496133,
+    "lon": -46.6537436
+  },
+  {
+    "venue_id": "osm-6814837563",
+    "name": "Café Mania",
+    "category": "cafe",
+    "lat": -23.5482624,
+    "lon": -46.6546653
+  },
+  {
+    "venue_id": "osm-6820490547",
+    "name": "Belo Valete",
+    "category": "restaurant",
+    "lat": -23.5594959,
+    "lon": -46.6687538
+  },
+  {
+    "venue_id": "osm-6823344990",
+    "name": "Laundry Auto Serviço",
+    "category": "cafe",
+    "lat": -23.5587773,
+    "lon": -46.6661397
+  },
+  {
+    "venue_id": "osm-6831158924",
+    "name": "All Day",
+    "category": "restaurant",
+    "lat": -23.5576954,
+    "lon": -46.6644005
+  },
+  {
+    "venue_id": "osm-6831158925",
+    "name": "Tux Panan",
+    "category": "restaurant",
+    "lat": -23.557646,
+    "lon": -46.66446
+  },
+  {
+    "venue_id": "osm-6831158926",
+    "name": "Tendai",
+    "category": "restaurant",
+    "lat": -23.5580148,
+    "lon": -46.6640397
+  },
+  {
+    "venue_id": "osm-6900555401",
+    "name": "Micaela",
+    "category": "restaurant",
+    "lat": -23.5705462,
+    "lon": -46.6550511
+  },
+  {
+    "venue_id": "osm-6958313596",
+    "name": "Dolce Caffé",
+    "category": "cafe",
+    "lat": -23.5664068,
+    "lon": -46.6388115
+  },
+  {
+    "venue_id": "osm-7041138121",
+    "name": "Clementina",
+    "category": "restaurant",
+    "lat": -23.55822,
+    "lon": -46.6733183
+  },
+  {
+    "venue_id": "osm-7041141421",
+    "name": "Perseu Coffee",
+    "category": "cafe",
+    "lat": -23.5591637,
+    "lon": -46.6611704
+  },
+  {
+    "venue_id": "osm-7042963087",
+    "name": "Wok'n Roll",
+    "category": "restaurant",
+    "lat": -23.5557906,
+    "lon": -46.6351321
+  },
+  {
+    "venue_id": "osm-7128603055",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.5453816,
+    "lon": -46.6395816
+  },
+  {
+    "venue_id": "osm-7137284287",
+    "name": "Sena's Bar",
+    "category": "pub",
+    "lat": -23.5707029,
+    "lon": -46.6386038
+  },
+  {
+    "venue_id": "osm-7140814448",
+    "name": "MOB Hamburgueria",
+    "category": "fast_food",
+    "lat": -23.5705622,
+    "lon": -46.638659
+  },
+  {
+    "venue_id": "osm-7179023946",
+    "name": "Rong He",
+    "category": "restaurant",
+    "lat": -23.5738497,
+    "lon": -46.6512889
+  },
+  {
+    "venue_id": "osm-7229356083",
+    "name": "Guna Vegan",
+    "category": "cafe",
+    "lat": -23.5565496,
+    "lon": -46.6592409
+  },
+  {
+    "venue_id": "osm-7234959580",
+    "name": "Restaurante Marajá",
+    "category": "restaurant",
+    "lat": -23.5488998,
+    "lon": -46.643675
+  },
+  {
+    "venue_id": "osm-7258687385",
+    "name": "Izakaya Cocoro",
+    "category": "restaurant",
+    "lat": -23.5734039,
+    "lon": -46.6449667
+  },
+  {
+    "venue_id": "osm-7302280885",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5656939,
+    "lon": -46.6508683
+  },
+  {
+    "venue_id": "osm-7833509712",
+    "name": "Alecrim Restaurante",
+    "category": "restaurant",
+    "lat": -23.5619231,
+    "lon": -46.6583278
+  },
+  {
+    "venue_id": "osm-7833639568",
+    "name": "La Arena Parilla",
+    "category": "restaurant",
+    "lat": -23.5608021,
+    "lon": -46.6586085
+  },
+  {
+    "venue_id": "osm-7833639569",
+    "name": "A Griffe do Filé",
+    "category": "restaurant",
+    "lat": -23.5608624,
+    "lon": -46.6586708
+  },
+  {
+    "venue_id": "osm-7833639571",
+    "name": "Savana Bar e Restaurante",
+    "category": "restaurant",
+    "lat": -23.5609667,
+    "lon": -46.658801
+  },
+  {
+    "venue_id": "osm-7850807416",
+    "name": "Karaokê Box Kampai",
+    "category": "bar",
+    "lat": -23.5582926,
+    "lon": -46.6372226
+  },
+  {
+    "venue_id": "osm-8322165617",
+    "name": "Pizzaria Veridiana",
+    "category": "restaurant",
+    "lat": -23.5690837,
+    "lon": -46.6570972
+  },
+  {
+    "venue_id": "osm-8346059580",
+    "name": "Atithi Devo Bhava",
+    "category": "restaurant",
+    "lat": -23.56913,
+    "lon": -46.6501813
+  },
+  {
+    "venue_id": "osm-8421849827",
+    "name": "Hotel Bar",
+    "category": "bar",
+    "lat": -23.5557797,
+    "lon": -46.6571457
+  },
+  {
+    "venue_id": "osm-8507390777",
+    "name": "Cuia",
+    "category": "restaurant",
+    "lat": -23.5463741,
+    "lon": -46.6438437
+  },
+  {
+    "venue_id": "osm-8758852117",
+    "name": "Critallo Oscar Freire",
+    "category": "cafe",
+    "lat": -23.5629111,
+    "lon": -46.6690855
+  },
+  {
+    "venue_id": "osm-9146534117",
+    "name": "Orfeu",
+    "category": "restaurant",
+    "lat": -23.5455855,
+    "lon": -46.6434878
+  },
+  {
+    "venue_id": "osm-9160859281",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5543611,
+    "lon": -46.6352426
+  },
+  {
+    "venue_id": "osm-9172423424",
+    "name": "Seven Guys Burger",
+    "category": "fast_food",
+    "lat": -23.5552137,
+    "lon": -46.6572508
+  },
+  {
+    "venue_id": "osm-9172423425",
+    "name": "Porks",
+    "category": "bar",
+    "lat": -23.5552351,
+    "lon": -46.6572765
+  },
+  {
+    "venue_id": "osm-9397076621",
+    "name": "Terraço Paulista",
+    "category": "restaurant",
+    "lat": -23.5651348,
+    "lon": -46.6496864
+  },
+  {
+    "venue_id": "osm-9397609618",
+    "name": "Gula Gula",
+    "category": "restaurant",
+    "lat": -23.5599448,
+    "lon": -46.6598783
+  },
+  {
+    "venue_id": "osm-9547476103",
+    "name": "Bela Italia",
+    "category": "restaurant",
+    "lat": -23.5718678,
+    "lon": -46.6483955
+  },
+  {
+    "venue_id": "osm-9711875808",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5543122,
+    "lon": -46.6524059
+  },
+  {
+    "venue_id": "osm-9711875811",
+    "name": "Gendai",
+    "category": "restaurant",
+    "lat": -23.554225,
+    "lon": -46.6523275
+  },
+  {
+    "venue_id": "osm-9711875812",
+    "name": "Latife",
+    "category": "restaurant",
+    "lat": -23.5543504,
+    "lon": -46.6524535
+  },
+  {
+    "venue_id": "osm-9711875813",
+    "name": "McDonald's",
+    "category": "fast_food",
+    "lat": -23.5542176,
+    "lon": -46.6519975
+  },
+  {
+    "venue_id": "osm-9711875814",
+    "name": "Oakberry Açaí bowls",
+    "category": "fast_food",
+    "lat": -23.5541465,
+    "lon": -46.652653
+  },
+  {
+    "venue_id": "osm-9711875815",
+    "name": "Outback Steakhouse",
+    "category": "restaurant",
+    "lat": -23.5540184,
+    "lon": -46.6528639
+  },
+  {
+    "venue_id": "osm-9711875816",
+    "name": "Rizzo Italian Gourmet",
+    "category": "restaurant",
+    "lat": -23.5542717,
+    "lon": -46.6525608
+  },
+  {
+    "venue_id": "osm-9711932317",
+    "name": "Starbucks",
+    "category": "cafe",
+    "lat": -23.5543752,
+    "lon": -46.6521924
+  },
+  {
+    "venue_id": "osm-9711932318",
+    "name": "Spoleto",
+    "category": "fast_food",
+    "lat": -23.5540504,
+    "lon": -46.652483
+  },
+  {
+    "venue_id": "osm-9848226599",
+    "name": "Café Crio",
+    "category": "cafe",
+    "lat": -23.5633335,
+    "lon": -46.6560812
+  },
+  {
+    "venue_id": "osm-9848258296",
+    "name": "Comedoria SESC",
+    "category": "restaurant",
+    "lat": -23.5705998,
+    "lon": -46.645695
+  },
+  {
+    "venue_id": "osm-9848263544",
+    "name": "Cafeteria do SESC",
+    "category": "cafe",
+    "lat": -23.5706376,
+    "lon": -46.6456269
+  },
+  {
+    "venue_id": "osm-9946480566",
+    "name": "Pizzaria e Churrascaria Moraes",
+    "category": "restaurant",
+    "lat": -23.5614372,
+    "lon": -46.6444057
+  },
+  {
+    "venue_id": "osm-10007826020",
+    "name": "A Casa de Antonia",
+    "category": "restaurant",
+    "lat": -23.5590503,
+    "lon": -46.6600852
+  },
+  {
+    "venue_id": "osm-10015683256",
+    "name": "Gopala - Cozinha Lactovegetariana",
+    "category": "restaurant",
+    "lat": -23.5586056,
+    "lon": -46.6681465
+  },
+  {
+    "venue_id": "osm-10055041333",
+    "name": "Que Pasa",
+    "category": "restaurant",
+    "lat": -23.5570699,
+    "lon": -46.6589643
+  },
+  {
+    "venue_id": "osm-10067459185",
+    "name": "Café Vitrine",
+    "category": "restaurant",
+    "lat": -23.5628438,
+    "lon": -46.6662097
+  },
+  {
+    "venue_id": "osm-10102653095",
+    "name": "Japan House",
+    "category": "cafe",
+    "lat": -23.5706639,
+    "lon": -46.6446075
+  },
+  {
+    "venue_id": "osm-10102653096",
+    "name": "Japan House",
+    "category": "restaurant",
+    "lat": -23.570694,
+    "lon": -46.6445668
+  },
+  {
+    "venue_id": "osm-10127141617",
+    "name": "Bar Do Netão",
+    "category": "nightclub",
+    "lat": -23.5516528,
+    "lon": -46.6516074
+  },
+  {
+    "venue_id": "osm-10200456717",
+    "name": "Kidoairaku",
+    "category": "restaurant",
+    "lat": -23.5578944,
+    "lon": -46.6361906
+  },
+  {
+    "venue_id": "osm-10268012496",
+    "name": "Vegan Faz Mais Gostoso",
+    "category": "restaurant",
+    "lat": -23.5539278,
+    "lon": -46.657713
+  },
+  {
+    "venue_id": "osm-10274134471",
+    "name": "Carat Restaurant & Lounge",
+    "category": "restaurant",
+    "lat": -23.5736323,
+    "lon": -46.6605785
+  },
+  {
+    "venue_id": "osm-10274164429",
+    "name": "1900 Pizzeria",
+    "category": "restaurant",
+    "lat": -23.57337,
+    "lon": -46.6607264
+  },
+  {
+    "venue_id": "osm-10274184390",
+    "name": "Lellis Trattoria Campinas",
+    "category": "restaurant",
+    "lat": -23.5734079,
+    "lon": -46.6604337
+  },
+  {
+    "venue_id": "osm-10292401359",
+    "name": "Restaurante Primeiro Mundo",
+    "category": "restaurant",
+    "lat": -23.5496801,
+    "lon": -46.6351196
+  },
+  {
+    "venue_id": "osm-10296015505",
+    "name": "Halabi",
+    "category": "restaurant",
+    "lat": -23.5689076,
+    "lon": -46.6490783
+  },
+  {
+    "venue_id": "osm-10574555950",
+    "name": "Frevo",
+    "category": "fast_food",
+    "lat": -23.5649283,
+    "lon": -46.666774
+  },
+  {
+    "venue_id": "osm-10605504425",
+    "name": "Samosa & Company",
+    "category": "restaurant",
+    "lat": -23.5593815,
+    "lon": -46.6628302
+  },
+  {
+    "venue_id": "osm-10676629605",
+    "name": "Miski",
+    "category": "restaurant",
+    "lat": -23.5739406,
+    "lon": -46.6588015
+  },
+  {
+    "venue_id": "osm-10697500070",
+    "name": "MAKOTO Shops",
+    "category": "restaurant",
+    "lat": -23.5648216,
+    "lon": -46.6690765
+  },
+  {
+    "venue_id": "osm-10700676689",
+    "name": "Caviar Kaspia Brasil",
+    "category": "restaurant",
+    "lat": -23.564653,
+    "lon": -46.668914
+  },
+  {
+    "venue_id": "osm-10700780221",
+    "name": "Mia Crudo Bar",
+    "category": "restaurant",
+    "lat": -23.5645977,
+    "lon": -46.668855
+  },
+  {
+    "venue_id": "osm-10704407009",
+    "name": "Casa Udjain",
+    "category": "public_bookcase",
+    "lat": -23.5489295,
+    "lon": -46.674722
+  },
+  {
+    "venue_id": "osm-10707942905",
+    "name": "Sol y Sombra",
+    "category": "pub",
+    "lat": -23.5629339,
+    "lon": -46.6433513
+  },
+  {
+    "venue_id": "osm-10942773207",
+    "name": "Bella Antônia",
+    "category": "restaurant",
+    "lat": -23.5474795,
+    "lon": -46.6493551
+  },
+  {
+    "venue_id": "osm-10942773805",
+    "name": "Frutaria Paulista",
+    "category": "fast_food",
+    "lat": -23.5547126,
+    "lon": -46.6644454
+  },
+  {
+    "venue_id": "osm-10982980805",
+    "name": "Kyoto",
+    "category": "restaurant",
+    "lat": -23.5576752,
+    "lon": -46.6362278
+  },
+  {
+    "venue_id": "osm-10983161705",
+    "name": "Casa Fluida",
+    "category": "bar",
+    "lat": -23.553454,
+    "lon": -46.658043
+  },
+  {
+    "venue_id": "osm-10983230643",
+    "name": "Sushi Yassuh Liberdade",
+    "category": "restaurant",
+    "lat": -23.5578449,
+    "lon": -46.6354376
+  },
+  {
+    "venue_id": "osm-10983230644",
+    "name": "Coffee Selfie",
+    "category": "cafe",
+    "lat": -23.5576965,
+    "lon": -46.6353545
+  },
+  {
+    "venue_id": "osm-10990133928",
+    "name": "Terraza",
+    "category": "restaurant",
+    "lat": -23.5595255,
+    "lon": -46.6613145
+  },
+  {
+    "venue_id": "osm-10990133929",
+    "name": "Daruma Coffee",
+    "category": "cafe",
+    "lat": -23.5594715,
+    "lon": -46.6613487
+  },
+  {
+    "venue_id": "osm-11072008317",
+    "name": "Sampa Grill",
+    "category": "restaurant",
+    "lat": -23.5543336,
+    "lon": -46.657505
+  },
+  {
+    "venue_id": "osm-11079535077",
+    "name": "Komei",
+    "category": "restaurant",
+    "lat": -23.5576694,
+    "lon": -46.6357341
+  },
+  {
+    "venue_id": "osm-11237031694",
+    "name": "Lanchonete Nova Ventura",
+    "category": "restaurant",
+    "lat": -23.573821,
+    "lon": -46.6434101
+  },
+  {
+    "venue_id": "osm-11237056023",
+    "name": "Go Coffee",
+    "category": "cafe",
+    "lat": -23.5745389,
+    "lon": -46.6430814
+  },
+  {
+    "venue_id": "osm-11237056030",
+    "name": "Bistrô das Pizzas",
+    "category": "restaurant",
+    "lat": -23.5742221,
+    "lon": -46.6432319
+  },
+  {
+    "venue_id": "osm-11237064553",
+    "name": "Oakberry",
+    "category": "restaurant",
+    "lat": -23.5739396,
+    "lon": -46.6433708
+  },
+  {
+    "venue_id": "osm-11237076832",
+    "name": "Bullger",
+    "category": "fast_food",
+    "lat": -23.5733653,
+    "lon": -46.6438941
+  },
+  {
+    "venue_id": "osm-11292341301",
+    "name": "Booz Restaurante",
+    "category": "restaurant",
+    "lat": -23.5629149,
+    "lon": -46.6565761
+  },
+  {
+    "venue_id": "osm-11329469312",
+    "name": "Mantegeria Lisboa",
+    "category": "cafe",
+    "lat": -23.5593702,
+    "lon": -46.6594883
+  },
+  {
+    "venue_id": "osm-11329469317",
+    "name": "Bonono Split",
+    "category": "fast_food",
+    "lat": -23.5592009,
+    "lon": -46.6593388
+  },
+  {
+    "venue_id": "osm-11329469318",
+    "name": "Pastel do Juca",
+    "category": "fast_food",
+    "lat": -23.5592122,
+    "lon": -46.659326
+  },
+  {
+    "venue_id": "osm-11329469320",
+    "name": "Rei do Mate",
+    "category": "cafe",
+    "lat": -23.5592958,
+    "lon": -46.6592309
+  },
+  {
+    "venue_id": "osm-11356392888",
+    "name": "Rosina",
+    "category": "restaurant",
+    "lat": -23.5742256,
+    "lon": -46.6561126
+  },
+  {
+    "venue_id": "osm-11421738531",
+    "name": "Tenda do Nilo",
+    "category": "restaurant",
+    "lat": -23.5747661,
+    "lon": -46.6464201
+  },
+  {
+    "venue_id": "osm-11524715511",
+    "name": "Kinboshi Karaokê",
+    "category": "restaurant",
+    "lat": -23.57222,
+    "lon": -46.6479913
+  },
+  {
+    "venue_id": "osm-11554673658",
+    "name": "Taturana",
+    "category": "fast_food",
+    "lat": -23.554999,
+    "lon": -46.6567719
+  },
+  {
+    "venue_id": "osm-11554685036",
+    "name": "Segredo dos gerais",
+    "category": "restaurant",
+    "lat": -23.5540586,
+    "lon": -46.6606151
+  },
+  {
+    "venue_id": "osm-11554694573",
+    "name": "Bella haddock",
+    "category": "restaurant",
+    "lat": -23.554253,
+    "lon": -46.657607
+  },
+  {
+    "venue_id": "osm-11565407618",
+    "name": "Tendall Grill",
+    "category": "restaurant",
+    "lat": -23.5505695,
+    "lon": -46.6460623
+  },
+  {
+    "venue_id": "osm-11572523203",
+    "name": "DRica",
+    "category": "restaurant",
+    "lat": -23.5557642,
+    "lon": -46.6663562
+  },
+  {
+    "venue_id": "osm-11573783900",
+    "name": "Restaurante Madrid 2",
+    "category": "restaurant",
+    "lat": -23.5517776,
+    "lon": -46.649213
+  },
+  {
+    "venue_id": "osm-11587523248",
+    "name": "Mandacaru",
+    "category": "restaurant",
+    "lat": -23.5531071,
+    "lon": -46.6521614
+  },
+  {
+    "venue_id": "osm-11617101913",
+    "name": "Koufu",
+    "category": "restaurant",
+    "lat": -23.5462866,
+    "lon": -46.6420245
+  },
+  {
+    "venue_id": "osm-11617105461",
+    "name": "Wanderlust Bar e Cozinha",
+    "category": "restaurant",
+    "lat": -23.5474631,
+    "lon": -46.6431479
+  },
+  {
+    "venue_id": "osm-11617289795",
+    "name": "Madame Underground Club",
+    "category": "nightclub",
+    "lat": -23.5595857,
+    "lon": -46.6440728
+  },
+  {
+    "venue_id": "osm-11617756368",
+    "name": "Prosa e Vinho",
+    "category": "bar",
+    "lat": -23.5464453,
+    "lon": -46.6422097
+  },
+  {
+    "venue_id": "osm-11638400403",
+    "name": "Grill Haddock",
+    "category": "restaurant",
+    "lat": -23.5557049,
+    "lon": -46.6591327
+  },
+  {
+    "venue_id": "osm-11654692395",
+    "name": "Rap burguer",
+    "category": "fast_food",
+    "lat": -23.5515693,
+    "lon": -46.6513347
+  },
+  {
+    "venue_id": "osm-11685078856",
+    "name": "Dom Black",
+    "category": "restaurant",
+    "lat": -23.547671,
+    "lon": -46.6550754
+  },
+  {
+    "venue_id": "osm-11685729482",
+    "name": "Taveli",
+    "category": "restaurant",
+    "lat": -23.5500362,
+    "lon": -46.6537396
+  },
+  {
+    "venue_id": "osm-11704375810",
+    "name": "Misoya",
+    "category": "restaurant",
+    "lat": -23.5564998,
+    "lon": -46.657861
+  },
+  {
+    "venue_id": "osm-11704398514",
+    "name": "Athenas",
+    "category": "restaurant",
+    "lat": -23.556268,
+    "lon": -46.6581077
+  },
+  {
+    "venue_id": "osm-11704398831",
+    "name": "Braz Elettrica",
+    "category": "fast_food",
+    "lat": -23.5564442,
+    "lon": -46.6579165
+  },
+  {
+    "venue_id": "osm-11704398916",
+    "name": "Feitiço Brasileiro",
+    "category": "restaurant",
+    "lat": -23.5565321,
+    "lon": -46.6578196
+  },
+  {
+    "venue_id": "osm-11727909890",
+    "name": "Boteco Ivazé",
+    "category": "pub",
+    "lat": -23.5544682,
+    "lon": -46.6504748
+  },
+  {
+    "venue_id": "osm-11751535862",
+    "name": "Lanchonete estrela nove",
+    "category": "fast_food",
+    "lat": -23.570928,
+    "lon": -46.6631973
+  },
+  {
+    "venue_id": "osm-11782092634",
+    "name": "Ikkousha Tonkotsu Ramen",
+    "category": "restaurant",
+    "lat": -23.5576767,
+    "lon": -46.6361078
+  },
+  {
+    "venue_id": "osm-11782092635",
+    "name": "Sushi Kenzo Liberdade",
+    "category": "restaurant",
+    "lat": -23.5576767,
+    "lon": -46.6360688
+  },
+  {
+    "venue_id": "osm-11782093597",
+    "name": "Curry's Culinária Indiana",
+    "category": "restaurant",
+    "lat": -23.5576756,
+    "lon": -46.6361841
+  },
+  {
+    "venue_id": "osm-11782093598",
+    "name": "Restaurante Thai Chef",
+    "category": "restaurant",
+    "lat": -23.5576762,
+    "lon": -46.6361472
+  },
+  {
+    "venue_id": "osm-11782113561",
+    "name": "Filipinas Restaurante Oriental",
+    "category": "restaurant",
+    "lat": -23.5582494,
+    "lon": -46.6366447
+  },
+  {
+    "venue_id": "osm-11782218911",
+    "name": "Lao Bei Jing Tong Huo Guo",
+    "category": "restaurant",
+    "lat": -23.5584377,
+    "lon": -46.6363872
+  },
+  {
+    "venue_id": "osm-11782245396",
+    "name": "Sopa de Carne do Senhor Li",
+    "category": "restaurant",
+    "lat": -23.5584211,
+    "lon": -46.6364956
+  },
+  {
+    "venue_id": "osm-11782248449",
+    "name": "Yakissoba Guioza House",
+    "category": "restaurant",
+    "lat": -23.5582752,
+    "lon": -46.6364645
+  },
+  {
+    "venue_id": "osm-11794831935",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5482114,
+    "lon": -46.6647203
+  },
+  {
+    "venue_id": "osm-11794831936",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5487029,
+    "lon": -46.6647087
+  },
+  {
+    "venue_id": "osm-11794886848",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.548922,
+    "lon": -46.6657433
+  },
+  {
+    "venue_id": "osm-11794886849",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5489968,
+    "lon": -46.6657393
+  },
+  {
+    "venue_id": "osm-11794886850",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5489086,
+    "lon": -46.664713
+  },
+  {
+    "venue_id": "osm-11794886851",
+    "name": "Lanchonete",
+    "category": "fast_food",
+    "lat": -23.5489901,
+    "lon": -46.664715
+  },
+  {
+    "venue_id": "osm-11805472352",
+    "name": "Casa Abe",
+    "category": "bar",
+    "lat": -23.5510729,
+    "lon": -46.649267
+  },
+  {
+    "venue_id": "osm-11805472356",
+    "name": "Augusto's",
+    "category": "restaurant",
+    "lat": -23.5533596,
+    "lon": -46.6552635
+  },
+  {
+    "venue_id": "osm-11809937224",
+    "name": "Kome",
+    "category": "restaurant",
+    "lat": -23.5548677,
+    "lon": -46.6548254
+  },
+  {
+    "venue_id": "osm-11832044695",
+    "name": "Hi Tea Coffee 1º Andar",
+    "category": "cafe",
+    "lat": -23.5544893,
+    "lon": -46.6357744
+  },
+  {
+    "venue_id": "osm-11832045790",
+    "name": "Restaurante Casa Feliz",
+    "category": "restaurant",
+    "lat": -23.5542813,
+    "lon": -46.6357862
+  },
+  {
+    "venue_id": "osm-11832068289",
+    "name": "Restaurante Rei dos Reis",
+    "category": "restaurant",
+    "lat": -23.5541369,
+    "lon": -46.6358014
+  },
+  {
+    "venue_id": "osm-11834440473",
+    "name": "Oakberry Açaí bowls",
+    "category": "fast_food",
+    "lat": -23.5538223,
+    "lon": -46.6353632
+  },
+  {
+    "venue_id": "osm-11845611777",
+    "name": "Santa augusta",
+    "category": "bar",
+    "lat": -23.5545887,
+    "lon": -46.6565587
+  },
+  {
+    "venue_id": "osm-11850377305",
+    "name": "Estoril",
+    "category": "restaurant",
+    "lat": -23.5663747,
+    "lon": -46.66895
+  },
+  {
+    "venue_id": "osm-11879245186",
+    "name": "Charme da Augusta",
+    "category": "bar",
+    "lat": -23.5562838,
+    "lon": -46.6583745
+  },
+  {
+    "venue_id": "osm-11879275874",
+    "name": "Bataclan",
+    "category": "bar",
+    "lat": -23.5521464,
+    "lon": -46.6526275
+  },
+  {
+    "venue_id": "osm-11885035176",
+    "name": "Burger King",
+    "category": "fast_food",
+    "lat": -23.5640047,
+    "lon": -46.666241
+  },
+  {
+    "venue_id": "osm-11885039192",
+    "name": "Ráscal",
+    "category": "restaurant",
+    "lat": -23.5590133,
+    "lon": -46.6609939
+  },
+  {
+    "venue_id": "osm-11895772656",
+    "name": "Lanchonete Jarinú",
+    "category": "fast_food",
+    "lat": -23.5533443,
+    "lon": -46.6354758
+  },
+  {
+    "venue_id": "osm-11895946279",
+    "name": "Restaurante Toisan",
+    "category": "restaurant",
+    "lat": -23.5536935,
+    "lon": -46.6355047
+  },
+  {
+    "venue_id": "osm-11895955903",
+    "name": "Al-Gharb's Fast Food",
+    "category": "fast_food",
+    "lat": -23.552879,
+    "lon": -46.6353994
+  },
+  {
+    "venue_id": "osm-11907789239",
+    "name": "Gusto",
+    "category": "restaurant",
+    "lat": -23.5595211,
+    "lon": -46.6615754
+  },
+  {
+    "venue_id": "osm-11907841780",
+    "name": "Casa Bauducco",
+    "category": "cafe",
+    "lat": -23.558256,
+    "lon": -46.6604887
+  },
+  {
+    "venue_id": "osm-11931420589",
+    "name": "Madadayo",
+    "category": "restaurant",
+    "lat": -23.5547278,
+    "lon": -46.6549422
+  },
+  {
+    "venue_id": "osm-11964582111",
+    "name": "Dona augusta",
+    "category": "bar",
+    "lat": -23.5540719,
+    "lon": -46.6560306
+  },
+  {
+    "venue_id": "osm-12033745895",
+    "name": "Coado shop",
+    "category": "cafe",
+    "lat": -23.5557497,
+    "lon": -46.6660792
+  },
+  {
+    "venue_id": "osm-12036458683",
+    "name": "Ital n house",
+    "category": "restaurant",
+    "lat": -23.5650038,
+    "lon": -46.6675125
+  },
+  {
+    "venue_id": "osm-12058648425",
+    "name": "Restaurante Satori",
+    "category": "restaurant",
+    "lat": -23.5531,
+    "lon": -46.6358435
+  },
+  {
+    "venue_id": "osm-12061033023",
+    "name": "Izakayada",
+    "category": "bar",
+    "lat": -23.5531196,
+    "lon": -46.6355352
+  },
+  {
+    "venue_id": "osm-12065345387",
+    "name": "Canhota Mercearia Sustentável",
+    "category": "bar",
+    "lat": -23.5599929,
+    "lon": -46.6463726
+  },
+  {
+    "venue_id": "osm-12077145058",
+    "name": "Kazu café",
+    "category": "cafe",
+    "lat": -23.5578398,
+    "lon": -46.6355295
+  },
+  {
+    "venue_id": "osm-12077264895",
+    "name": "Bella paim",
+    "category": "cafe",
+    "lat": -23.5547468,
+    "lon": -46.6499394
+  },
+  {
+    "venue_id": "osm-12077306707",
+    "name": "Parada 14 bis",
+    "category": "restaurant",
+    "lat": -23.5544732,
+    "lon": -46.6500126
+  },
+  {
+    "venue_id": "osm-12077323470",
+    "name": "Imperial",
+    "category": "fast_food",
+    "lat": -23.5510574,
+    "lon": -46.6355609
+  },
+  {
+    "venue_id": "osm-12077328681",
+    "name": "Flor da 9 de julho",
+    "category": "fast_food",
+    "lat": -23.5541641,
+    "lon": -46.6486065
+  },
+  {
+    "venue_id": "osm-12091174475",
+    "name": "Terraço",
+    "category": "nightclub",
+    "lat": -23.5549909,
+    "lon": -46.6557726
+  },
+  {
+    "venue_id": "osm-12091185246",
+    "name": "Aloka",
+    "category": "nightclub",
+    "lat": -23.555092,
+    "lon": -46.655844
+  },
+  {
+    "venue_id": "osm-12091678935",
+    "name": "Famiglia Mancini",
+    "category": "restaurant",
+    "lat": -23.5499289,
+    "lon": -46.645035
+  },
+  {
+    "venue_id": "osm-12105290024",
+    "name": "Lanches milênio",
+    "category": "fast_food",
+    "lat": -23.5704013,
+    "lon": -46.655233
+  },
+  {
+    "venue_id": "osm-12107003153",
+    "name": "Rei do Mate",
+    "category": "cafe",
+    "lat": -23.5450668,
+    "lon": -46.6416471
+  },
+  {
+    "venue_id": "osm-12113312726",
+    "name": "Casa de Lanches Bandeira",
+    "category": "fast_food",
+    "lat": -23.5486666,
+    "lon": -46.6383467
+  },
+  {
+    "venue_id": "osm-12132528520",
+    "name": "Alameda",
+    "category": "cafe",
+    "lat": -23.5667784,
+    "lon": -46.6591443
+  },
+  {
+    "venue_id": "osm-12170186442",
+    "name": "Cosi",
+    "category": "restaurant",
+    "lat": -23.5645826,
+    "lon": -46.6684773
+  },
+  {
+    "venue_id": "osm-12175682169",
+    "name": "Eskina 9",
+    "category": "fast_food",
+    "lat": -23.5705368,
+    "lon": -46.6627141
+  },
+  {
+    "venue_id": "osm-12175686717",
+    "name": "Caju verde",
+    "category": "fast_food",
+    "lat": -23.5706474,
+    "lon": -46.662797
+  },
+  {
+    "venue_id": "osm-12189755067",
+    "name": "HINODÊ",
+    "category": "restaurant",
+    "lat": -23.5578456,
+    "lon": -46.6357885
+  },
+  {
+    "venue_id": "osm-12190835491",
+    "name": "Panamericana",
+    "category": "fast_food",
+    "lat": -23.552185,
+    "lon": -46.6527621
+  },
+  {
+    "venue_id": "osm-12207957903",
+    "name": "Bom Suco",
+    "category": "fast_food",
+    "lat": -23.5572532,
+    "lon": -46.6350385
+  },
+  {
+    "venue_id": "osm-12228160401",
+    "name": "Restaurante Lanchitu",
+    "category": "restaurant",
+    "lat": -23.5611256,
+    "lon": -46.6624504
+  },
+  {
+    "venue_id": "osm-12228168923",
+    "name": "Andrômeda",
+    "category": "nightclub",
+    "lat": -23.5524755,
+    "lon": -46.6533094
+  },
+  {
+    "venue_id": "osm-12444706101",
+    "name": "Takoyaki8",
+    "category": "restaurant",
+    "lat": -23.5584436,
+    "lon": -46.6354444
+  },
+  {
+    "venue_id": "osm-12552452321",
+    "name": "Let's Poke",
+    "category": "restaurant",
+    "lat": -23.5560179,
+    "lon": -46.6586426
+  },
+  {
+    "venue_id": "osm-12553970313",
+    "name": "Insalata",
+    "category": "restaurant",
+    "lat": -23.5723318,
+    "lon": -46.6597226
+  },
+  {
+    "venue_id": "osm-12553991808",
+    "name": "Magori",
+    "category": "restaurant",
+    "lat": -23.5721742,
+    "lon": -46.6592081
+  },
+  {
+    "venue_id": "osm-12554261102",
+    "name": "B/side",
+    "category": "restaurant",
+    "lat": -23.5724766,
+    "lon": -46.6593616
+  },
+  {
+    "venue_id": "osm-12590485468",
+    "name": "Dino‘s Place",
+    "category": "restaurant",
+    "lat": -23.5714112,
+    "lon": -46.6459833
+  },
+  {
+    "venue_id": "osm-12780040822",
+    "name": "Bar do Manoel",
+    "category": "bar",
+    "lat": -23.5579634,
+    "lon": -46.6498256
+  },
+  {
+    "venue_id": "osm-12840603301",
+    "name": "Espaço Zebra",
+    "category": "bar",
+    "lat": -23.5562401,
+    "lon": -46.6428192
+  },
+  {
+    "venue_id": "osm-12840655001",
+    "name": "Espaço Zebra",
+    "category": "bar",
+    "lat": -23.5532342,
+    "lon": -46.6431283
+  },
+  {
+    "venue_id": "osm-12840806701",
+    "name": "Bar Kintaro",
+    "category": "pub",
+    "lat": -23.5576768,
+    "lon": -46.6358474
+  },
+  {
+    "venue_id": "osm-12848905247",
+    "name": "LUGAR Metrópole",
+    "category": "cafe",
+    "lat": -23.5461978,
+    "lon": -46.6421554
+  },
+  {
+    "venue_id": "osm-12848933701",
+    "name": "CaféDaqui",
+    "category": "cafe",
+    "lat": -23.5487888,
+    "lon": -46.6436095
+  },
+  {
+    "venue_id": "osm-12848933702",
+    "name": "O Bibelô",
+    "category": "cafe",
+    "lat": -23.5454961,
+    "lon": -46.6474917
+  },
+  {
+    "venue_id": "osm-12861495178",
+    "name": "Café Floresta",
+    "category": "cafe",
+    "lat": -23.5466076,
+    "lon": -46.644871
+  },
+  {
+    "venue_id": "osm-12989988983",
+    "name": "Sushi Amigo",
+    "category": "restaurant",
+    "lat": -23.5581329,
+    "lon": -46.6368236
+  },
+  {
+    "venue_id": "osm-13037907801",
+    "name": "MeGusta",
+    "category": "restaurant",
+    "lat": -23.559414,
+    "lon": -46.6649251
+  },
+  {
+    "venue_id": "osm-13131453153",
+    "name": "We Protein",
+    "category": "fast_food",
+    "lat": -23.5587318,
+    "lon": -46.660519
+  },
+  {
+    "venue_id": "osm-13131453161",
+    "name": "Mundo Pão do Olivier",
+    "category": "fast_food",
+    "lat": -23.5587531,
+    "lon": -46.6600934
+  },
+  {
+    "venue_id": "osm-13141694987",
+    "name": "LE Burger",
+    "category": "fast_food",
+    "lat": -23.5634352,
+    "lon": -46.6658992
+  },
+  {
+    "venue_id": "osm-13186393184",
+    "name": "Pecorino Bar & Trattoria",
+    "category": "restaurant",
+    "lat": -23.5463617,
+    "lon": -46.6389267
+  },
+  {
+    "venue_id": "osm-13207211923",
+    "name": "MARIA MARIA RESTAURANTE",
+    "category": "restaurant",
+    "lat": -23.5462647,
+    "lon": -46.6351026
+  },
+  {
+    "venue_id": "osm-13226652893",
+    "name": "Whiplash Bar",
+    "category": "restaurant",
+    "lat": -23.5587478,
+    "lon": -46.6682566
+  },
+  {
+    "venue_id": "osm-13276614638",
+    "name": "Fôrno",
+    "category": "restaurant",
+    "lat": -23.5461326,
+    "lon": -46.6486105
+  },
+  {
+    "venue_id": "osm-13278114003",
+    "name": "Subway",
+    "category": "fast_food",
+    "lat": -23.5606331,
+    "lon": -46.6380929
+  },
+  {
+    "venue_id": "osm-13286454863",
+    "name": "Nova Major lanchonete",
+    "category": "fast_food",
+    "lat": -23.5454928,
+    "lon": -46.6490655
+  },
+  {
+    "venue_id": "osm-13286506319",
+    "name": "The Coffee",
+    "category": "cafe",
+    "lat": -23.5454651,
+    "lon": -46.6491344
+  },
+  {
+    "venue_id": "osm-13311909148",
+    "name": "Parahy",
+    "category": "cafe",
+    "lat": -23.566909,
+    "lon": -46.6457389
+  },
+  {
+    "venue_id": "osm-13320081502",
+    "name": "Lanchones olimpia",
+    "category": "restaurant",
+    "lat": -23.557675,
+    "lon": -46.6455951
+  },
+  {
+    "venue_id": "osm-13320081601",
+    "name": "Cana braya",
+    "category": "restaurant",
+    "lat": -23.5501385,
+    "lon": -46.6463796
+  },
+  {
+    "venue_id": "osm-13330605303",
+    "name": "GoWork co-working",
+    "category": "internet_cafe",
+    "lat": -23.569159,
+    "lon": -46.6466437
+  },
+  {
+    "venue_id": "osm-13338558285",
+    "name": "reet namastê",
+    "category": "restaurant",
+    "lat": -23.5707903,
+    "lon": -46.6583925
+  },
+  {
+    "venue_id": "osm-13427169499",
+    "name": "A Baianeira MASP",
+    "category": "restaurant",
+    "lat": -23.56186,
+    "lon": -46.6554609
+  },
+  {
+    "venue_id": "osm-13450313101",
+    "name": "Fel",
+    "category": "bar",
+    "lat": -23.5464105,
+    "lon": -46.6440749
+  },
+  {
+    "venue_id": "osm-13471408606",
+    "name": "Fora da Lei Café",
+    "category": "cafe",
+    "lat": -23.5734812,
+    "lon": -46.6447325
+  },
+  {
+    "venue_id": "osm-13471408607",
+    "name": "Cheirin Bão",
+    "category": "cafe",
+    "lat": -23.5739882,
+    "lon": -46.6446666
+  },
+  {
+    "venue_id": "osm-13471408610",
+    "name": "Divino's Vergueiro",
+    "category": "restaurant",
+    "lat": -23.5632116,
+    "lon": -46.638787
+  },
+  {
+    "venue_id": "osm-13505699801",
+    "name": "La Guapa Empanadas",
+    "category": "cafe",
+    "lat": -23.5565601,
+    "lon": -46.6577783
+  },
+  {
+    "venue_id": "osm-13505702401",
+    "name": "Santo Colomba",
+    "category": "restaurant",
+    "lat": -23.5662779,
+    "lon": -46.6635639
+  },
+  {
+    "venue_id": "osm-13516739401",
+    "name": "Funilaria",
+    "category": "nightclub",
+    "lat": -23.5605229,
+    "lon": -46.6453071
+  },
+  {
+    "venue_id": "osm-13516739601",
+    "name": "Los Perros",
+    "category": "bar",
+    "lat": -23.559852,
+    "lon": -46.6464151
+  },
+  {
+    "venue_id": "osm-13644329469",
+    "name": "Caffe Latte Piccolo",
+    "category": "cafe",
+    "lat": -23.5462972,
+    "lon": -46.6354216
+  },
+  {
+    "venue_id": "osm-13644329471",
+    "name": "Bashar Comida Árabe",
+    "category": "restaurant",
+    "lat": -23.5462828,
+    "lon": -46.6354503
+  },
+  {
+    "venue_id": "osm-13644329482",
+    "name": "Pastelaria São Bento",
+    "category": "fast_food",
+    "lat": -23.5463251,
+    "lon": -46.6353441
+  },
+  {
+    "venue_id": "osm-13719110301",
+    "name": "DaSelva Centro Historico",
+    "category": "restaurant",
+    "lat": -23.5479921,
+    "lon": -46.6417255
+  },
+  {
+    "venue_id": "osm-13722776646",
+    "name": "Mixue",
+    "category": "cafe",
+    "lat": -23.5636455,
+    "lon": -46.6525839
+  },
+  {
+    "venue_id": "osm-13847177662",
+    "name": "Divina Parada",
+    "category": "restaurant",
+    "lat": -23.5684337,
+    "lon": -46.6397601
+  },
+  {
+    "venue_id": "osm-13853094625",
+    "name": "Krapook Khao",
+    "category": "restaurant",
+    "lat": -23.5726457,
+    "lon": -46.6494671
+  },
+  {
+    "venue_id": "osm-13853094627",
+    "name": "KuroMoon 黒문",
+    "category": "bar",
+    "lat": -23.5726942,
+    "lon": -46.6494482
+  },
+  {
+    "venue_id": "osm-13864318503",
+    "name": "Candeia",
+    "category": "bar",
+    "lat": -23.5582171,
+    "lon": -46.646632
+  },
+  {
+    "venue_id": "osm-13869864806",
+    "name": "Taverna e Kaffee",
+    "category": "pub",
+    "lat": -23.5578272,
+    "lon": -46.6361132
+  },
+  {
+    "venue_id": "osm-13894211871",
+    "name": "Doca",
+    "category": "restaurant",
+    "lat": -23.5624623,
+    "lon": -46.6417796
+  },
+  {
+    "venue_id": "osm-13895030581",
+    "name": "Fuji",
+    "category": "restaurant",
+    "lat": -23.5578346,
+    "lon": -46.6360477
+  },
+  {
+    "venue_id": "osm-14008698550",
+    "name": "Cheers Cocktail Bar",
+    "category": "bar",
+    "lat": -23.5719975,
+    "lon": -46.6446299
+  },
+  {
+    "venue_id": "osm-14008698552",
+    "name": "Bar do Alemão",
+    "category": "bar",
+    "lat": -23.5737612,
+    "lon": -46.6448013
+  },
+  {
+    "venue_id": "osm-14050067335",
+    "name": "Lucky",
+    "category": "restaurant",
+    "lat": -23.5617001,
+    "lon": -46.6362039
+  },
+  {
+    "venue_id": "osm-14064469202",
+    "name": "Soa Cake",
+    "category": "cafe",
+    "lat": -23.5696459,
+    "lon": -46.6360371
+  },
+  {
+    "venue_id": "osm-14108524987",
+    "name": "Marla Cozinha Árabe",
+    "category": "fast_food",
+    "lat": -23.5589806,
+    "lon": -46.6587428
+  },
+  {
+    "venue_id": "osm-14132363101",
+    "name": "Hot Dog",
+    "category": "fast_food",
+    "lat": -23.5653392,
+    "lon": -46.666022
+  },
+  {
+    "venue_id": "osm-14165251129",
+    "name": "Sagrado Mineiro",
+    "category": "restaurant",
+    "lat": -23.5454058,
+    "lon": -46.644807
+  },
+  {
+    "venue_id": "osm-14165251130",
+    "name": "Feijão do Norte",
+    "category": "restaurant",
+    "lat": -23.5462264,
+    "lon": -46.6420785
+  }
+]

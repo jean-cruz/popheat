@@ -1,7 +1,11 @@
-import urllib.request, urllib.parse, json, sys, time
+"""Regenerates data/venues.json with real venues from OpenStreetMap (Overpass
+API) inside BBOX. Free, no API key required. To change city, edit BBOX below
+and rerun (`python3 data/fetch_venues.py`)."""
+import urllib.request, urllib.parse, json, sys, time, pathlib
 
-BBOX = (41.135, -8.635, 41.165, -8.580)  # Porto historic center + surroundings
+BBOX = (-23.575, -46.675, -23.545, -46.635)  # Sao Paulo: Paulista / Jardins / Pinheiros / Vila Madalena
 CATEGORIES = "bar|pub|restaurant|cafe|fast_food|nightclub"
+OUTPUT_FILE = pathlib.Path(__file__).parent / "venues.json"
 
 query = f"""
 [out:json][timeout:25];
@@ -49,5 +53,5 @@ for el in result.get("elements", []):
     })
 
 print(f"Collected {len(venues)} named venues", file=sys.stderr)
-with open("/tmp/claude-1001/-home-jean-contest/0d4377b7-0c32-463d-9f59-08d01c3013d3/scratchpad/porto_venues.json", "w", encoding="utf-8") as f:
+with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(venues, f, ensure_ascii=False, indent=2)

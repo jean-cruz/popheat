@@ -1,6 +1,6 @@
 # PopHeat
 
-A live crowdedness heatmap for the city of Porto, Portugal, built as a **pure-Python InterSystems IRIS Interoperability Production** using [PyProd](https://github.com/intersystems/pyprod).
+A live crowdedness heatmap for the city of São Paulo, Brazil, built as a **pure-Python InterSystems IRIS Interoperability Production** using [PyProd](https://github.com/intersystems/pyprod).
 
 Built for the **InterSystems Portuguese Community AI Programming Contest 2026** ([contest page](https://pt.community.intersystems.com/contests/current)), PyProd track.
 
@@ -8,7 +8,7 @@ Built for the **InterSystems Portuguese Community AI Programming Contest 2026** 
 
 ## What it does
 
-PopHeat ingests ~1,500 real venues (bars, restaurants, cafés, pubs, nightclubs) in Porto, scores how crowded each one likely is right now, classifies that score through an IRIS **Business Rule**, persists it, and renders it as a live heatmap on a **Flask/WSGI** dashboard hosted directly by IRIS — refreshing every 10 seconds.
+PopHeat ingests ~650 real venues (bars, restaurants, cafés, pubs, nightclubs) around Avenida Paulista/Jardins/Pinheiros in São Paulo, scores how crowded each one likely is right now, classifies that score through an IRIS **Business Rule**, persists it, and renders it as a live heatmap on a **Flask/WSGI** dashboard hosted directly by IRIS — refreshing every 10 seconds.
 
 <p align="center"><em>(add a screenshot of the dashboard here before publishing)</em></p>
 
@@ -28,7 +28,7 @@ This is disclosed here and in the accompanying article so nobody mistakes the de
 ## Architecture
 
 ```
-data/porto_venues.json (1,479 real OSM venues)
+data/venues.json (~650 real OSM venues)
         │
         ▼
 ┌─────────────────────┐   batch of ~150 venues/tick, synthetic popularity computed
@@ -58,7 +58,7 @@ data/porto_venues.json (1,479 real OSM venues)
    served directly by IRIS at /popheat/
 ```
 
-**Why a whole batch travels as one message** instead of one message per venue: an earlier version routed one PyProd message per venue through all three hosts. At ~1,500 venues that meant ~3,000 synchronous inter-host round trips per refresh cycle — a full refresh took over an hour. Batching the venues into a single `VenueBatch` message (and persisting rows directly via `iris.cls(...)._New()/._Save()` instead of one more messaging hop per row) brought a full refresh down to well under a minute.
+**Why a whole batch travels as one message** instead of one message per venue: an earlier version (tested against a ~1,500-venue dataset) routed one PyProd message per venue through all three hosts. That meant thousands of synchronous inter-host round trips per refresh cycle — a full refresh took over an hour. Batching venues into a single `VenueBatch` message (and persisting rows directly via `iris.cls(...)._New()/._Save()` instead of one more messaging hop per row) brought a full refresh of the whole dataset down to well under a minute.
 
 ## Contest scorecard (PyProd track)
 
@@ -76,7 +76,7 @@ data/porto_venues.json (1,479 real OSM venues)
 
 - Docker + Docker Compose
 - ~2 GB free RAM for the IRIS container
-- Internet access on first data refresh only (`data/fetch_venues.py`, already run — `data/porto_venues.json` is committed)
+- Internet access on first data refresh only (`data/fetch_venues.py`, already run — `data/venues.json` is committed)
 
 ## Quick start
 
@@ -105,19 +105,19 @@ iris/setup.sh, setup.txt     One-shot idempotent environment setup
 src/python/popheat_production.py   The PyProd production (Service/Process/Operation/Adapter)
 src/python/webapp/app.py     Flask/WSGI dashboard, hosted directly by IRIS
 src/objectscript/            The IRIS Business Rule + its context class
-data/porto_venues.json       1,479 real Porto venues (OpenStreetMap)
+data/venues.json             ~650 real São Paulo venues (OpenStreetMap)
 data/fetch_venues.py         Script used to (re)generate that dataset for any bounding box
 ```
 
 ## Data & licensing
 
 - Code: MIT (see `LICENSE`).
-- `data/porto_venues.json` is derived from **OpenStreetMap** data, © OpenStreetMap contributors, available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/). The dashboard's map tiles also carry the OSM attribution in the UI, as required.
+- `data/venues.json` is derived from **OpenStreetMap** data, © OpenStreetMap contributors, available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/). The dashboard's map tiles also carry the OSM attribution in the UI, as required.
 - Popularity scores in that dataset are synthetic (see above) — they are not derived from any real observed data.
 
 ## Changing the city
 
-Edit `BBOX` in `data/fetch_venues.py` to any bounding box, rerun it to regenerate `data/porto_venues.json`, and update the map's initial view in `src/python/webapp/app.py` (`map.setView([lat, lon], zoom)`).
+Edit `BBOX` in `data/fetch_venues.py` to any bounding box, rerun it to regenerate `data/venues.json`, and update the map's initial view in `src/python/webapp/app.py` (`map.setView([lat, lon], zoom)`).
 
 ## Author
 

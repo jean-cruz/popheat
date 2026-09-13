@@ -101,7 +101,7 @@ INDEX_HTML = """<!doctype html>
 <html lang="pt">
 <head>
 <meta charset="utf-8">
-<title>PopHeat - Mapa de Calor do Porto</title>
+<title>PopHeat - Mapa de Calor de Sao Paulo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
@@ -121,7 +121,7 @@ INDEX_HTML = """<!doctype html>
 </head>
 <body>
 <header>
-  <h1>PopHeat &mdash; lugares mais cheios agora (Porto)</h1>
+  <h1>PopHeat &mdash; lugares mais cheios agora (Sao Paulo)</h1>
   <div class="stats" id="stats"></div>
 </header>
 <div id="map"></div>
@@ -138,7 +138,7 @@ INDEX_HTML = """<!doctype html>
 <script>
 const COLORS = {BAIXO:'#2563eb', MEDIO:'#eab308', ALTO:'#f97316', CRITICO:'#dc2626'};
 
-const map = L.map('map').setView([41.1496, -8.6109], 14);
+const map = L.map('map').setView([-23.5600, -46.6550], 14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; OpenStreetMap contributors'
@@ -181,7 +181,7 @@ async function refresh() {
       `<span class="pill">gravacao DB: <b>${tData.avg_venues_per_second}</b> locais/s</span>`;
 
     document.getElementById('updated').textContent =
-      `${vData.count} locais - atualizado ${new Date(vData.generated_at).toLocaleTimeString('pt-PT')}`;
+      `${vData.count} locais - atualizado ${new Date(vData.generated_at).toLocaleTimeString('pt-BR')}`;
   } catch (e) {
     document.getElementById('updated').textContent = 'erro ao atualizar: ' + e;
   }
