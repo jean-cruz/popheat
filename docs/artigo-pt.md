@@ -31,6 +31,8 @@ O PyProd é uma biblioteca que permite escrever produções de interoperabilidad
 
 Por cima disso, um **dashboard Flask hospedado como aplicação WSGI diretamente pelo IRIS** (`Security.Applications` com `DispatchClass=%SYS.Python.WSGI`) lê a tabela via SQL embutido (`iris.sql.exec`, sem round-trip de rede) e desenha o mapa de calor com Leaflet, atualizando a cada 10 segundos.
 
+![Dashboard do PopHeat mostrando o mapa de calor de São Paulo](images/dashboard.png)
+
 ## Como usei IA no desenvolvimento
 
 Todo o projeto foi construído com o **Claude Code** operando diretamente no meu terminal, com acesso real a Docker, ao container IRIS e à internet — não foi "peça o código pronto e cole", foi um ciclo iterativo de implementar, rodar, ver o erro real, e corrigir. Achei importante documentar os problemas reais encontrados, porque foram eles que mais consumiram tempo — e onde a IA foi mais útil não foi gerando código bonito de primeira, mas depurando problemas de ambiente que eu não teria diagnosticado rápido sozinho:
@@ -48,7 +50,7 @@ Nenhum desses problemas é "um bug de IA" — são detalhes reais de operar IRIS
 ## Rodando o projeto
 
 ```bash
-git clone <repo>
+git clone https://github.com/jean-cruz/popheat.git
 cd popheat
 docker compose up -d
 bash iris/setup.sh
@@ -78,5 +80,5 @@ Dashboard: **http://localhost:52773/popheat/**
 
 ## Links
 
+- Repositório: https://github.com/jean-cruz/popheat
 - Open Exchange: *(adicionar link após publicar)*
-- Repositório: *(adicionar link do GitHub)*

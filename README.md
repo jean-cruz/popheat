@@ -10,7 +10,7 @@ Built for the **InterSystems Portuguese Community AI Programming Contest 2026** 
 
 PopHeat ingests ~650 real venues (bars, restaurants, cafés, pubs, nightclubs) around Avenida Paulista/Jardins/Pinheiros in São Paulo, scores how crowded each one likely is right now, classifies that score through an IRIS **Business Rule**, persists it, and renders it as a live heatmap on a **Flask/WSGI** dashboard hosted directly by IRIS — refreshing every 10 seconds.
 
-<p align="center"><em>(add a screenshot of the dashboard here before publishing)</em></p>
+<p align="center"><img src="docs/images/dashboard.png" alt="PopHeat dashboard showing a live heatmap of São Paulo" width="800"></p>
 
 ## Why the popularity score is synthetic, not scraped
 
