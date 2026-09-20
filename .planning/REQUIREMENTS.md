@@ -18,34 +18,34 @@ Derived directly from `specs/*.spec` (already-decided business rules) plus the I
 
 ### Ingestion Pipeline
 
-- [ ] **INGE-01**: Ingestion is implemented as an IRIS Interoperability Production using embedded Python (PyProd)
+- [x] **INGE-01**: Ingestion is implemented as an IRIS Interoperability Production using embedded Python (PyProd)
 - [ ] **INGE-02**: Venues are processed in batches of 150, with 3 seconds between the start of one batch and the next
 - [ ] **INGE-03**: Ingestion cycles through the full venue catalog continuously, wrapping to the start after reaching the end
 - [ ] **INGE-04**: A batch of venues is scored, classified, and persisted as one atomic unit; venues are never split across pipeline stages mid-batch
 - [ ] **INGE-05**: A failure while processing one batch is recorded as an error for that batch without stopping the next scheduled batch
-- [ ] **INGE-06**: Every persisted reading carries venue identity, name, category, coordinates, popularity, heat level, and observation timestamp
-- [ ] **INGE-07**: Persisting a reading always inserts a new row; historical readings are retained, never overwritten
+- [x] **INGE-06**: Every persisted reading carries venue identity, name, category, coordinates, popularity, heat level, and observation timestamp
+- [x] **INGE-07**: Persisting a reading always inserts a new row; historical readings are retained, never overwritten
 
 ### Popularity Model
 
-- [ ] **POPU-01**: Popularity score is always between 0.02 and 0.98, rounded to 3 decimal places
-- [ ] **POPU-02**: Each venue category follows its own peak-hour curve (cafe, restaurant, fast_food, bar, pub, nightclub, and a generic fallback for any other category)
-- [ ] **POPU-03**: Time distance to a peak hour wraps at midnight (the day is circular)
-- [ ] **POPU-04**: Score is boosted 20% from Friday through Sunday, before clamping to the valid range
-- [ ] **POPU-05**: A small random adjustment (-0.06 to +0.06) is applied to every reading
-- [ ] **POPU-06**: Popularity is recalculated fresh on every ingestion cycle, never stored or reused between cycles
+- [x] **POPU-01**: Popularity score is always between 0.02 and 0.98, rounded to 3 decimal places
+- [x] **POPU-02**: Each venue category follows its own peak-hour curve (cafe, restaurant, fast_food, bar, pub, nightclub, and a generic fallback for any other category)
+- [x] **POPU-03**: Time distance to a peak hour wraps at midnight (the day is circular)
+- [x] **POPU-04**: Score is boosted 20% from Friday through Sunday, before clamping to the valid range
+- [x] **POPU-05**: A small random adjustment (-0.06 to +0.06) is applied to every reading
+- [x] **POPU-06**: Popularity is recalculated fresh on every ingestion cycle, never stored or reused between cycles
 
 ### Heat Classification
 
-- [ ] **HEAT-01**: Every reading is classified into exactly one of BAIXO, MEDIO, ALTO, CRITICO
-- [ ] **HEAT-02**: Nightlife categories (bar, pub, nightclub) use a lower popularity threshold scale than daytime categories
+- [x] **HEAT-01**: Every reading is classified into exactly one of BAIXO, MEDIO, ALTO, CRITICO
+- [x] **HEAT-02**: Nightlife categories (bar, pub, nightclub) use a lower popularity threshold scale than daytime categories
 - [ ] **HEAT-03**: Thresholds are stored as configuration, adjustable without a code change or redeploy
 - [ ] **HEAT-04**: A reading that can't be classified defaults to BAIXO rather than being left unlabeled or rejected
 
 ### Telemetry
 
-- [ ] **TELE-01**: Exactly one telemetry record is written per persisted batch
-- [ ] **TELE-02**: Each telemetry record captures reading count, elapsed persist time, throughput, and timestamp
+- [x] **TELE-01**: Exactly one telemetry record is written per persisted batch
+- [x] **TELE-02**: Each telemetry record captures reading count, elapsed persist time, throughput, and timestamp
 - [ ] **TELE-03**: Throughput is computed as batch size divided by elapsed time, reporting zero (not divide-by-zero or omitted) when elapsed time is zero or unavailable
 - [ ] **TELE-04**: A telemetry-recording failure never blocks persistence of the venue readings themselves
 - [ ] **TELE-05**: Operational views show only the most recent 20 batches, not the full historical telemetry log
@@ -93,25 +93,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VENU-04 | Phase 1 | Complete |
 | VENU-05 | Phase 1 | Complete |
 | VENU-06 | Phase 1 | Complete |
-| INGE-01 | Phase 2 | Pending |
+| INGE-01 | Phase 2 | Complete |
 | INGE-02 | Phase 2 | Pending |
 | INGE-03 | Phase 2 | Pending |
 | INGE-04 | Phase 2 | Pending |
 | INGE-05 | Phase 2 | Pending |
-| INGE-06 | Phase 2 | Pending |
-| INGE-07 | Phase 2 | Pending |
-| POPU-01 | Phase 2 | Pending |
-| POPU-02 | Phase 2 | Pending |
-| POPU-03 | Phase 2 | Pending |
-| POPU-04 | Phase 2 | Pending |
-| POPU-05 | Phase 2 | Pending |
-| POPU-06 | Phase 2 | Pending |
-| HEAT-01 | Phase 2 | Pending |
-| HEAT-02 | Phase 2 | Pending |
+| INGE-06 | Phase 2 | Complete |
+| INGE-07 | Phase 2 | Complete |
+| POPU-01 | Phase 2 | Complete |
+| POPU-02 | Phase 2 | Complete |
+| POPU-03 | Phase 2 | Complete |
+| POPU-04 | Phase 2 | Complete |
+| POPU-05 | Phase 2 | Complete |
+| POPU-06 | Phase 2 | Complete |
+| HEAT-01 | Phase 2 | Complete |
+| HEAT-02 | Phase 2 | Complete |
 | HEAT-03 | Phase 2 | Pending |
 | HEAT-04 | Phase 2 | Pending |
-| TELE-01 | Phase 2 | Pending |
-| TELE-02 | Phase 2 | Pending |
+| TELE-01 | Phase 2 | Complete |
+| TELE-02 | Phase 2 | Complete |
 | TELE-03 | Phase 2 | Pending |
 | TELE-04 | Phase 2 | Pending |
 | TELE-05 | Phase 2 | Pending |
