@@ -35,7 +35,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. No two catalog entries share the same name and coordinates rounded to 5 decimal places
   4. Every catalog venue carries a stable identifier derived from its OSM source record
   5. The catalog is produced by an on-demand build step, not recomputed automatically on every ingestion cycle
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Config-driven Overpass fetch -> filtered catalog write, end-to-end (tracer)
+- [ ] 01-02-PLAN.md — Deduplication + run() overwrite/empty-result semantics
 
 ### Phase 2: IRIS Ingestion Pipeline — Scoring, Classification & Telemetry
 **Goal**: A running IRIS Interoperability Production continuously ingests the venue catalog in batches, computes popularity, classifies heat level, persists readings, and records operational telemetry — resiliently and without manual intervention
@@ -81,7 +85,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Venue Catalog Sourcing | 0/TBD | Not started | - |
+| 1. Venue Catalog Sourcing | 0/2 | Planned | - |
 | 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 0/TBD | Not started | - |
 | 3. Dashboard & API | 0/TBD | Not started | - |
 | 4. Contest Submission Packaging | 0/TBD | Not started | - |
