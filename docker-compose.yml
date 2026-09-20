@@ -10,6 +10,17 @@
 # brings the same container back with its data intact and
 # PopHeat.Production auto-starting (D-05) -- no manual "start production"
 # step, ever, after the one-time docker/init-production.sh run.
+#
+# WARNING (WR-02): the POPHEAT database (iris/merge.cpf) lives inside this
+# container's own writable filesystem, not a named Docker volume -- by
+# deliberate design (02-01-PLAN.md's durability prohibition: do not bind-mount
+# a host path over it, which would make data ephemeral instead of more
+# durable). This means `docker compose restart` / a host reboot preserve
+# every PopHeat.Reading and PopHeat.BatchTelemetry row, but `docker compose
+# down` (which removes the container, not just stops it) PERMANENTLY DESTROYS
+# ALL DATA. Only ever use `docker compose restart` (or `stop` + `start`) to
+# cycle the running demo -- never `down` -- unless you intend to wipe and
+# re-run docker/init-production.sh from scratch.
 services:
   iris:
     image: intersystemsdc/iris-community:latest
