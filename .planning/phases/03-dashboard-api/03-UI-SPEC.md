@@ -1,10 +1,11 @@
 ---
 phase: "3"
 slug: "dashboard-api"
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: "2026-09-20"
+reviewed_at: "2026-09-20"
 ---
 
 # Phase 3 — UI Design Contract
@@ -104,6 +105,7 @@ Accent reserved for: pipeline-running status dot, banner dismiss control interac
 | Marker popup | "{Venue Name}" (bold, Body) / "{Category} · {HeatLevel}" (Label, colored per heat gradient) / "Popularity: {score}" / "as of {ObservedAt local time}" (accent-colored per above) |
 | Counts panel | Four rows: "{count} BAIXO" / "{count} MEDIO" / "{count} ALTO" / "{count} CRITICO", count in Display size, label in Label size, each row's count digit colored per that level's heat color |
 | Telemetry panel | "Last batch: {ReadingCount} readings · {ElapsedSeconds}s · {Throughput}/s" and "Recorded {RecordedAt local time}" — sourced from `PopHeat.BatchTelemetry.RecentBatches()` most-recent row |
+| Banner dismiss control | Icon-only "×" button carries `aria-label="Dismiss"` (checker Dimension 2 flag — icon-only interactive elements need a declared accessible-name fallback) |
 
 ---
 
