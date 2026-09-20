@@ -243,13 +243,18 @@ def run(config_path, fetch_fn=fetch_overpass, catalog_path=CATALOG_PATH, raw_pat
             config["request_timeout_seconds"],
             config["max_response_bytes"],
         )
+        if "elements" not in response:
+            raise OverpassFetchError(
+                "Overpass response missing 'elements' "
+                f"(remark: {response.get('remark', 'none')})"
+            )
     except OverpassFetchError as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 1
 
     write_json_atomic(raw_path, response)
 
-    elements = response.get("elements", [])
+    elements = response["elements"]
     fetched_count = len(elements)
 
     venues = []

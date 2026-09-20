@@ -245,6 +245,36 @@ class BuildCatalogTests(unittest.TestCase):
             with open(catalog_path, "rb") as f:
                 self.assertEqual(f.read(), existing_bytes)
 
+    def test_run_missing_elements_key_treated_as_failure_not_zero_match(self):
+        """CR-01 regression: a 200-OK Overpass response whose JSON body
+        carries a `remark` (soft error/timeout) instead of an `elements`
+        list must be treated as a fetch failure — NOT as a genuine
+        zero-match success — and must leave any existing catalog untouched
+        (VENU-06 failure semantics, D-05)."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = self._write_config(tmp_dir)
+            catalog_path = os.path.join(tmp_dir, "venues.json")
+            raw_path = os.path.join(tmp_dir, "venues.raw.json")
+
+            existing_bytes = b'[{"id": "node/1", "name": "Existing Bar", "category": "bar", "lat": 41.14, "lon": -8.61}]'
+            with open(catalog_path, "wb") as f:
+                f.write(existing_bytes)
+
+            def soft_failure_fetch_fn(query, endpoint, request_timeout, max_bytes):
+                return {"remark": "runtime error: Query timed out"}
+
+            exit_code = run(
+                config_path,
+                fetch_fn=soft_failure_fetch_fn,
+                catalog_path=catalog_path,
+                raw_path=raw_path,
+            )
+
+            self.assertNotEqual(exit_code, 0)
+            with open(catalog_path, "rb") as f:
+                self.assertEqual(f.read(), existing_bytes)
+            self.assertFalse(os.path.exists(raw_path))
+
     def test_run_second_call_fully_overwrites_first(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             config_path = self._write_config(tmp_dir)
