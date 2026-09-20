@@ -10,6 +10,7 @@ specs/ingestion-pipeline.spec for the business rules this implements.
 """
 
 import argparse
+import decimal
 import json
 import os
 import socket
@@ -161,6 +162,36 @@ def map_element_to_venue(element, allowlist):
     }
 
 
+def round5(value):
+    """Round value to exactly 5 decimal places using explicit round-half-up
+    (VENU-04 dedup key precision). Deliberately does NOT use Python's native
+    round(), which applies round-half-to-even on floats and is subject to
+    binary representation error; decimal.Decimal(str(value)) preserves the
+    value's decimal string form before rounding."""
+    return float(
+        decimal.Decimal(str(value)).quantize(
+            decimal.Decimal("0.00001"), rounding=decimal.ROUND_HALF_UP
+        )
+    )
+
+
+def dedupe_venues(venues):
+    """Drop duplicate venues: a venue is a duplicate of an earlier one if it
+    shares the same exact `name` string and the same (lat, lon) rounded to 5
+    decimal places (R4). Iterates in input order, keeps only the FIRST
+    occurrence of each (name, round5(lat), round5(lon)) key, and preserves
+    the relative order of survivors — no sorting."""
+    seen = set()
+    result = []
+    for venue in venues:
+        key = (venue["name"], round5(venue["lat"]), round5(venue["lon"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(venue)
+    return result
+
+
 def write_json_atomic(path, data):
     """Write data as JSON to path atomically: write to a temp file in the
     same directory, then os.replace() onto the final path. Ensures an
@@ -220,11 +251,14 @@ def main():
         else:
             venues.append(venue)
 
-    write_json_atomic(CATALOG_PATH, venues)
+    deduped_venues = dedupe_venues(venues)
+    duplicate_count = len(venues) - len(deduped_venues)
+
+    write_json_atomic(CATALOG_PATH, deduped_venues)
 
     print(
-        f"Fetched {fetched_count} elements, dropped {dropped_count} for "
-        f"missing fields, final catalog count: {len(venues)}"
+        f"Fetched: {fetched_count}, dropped (missing field): {dropped_count}, "
+        f"dropped (duplicate): {duplicate_count}, final catalog: {len(deduped_venues)}"
     )
     return 0
 
