@@ -1,0 +1,13 @@
+{
+  "bounding_box": {
+    "south": 41.1390,
+    "west": -8.6200,
+    "north": 41.1510,
+    "east": -8.6020
+  },
+  "amenity_allowlist": ["bar", "pub", "restaurant", "cafe", "fast_food", "nightclub"],
+  "overpass_endpoint": "https://overpass-api.de/api/interpreter",
+  "request_timeout_seconds": 30,
+  "overpass_timeout_seconds": 25,
+  "max_response_bytes": 20000000
+}
