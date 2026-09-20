@@ -188,8 +188,11 @@ class ClassifyHeatTests(unittest.TestCase):
         self.assertEqual(classify_heat("cafe", 0.65, thresholds), "ALTO")
 
     def test_missing_required_key_defaults_to_baixo(self):
+        """A popularity below CRITICO forces the evaluation loop to consult
+        ALTO, which is missing from this thresholds dict -- classify_heat
+        must catch the KeyError and default to BAIXO rather than raise."""
         broken_thresholds = {"nightlife": {"CRITICO": 0.60}}  # missing ALTO/MEDIO/daytime
-        result = classify_heat("bar", 0.99, broken_thresholds)
+        result = classify_heat("bar", 0.30, broken_thresholds)
         self.assertEqual(result, "BAIXO")
 
     def test_empty_thresholds_defaults_to_baixo(self):

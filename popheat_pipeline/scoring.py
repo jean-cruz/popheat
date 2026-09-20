@@ -3,12 +3,11 @@
 Deliberately imports NOTHING from `iop`/`iris` -- must be importable and
 testable with plain `python3` (Plan 02-02, Task 1). Everything an IRIS
 Interoperability component needs from the popularity/heat-classification/
-batching/telemetry domain lives here; `popheat_pipeline/components.py`
-imports from this module instead of duplicating the logic.
+batching domain lives here; `popheat_pipeline/components.py` imports from
+this module instead of duplicating the logic.
 
-See specs/popularity-model.spec, specs/heat-classification.spec,
-specs/ingestion-pipeline.spec, and specs/telemetry.spec for the business
-rules implemented here.
+See specs/popularity-model.spec, specs/heat-classification.spec, and
+specs/ingestion-pipeline.spec for the business rules implemented here.
 """
 
 import json
@@ -145,12 +144,19 @@ def load_thresholds(path):
     caller (which has host logging methods) logs if it cares; this module
     stays IRIS-independent.
     """
-    # RED-phase stub (Plan 02-02 Task 1): no defaulting/validation yet --
-    # naively loads whatever is at `path` and lets any error propagate,
-    # never falls back to DEFAULT_THRESHOLDS. Intentionally incomplete to
-    # prove the test suite fails for the right reason before GREEN.
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    if not os.path.isfile(path):
+        return DEFAULT_THRESHOLDS
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            thresholds = json.load(f)
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError):
+        return DEFAULT_THRESHOLDS
+
+    if not _thresholds_valid(thresholds):
+        return DEFAULT_THRESHOLDS
+
+    return thresholds
 
 
 def classify_heat(category, popularity, thresholds) -> str:
@@ -193,9 +199,10 @@ def select_batch(catalog, cursor, size=150):
     `(cursor + size) % len(catalog)` -- the walk-and-wrap semantics that
     guarantee the full catalog is revisited on a regular cycle (R2).
     """
-    # RED-phase stub (Plan 02-02 Task 1): naive linear slice, no modulo/wrap
-    # and no empty-catalog guard -- intentionally incomplete to prove the
-    # test suite fails for the right reason before GREEN.
-    batch = catalog[cursor:cursor + size]
-    next_cursor = cursor + size
+    n = len(catalog)
+    if n == 0:
+        return [], 0
+
+    batch = [catalog[(cursor + i) % n] for i in range(size)]
+    next_cursor = (cursor + size) % n
     return batch, next_cursor

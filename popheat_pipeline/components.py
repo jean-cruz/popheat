@@ -1,22 +1,25 @@
 """PopHeat IoP production: poll -> score/classify -> persist (INGE-01).
 
-This is the phase's tracer slice: CatalogPollingService reads exactly one
-venue from data/venues.json per poll (no batching/cycling -- that is Plan
-02-02's INGE-01/R1/R2 job), ScoreClassifyProcess computes the REAL, final
-popularity + heat-classification math (not a placeholder), and
-PersistOperation inserts one PopHeat.Reading row plus one
-PopHeat.BatchTelemetry row per poll via parameterized SQL.
+Real, spec-complete pipeline (Plan 02-02): CatalogPollingService cycles the
+full venue catalog in 150-venue, 3-second-cadence batches via circular
+(modulo) indexing (INGE-02, INGE-03), ScoreClassifyProcess computes the
+REAL, final popularity + heat-classification math for every venue in the
+batch using thresholds re-read fresh from config every call (HEAT-03/D-10),
+and PersistOperation inserts every reading in the batch plus one
+PopHeat.BatchTelemetry row via the embedded-Python object-persistence API.
+
+The pure popularity/classification/batching math lives in
+`popheat_pipeline/scoring.py` (IRIS-independent, unit-tested) -- this module
+imports from it rather than duplicating the logic.
 
 See specs/popularity-model.spec, specs/heat-classification.spec,
 specs/telemetry.spec, specs/ingestion-pipeline.spec, and
 .planning/phases/02-iris-ingestion-pipeline-scoring-classification-telemetry/
-02-CONTEXT.md (D-01, D-02, D-06, D-07) for the business rules implemented
-here.
+02-CONTEXT.md (D-01, D-02, D-06, D-07, D-09, D-10) for the business rules
+implemented here.
 """
 
 import json
-import math
-import random
 import time
 from dataclasses import dataclass
 from datetime import datetime
@@ -24,6 +27,13 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from iop import BusinessOperation, BusinessProcess, Message, PollingBusinessService, target
+
+from popheat_pipeline.scoring import (
+    classify_heat,
+    compute_popularity,
+    load_thresholds,
+    select_batch,
+)
 
 # D-02: "current time" for peak-hour distance and the weekend boost is
 # Europe/Lisbon local time, not UTC -- venues are physically in Porto.
@@ -34,101 +44,13 @@ LISBON_TZ = ZoneInfo("Europe/Lisbon")
 # components.py -> repo_root/data/venues.json).
 VENUES_PATH = Path(__file__).resolve().parent.parent / "data" / "venues.json"
 
+# HEAT-03/D-10: heat thresholds live in a config file, re-read fresh at the
+# start of every batch cycle (never cached) -- editing the file changes
+# behavior on the next 3-second tick with no restart.
+HEAT_THRESHOLDS_PATH = Path(__file__).resolve().parent.parent / "config" / "heat_thresholds.json"
 
-# ---------------------------------------------------------------------------
-# Popularity model (specs/popularity-model.spec R1-R6)
-# ---------------------------------------------------------------------------
-
-# Each category maps to a list of (peak_hour, height, sigma_hours) tuples
-# (POPU-02). sigma_hours = 1.7 for every peak, per D-01's "~2-hour
-# half-width" guideline: a Gaussian's half-width-at-half-maximum equals
-# sigma * sqrt(2 * ln(2)) ~= 1.1774 * sigma, so sigma=1.7 gives a half-width
-# of ~2.00 hours. Heights are Claude's-discretion tuning (D-01/CONTEXT.md
-# "Claude's Discretion"): fast_food's peaks are deliberately lower than
-# restaurant's identical 13h/20h peaks, per the spec's explicit "lower
-# intensity than restaurant" instruction.
-_SIGMA = 1.7
-
-CATEGORY_CURVES = {
-    "cafe": [(9.0, 0.50, _SIGMA), (15.0, 0.50, _SIGMA)],
-    "restaurant": [(13.0, 0.65, _SIGMA), (20.0, 0.65, _SIGMA)],
-    "fast_food": [(13.0, 0.45, _SIGMA), (20.0, 0.45, _SIGMA)],
-    "bar": [(22.0, 0.50, _SIGMA), (1.0, 0.50, _SIGMA)],
-    "pub": [(21.0, 0.45, _SIGMA), (0.0, 0.45, _SIGMA)],
-    "nightclub": [(1.0, 0.55, _SIGMA), (3.0, 0.55, _SIGMA)],
-    "_default": [(13.0, 0.45, _SIGMA), (20.0, 0.45, _SIGMA)],
-}
-
-# Every score starts from this floor so popularity is never fully empty
-# (POPU-01).
-_BASE_FLOOR = 0.05
-_MIN_POPULARITY = 0.02
-_MAX_POPULARITY = 0.98
-_WEEKEND_BOOST = 1.20
-_RANDOM_ADJUSTMENT_RANGE = (-0.06, 0.06)
-# Friday=4, Saturday=5, Sunday=6 (datetime.weekday()) -- POPU-04.
-_WEEKEND_WEEKDAYS = (4, 5, 6)
-
-
-def circular_distance(h1: float, h2: float) -> float:
-    """Hour distance on a 24h circular clock (POPU-03): 23h to 1h is 2, not 22."""
-    d = abs(h1 - h2) % 24
-    return min(d, 24 - d)
-
-
-def compute_popularity(category: str, when: datetime) -> float:
-    """Compute a venue's synthetic popularity score at `when` (Lisbon-local).
-
-    Fixed order (POPU-01 through POPU-05): category curve (MAX over peaks,
-    never SUM, so nearby peaks like bar's 22h/1h don't stack) -> weekend
-    boost -> random adjustment -> clamp to [0.02, 0.98] -> round to 3
-    decimals. Never reads or caches a prior reading (POPU-06) -- recomputed
-    fresh on every call from the given timestamp (POPU-06/R6).
-    """
-    hour = when.hour + when.minute / 60.0
-    peaks = CATEGORY_CURVES.get(category, CATEGORY_CURVES["_default"])
-
-    score = _BASE_FLOOR + max(
-        height * math.exp(-(circular_distance(hour, peak_hour) ** 2) / (2 * sigma**2))
-        for peak_hour, height, sigma in peaks
-    )
-
-    if when.weekday() in _WEEKEND_WEEKDAYS:
-        score *= _WEEKEND_BOOST
-
-    score += random.uniform(*_RANDOM_ADJUSTMENT_RANGE)
-
-    score = max(_MIN_POPULARITY, min(_MAX_POPULARITY, score))
-    return round(score, 3)
-
-
-# ---------------------------------------------------------------------------
-# Heat classification (specs/heat-classification.spec R1-R5)
-# ---------------------------------------------------------------------------
-
-NIGHTLIFE_CATEGORIES = {"bar", "pub", "nightclub"}
-
-# Ordered highest-threshold-first (R3): first matching rule wins.
-_NIGHTLIFE_SCALE = (("CRITICO", 0.60), ("ALTO", 0.40), ("MEDIO", 0.20))
-_DAYTIME_SCALE = (("CRITICO", 0.75), ("ALTO", 0.50), ("MEDIO", 0.25))
-
-
-def classify_heat(category: str, popularity: float) -> str:
-    """Classify a popularity score into BAIXO/MEDIO/ALTO/CRITICO (R1-R5).
-
-    Nightlife categories (bar/pub/nightclub) use a lower scale than daytime
-    categories (R1/R2). Defaults to BAIXO -- including when classification
-    itself fails for any reason (HEAT-04/R5) -- rather than leaving a
-    reading unlabeled or raising.
-    """
-    try:
-        scale = _NIGHTLIFE_SCALE if category in NIGHTLIFE_CATEGORIES else _DAYTIME_SCALE
-        for label, threshold in scale:
-            if popularity >= threshold:
-                return label
-        return "BAIXO"
-    except Exception:
-        return "BAIXO"
+# INGE-02: exactly 150 venues per batch.
+BATCH_SIZE = 150
 
 
 # ---------------------------------------------------------------------------
@@ -160,10 +82,13 @@ class ScoredBatch(Message):
 class CatalogPollingService(PollingBusinessService):
     """Acquires venues from the static catalog (INGE-01, R5).
 
-    Tracer scope: reads data/venues.json once per poll and takes only the
-    FIRST venue -- no batching (150/3s, R1) or full-catalog cycling (R2) yet;
-    that is Plan 02-02's job. This service owns the source read; it never
-    emits an empty "fetch this" trigger.
+    Walks the full catalog in fixed-size (150-venue) batches via circular
+    (modulo) indexing (INGE-02, INGE-03): `_cursor` is in-memory state that
+    advances every poll and wraps back to 0 once it passes the end of the
+    catalog, so every venue is revisited on a regular cycle rather than
+    just once. The WHOLE batch travels as one `CatalogBatch` message, never
+    split into per-venue messages (INGE-04). An empty catalog is a no-op
+    tick (logged, not a crash) rather than a modulo-by-zero/divide-by-zero.
 
     `Output` carries an explicit default target name (rather than a bare
     `target()`) because the polling-triggered call path invokes `on_poll()`
@@ -178,19 +103,28 @@ class CatalogPollingService(PollingBusinessService):
 
     Output = target("ScoreClassifyProcess")
 
+    def on_init(self):
+        # `iop` never calls `__init__` on business hosts -- cursor state
+        # must be initialized here, not in `__init__` (INGE-02/INGE-03).
+        self._cursor = 0
+
     def on_poll(self):
         with open(VENUES_PATH, "r", encoding="utf-8") as f:
-            venues = json.load(f)
+            catalog = json.load(f)
 
-        if not venues:
-            self.log_warning(f"No venues found at {VENUES_PATH}; skipping poll")
+        if not catalog:
+            self.log_info(f"Catalog at {VENUES_PATH} is empty; skipping poll")
             return
 
-        venue = venues[0]
+        batch, self._cursor = select_batch(catalog, self._cursor, BATCH_SIZE)
+        if not batch:
+            self.log_info(f"Catalog at {VENUES_PATH} is empty; skipping poll")
+            return
+
         batch_started_at = datetime.now(LISBON_TZ).isoformat()
         self.send_request_async(
             self.Output,
-            CatalogBatch(venues=[venue], batch_started_at=batch_started_at),
+            CatalogBatch(venues=batch, batch_started_at=batch_started_at),
         )
 
 
@@ -199,12 +133,17 @@ class ScoreClassifyProcess(BusinessProcess):
 
     Owns validation/transform only -- no destination I/O here (that is
     PersistOperation's job). Recomputes popularity fresh for every venue on
-    every call (POPU-06/R6); never reads PopHeat.Reading.
+    every call (POPU-06/R6); never reads PopHeat.Reading. Loads heat
+    thresholds fresh from config/heat_thresholds.json at the START of every
+    call -- never cached across calls or stored on `self` (HEAT-03/D-10) --
+    so an operator edit to the config file takes effect on the very next
+    batch with no restart.
     """
 
     Persist = target("PersistOperation")
 
     def on_message(self, request: CatalogBatch):
+        thresholds = load_thresholds(str(HEAT_THRESHOLDS_PATH))
         when = datetime.now(LISBON_TZ)
         observed_at = when.isoformat()
 
@@ -212,7 +151,7 @@ class ScoreClassifyProcess(BusinessProcess):
         for venue in request.venues:
             category = venue.get("category")
             popularity = compute_popularity(category, when)
-            heat_level = classify_heat(category, popularity)
+            heat_level = classify_heat(category, popularity, thresholds)
             readings.append(
                 {
                     "venue_id": venue.get("id"),
