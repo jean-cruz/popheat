@@ -1,0 +1,19 @@
+; PopHeat CPF merge file (D-04): creates a single POPHEAT database and
+; namespace on first container boot, via ISC_CPF_MERGE_FILE.
+;
+; A merge file creates NEW databases/namespaces via the [Actions] section
+; (verified live: the running intersystemsdc/iris-community container's own
+; entrypoint log shows "Reading [Actions] section" while processing this
+; file) -- raw [Databases]/[Namespaces] sections only describe entries
+; already present in the final iris.cpf, they do not create new ones.
+;
+; The database directory lives inside the container's own filesystem (not the
+; ./:/irisdev/app bind mount) so an ordinary `docker compose restart` keeps
+; the data intact without adding a separate named volume (durability
+; prohibition in 02-01-PLAN.md -- no volume override). CreateDatabase can
+; create a new leaf directory but not multiple missing parent levels, so the
+; directory lives under /usr/irissys/mgr/ (already exists in the image)
+; rather than a from-scratch /durable/ tree.
+[Actions]
+CreateDatabase:Name=POPHEAT,Directory=/usr/irissys/mgr/popheat
+CreateNamespace:Name=POPHEAT,Globals=POPHEAT,Routines=POPHEAT,Interop=1
