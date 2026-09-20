@@ -23,7 +23,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-09-20)
 
 **Core value:** A working, submittable IRIS PyProd application, live and functioning end-to-end (ingest → score → classify → persist → dashboard), by the contest deadline
-**Current focus:** Phase 01 — Venue Catalog Sourcing
+**Current focus:** Phase 2 — IRIS Ingestion Pipeline — Scoring, Classification & Telemetry
 
 ## Current Position
 
@@ -85,6 +85,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-09-20T13:12:09.159Z
+Last session: 2026-09-20
 Stopped at: Phase 01 complete, ready to plan Phase 2
-Resume file: .planning/phases/01-venue-catalog-sourcing/01-CONTEXT.md
+Resume file: None
