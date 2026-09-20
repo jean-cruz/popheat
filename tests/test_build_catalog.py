@@ -111,6 +111,20 @@ class BuildCatalogTests(unittest.TestCase):
         self.assertEqual(result["name"], "Test Bar")
         self.assertEqual(result["category"], "bar")
 
+    def test_map_element_drops_out_of_allowlist_amenity(self):
+        """WR-01 regression: even if the Overpass server ever returns an
+        element whose amenity is outside the configured allowlist, local
+        defense-in-depth filtering must drop it."""
+        element = {
+            "type": "node",
+            "id": 5,
+            "lat": 41.14,
+            "lon": -8.61,
+            "tags": {"amenity": "fuel", "name": "Some Gas Station"},
+        }
+        result = map_element_to_venue(element, VALID_CONFIG["amenity_allowlist"])
+        self.assertIsNone(result)
+
     def test_derive_id_node_and_way(self):
         node_element = {"type": "node", "id": 123}
         way_element = {"type": "way", "id": 456}

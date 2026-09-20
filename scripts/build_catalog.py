@@ -128,7 +128,13 @@ def derive_id(element):
 
 def map_element_to_venue(element, allowlist):
     """Map a raw Overpass element to a minimal venue record, or None if the
-    element is missing a required field (VENU-02).
+    element is missing a required field or its amenity is not in allowlist
+    (VENU-02).
+
+    The allowlist check here is local defense-in-depth: server-side
+    filtering already happens via the regex built in build_overpass_query,
+    but this guards against that filter ever diverging from allowlist or
+    an Overpass API quirk returning tag-adjacent elements.
 
     Returns a dict with EXACTLY the keys: id, name, category, lat, lon.
     Never copies `tags` wholesale or contributor metadata (user/uid/
@@ -141,7 +147,7 @@ def map_element_to_venue(element, allowlist):
     if name is None or str(name).strip() == "":
         return None
 
-    if category is None:
+    if category is None or category not in allowlist:
         return None
 
     if "lat" in element and "lon" in element:
