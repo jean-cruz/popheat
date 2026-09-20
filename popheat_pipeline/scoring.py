@@ -206,3 +206,15 @@ def select_batch(catalog, cursor, size=150):
     batch = [catalog[(cursor + i) % n] for i in range(size)]
     next_cursor = (cursor + size) % n
     return batch, next_cursor
+
+
+# ---------------------------------------------------------------------------
+# Telemetry (specs/telemetry.spec R2, R3)
+# ---------------------------------------------------------------------------
+
+
+def compute_throughput(count, elapsed_seconds):
+    """RED-phase stub (Plan 02-02 Task 2): naive division, not yet
+    zero-safe -- intentionally incomplete to prove the test suite fails
+    for the right reason before GREEN."""
+    return count / elapsed_seconds

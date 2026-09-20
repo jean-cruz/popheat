@@ -21,6 +21,7 @@ from popheat_pipeline.scoring import (
     circular_distance,
     classify_heat,
     compute_popularity,
+    compute_throughput,
     load_thresholds,
     select_batch,
 )
@@ -197,6 +198,30 @@ class ClassifyHeatTests(unittest.TestCase):
 
     def test_empty_thresholds_defaults_to_baixo(self):
         self.assertEqual(classify_heat("cafe", 0.99, {}), "BAIXO")
+
+
+class ComputeThroughputTests(unittest.TestCase):
+    """TELE-02, TELE-03: zero-safe throughput derivation."""
+
+    def test_normal_division(self):
+        self.assertEqual(compute_throughput(150, 3.0), 50.0)
+
+    def test_zero_elapsed_returns_zero(self):
+        self.assertEqual(compute_throughput(150, 0), 0)
+
+    def test_negative_elapsed_returns_zero(self):
+        self.assertEqual(compute_throughput(150, -1), 0)
+
+    def test_zero_count_and_zero_elapsed_returns_zero(self):
+        self.assertEqual(compute_throughput(0, 0), 0)
+
+    def test_return_type_is_int_zero_not_float_or_none(self):
+        """Behavior spec: 'returns exactly 0 (not 0.0 divide-by-zero, not
+        None, not an exception)' -- assert the exact sentinel value, and
+        that it is not None, distinguishing it from a lazy `return` bug."""
+        result = compute_throughput(0, 0)
+        self.assertIsNotNone(result)
+        self.assertEqual(result, 0)
 
 
 class CircularDistanceTests(unittest.TestCase):
