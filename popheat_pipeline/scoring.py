@@ -214,7 +214,12 @@ def select_batch(catalog, cursor, size=150):
 
 
 def compute_throughput(count, elapsed_seconds):
-    """RED-phase stub (Plan 02-02 Task 2): naive division, not yet
-    zero-safe -- intentionally incomplete to prove the test suite fails
-    for the right reason before GREEN."""
+    """Readings-per-second throughput for one batch (TELE-02, TELE-03).
+
+    Returns `count / elapsed_seconds` when `elapsed_seconds > 0`; returns
+    exactly `0` (never a ZeroDivisionError, never `None`, never omitted)
+    when `elapsed_seconds <= 0` -- including the `count == 0` case.
+    """
+    if elapsed_seconds <= 0:
+        return 0
     return count / elapsed_seconds

@@ -17,4 +17,14 @@ Property RecordedAt As %TimeStamp;
 /// One row per persisted batch (TELE-01); never updated after insert.
 Index RecordedAtIdx On RecordedAt;
 
+/// Operational visibility into the most recent batches only (TELE-05):
+/// the latest 20 telemetry rows, newest first -- never the full
+/// historical log, so throughput reporting reflects current behavior.
+Query RecentBatches() As %SQLQuery(CONTAINID = 1)
+{
+SELECT TOP 20 ID, ReadingCount, ElapsedSeconds, Throughput, RecordedAt
+FROM PopHeat.BatchTelemetry
+ORDER BY RecordedAt DESC
+}
+
 }

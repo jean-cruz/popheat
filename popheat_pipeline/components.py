@@ -31,6 +31,7 @@ from iop import BusinessOperation, BusinessProcess, Message, PollingBusinessServ
 from popheat_pipeline.scoring import (
     classify_heat,
     compute_popularity,
+    compute_throughput,
     load_thresholds,
     select_batch,
 )
@@ -138,32 +139,44 @@ class ScoreClassifyProcess(BusinessProcess):
     call -- never cached across calls or stored on `self` (HEAT-03/D-10) --
     so an operator edit to the config file takes effect on the very next
     batch with no restart.
+
+    The entire scoring/classification loop for one batch is wrapped in a
+    single try/except (INGE-05, R4): a failure anywhere in the batch is
+    logged via `self.log_error(...)` and this method returns WITHOUT
+    calling `send_request_sync` -- so a broken batch never reaches
+    PersistOperation at all, and no exception propagates up to break the
+    adapter timer loop that schedules the NEXT poll tick. The batch is
+    recorded as an error; subsequent scheduled batches are unaffected.
     """
 
     Persist = target("PersistOperation")
 
     def on_message(self, request: CatalogBatch):
-        thresholds = load_thresholds(str(HEAT_THRESHOLDS_PATH))
-        when = datetime.now(LISBON_TZ)
-        observed_at = when.isoformat()
+        try:
+            thresholds = load_thresholds(str(HEAT_THRESHOLDS_PATH))
+            when = datetime.now(LISBON_TZ)
+            observed_at = when.isoformat()
 
-        readings = []
-        for venue in request.venues:
-            category = venue.get("category")
-            popularity = compute_popularity(category, when)
-            heat_level = classify_heat(category, popularity, thresholds)
-            readings.append(
-                {
-                    "venue_id": venue.get("id"),
-                    "name": venue.get("name"),
-                    "category": category,
-                    "lat": venue.get("lat"),
-                    "lon": venue.get("lon"),
-                    "popularity": popularity,
-                    "heat_level": heat_level,
-                    "observed_at": observed_at,
-                }
-            )
+            readings = []
+            for venue in request.venues:
+                category = venue.get("category")
+                popularity = compute_popularity(category, when)
+                heat_level = classify_heat(category, popularity, thresholds)
+                readings.append(
+                    {
+                        "venue_id": venue.get("id"),
+                        "name": venue.get("name"),
+                        "category": category,
+                        "lat": venue.get("lat"),
+                        "lon": venue.get("lon"),
+                        "popularity": popularity,
+                        "heat_level": heat_level,
+                        "observed_at": observed_at,
+                    }
+                )
+        except Exception as exc:
+            self.log_error(f"batch failed: {exc}")
+            return None
 
         return self.send_request_sync(
             self.Persist,
@@ -204,39 +217,56 @@ class PersistOperation(BusinessOperation):
     job. Rule 3 blocking-issue fix: the object API sidesteps the SQL
     compiler entirely and is unaffected.) PopHeat.Reading is insert-only
     (INGE-07, D-07); this file never modifies or removes an existing row.
+
+    The Reading-insert loop and the BatchTelemetry insert live in TWO
+    SEPARATE try/except blocks (INGE-04, TELE-04): (1) if the reading loop
+    raises partway through, this method logs and returns immediately
+    WITHOUT attempting the telemetry insert, so a mid-batch persistence
+    failure never leaves a mix of this-batch and next-batch rows; (2) only
+    if step 1 fully succeeds does the telemetry insert run, in its OWN
+    try/except that logs and swallows any exception -- this block wraps
+    ONLY the telemetry insert, never the reading-insert loop, so a
+    telemetry failure can never block or roll back readings already saved.
     """
 
     def on_message(self, request: ScoredBatch):
         import iris
 
-        start = time.monotonic()
-        for reading in request.readings:
-            obj = iris.cls("PopHeat.Reading")._New()
-            obj.VenueId = reading["venue_id"]
-            obj.VenueName = reading["name"]
-            obj.Category = reading["category"]
-            obj.Latitude = reading["lat"]
-            obj.Longitude = reading["lon"]
-            obj.Popularity = reading["popularity"]
-            obj.HeatLevel = reading["heat_level"]
-            obj.ObservedAt = _to_iris_timestamp(reading["observed_at"])
-            status = obj._Save()
-            if not status:
-                raise PersistenceError(f"Failed to save PopHeat.Reading: {status}")
-        elapsed = time.monotonic() - start
+        # --- Step 1: Reading inserts (own try/except; INGE-04) ---
+        try:
+            start = time.monotonic()
+            for reading in request.readings:
+                obj = iris.cls("PopHeat.Reading")._New()
+                obj.VenueId = reading["venue_id"]
+                obj.VenueName = reading["name"]
+                obj.Category = reading["category"]
+                obj.Latitude = reading["lat"]
+                obj.Longitude = reading["lon"]
+                obj.Popularity = reading["popularity"]
+                obj.HeatLevel = reading["heat_level"]
+                obj.ObservedAt = _to_iris_timestamp(reading["observed_at"])
+                status = obj._Save()
+                if not status:
+                    raise PersistenceError(f"Failed to save PopHeat.Reading: {status}")
+            elapsed = time.monotonic() - start
+        except Exception as exc:
+            self.log_error(f"batch persistence failed: {exc}")
+            return None
 
         count = len(request.readings)
-        # TELE-03: zero-safety -- throughput is 0, never divided-by-zero,
-        # when elapsed time is zero or unavailable.
-        throughput = count / elapsed if elapsed > 0 else 0
+        throughput = compute_throughput(count, elapsed)
 
-        telemetry = iris.cls("PopHeat.BatchTelemetry")._New()
-        telemetry.ReadingCount = count
-        telemetry.ElapsedSeconds = round(elapsed, 3)
-        telemetry.Throughput = round(throughput, 3)
-        telemetry.RecordedAt = _to_iris_timestamp(datetime.now(LISBON_TZ).isoformat())
-        status = telemetry._Save()
-        if not status:
-            raise PersistenceError(f"Failed to save PopHeat.BatchTelemetry: {status}")
+        # --- Step 2: BatchTelemetry insert (own try/except; TELE-04) ---
+        try:
+            telemetry = iris.cls("PopHeat.BatchTelemetry")._New()
+            telemetry.ReadingCount = count
+            telemetry.ElapsedSeconds = round(elapsed, 3)
+            telemetry.Throughput = round(throughput, 3)
+            telemetry.RecordedAt = _to_iris_timestamp(datetime.now(LISBON_TZ).isoformat())
+            status = telemetry._Save()
+            if not status:
+                raise PersistenceError(f"Failed to save PopHeat.BatchTelemetry: {status}")
+        except Exception as exc:
+            self.log_error(f"telemetry persistence failed: {exc}")
 
         return request
