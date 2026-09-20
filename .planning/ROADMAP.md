@@ -39,12 +39,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Every catalog venue carries a stable identifier derived from its OSM source record
   5. The catalog is produced by an on-demand build step, not recomputed automatically on every ingestion cycle
 
-**Plans**: 2 plans
+**Plans**: 1/2 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Config-driven Overpass fetch -> filtered catalog write, end-to-end (tracer)
+- [x] 01-01-PLAN.md — Config-driven Overpass fetch -> filtered catalog write, end-to-end (tracer)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -103,7 +103,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Venue Catalog Sourcing | 0/2 | Planned | - |
+| 1. Venue Catalog Sourcing | 1/2 | In Progress|  |
 | 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 0/TBD | Not started | - |
 | 3. Dashboard & API | 0/TBD | Not started | - |
 | 4. Contest Submission Packaging | 0/TBD | Not started | - |
