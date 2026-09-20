@@ -10,6 +10,7 @@ specs/ingestion-pipeline.spec for the business rules this implements.
 """
 
 import argparse
+import decimal
 import json
 import os
 import socket
@@ -161,6 +162,36 @@ def map_element_to_venue(element, allowlist):
     }
 
 
+def round5(value):
+    """Round value to exactly 5 decimal places using explicit round-half-up
+    (VENU-04 dedup key precision). Deliberately does NOT use Python's native
+    round(), which applies round-half-to-even on floats and is subject to
+    binary representation error; decimal.Decimal(str(value)) preserves the
+    value's decimal string form before rounding."""
+    return float(
+        decimal.Decimal(str(value)).quantize(
+            decimal.Decimal("0.00001"), rounding=decimal.ROUND_HALF_UP
+        )
+    )
+
+
+def dedupe_venues(venues):
+    """Drop duplicate venues: a venue is a duplicate of an earlier one if it
+    shares the same exact `name` string and the same (lat, lon) rounded to 5
+    decimal places (R4). Iterates in input order, keeps only the FIRST
+    occurrence of each (name, round5(lat), round5(lon)) key, and preserves
+    the relative order of survivors — no sorting."""
+    seen = set()
+    result = []
+    for venue in venues:
+        key = (venue["name"], round5(venue["lat"]), round5(venue["lon"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(venue)
+    return result
+
+
 def write_json_atomic(path, data):
     """Write data as JSON to path atomically: write to a temp file in the
     same directory, then os.replace() onto the final path. Ensures an
@@ -182,13 +213,23 @@ def write_json_atomic(path, data):
         raise
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Build the PopHeat venue catalog from OpenStreetMap.")
-    parser.add_argument("--config", default=DEFAULT_CONFIG_PATH, help="Path to the catalog build config JSON file")
-    args = parser.parse_args()
+def run(config_path, fetch_fn=fetch_overpass, catalog_path=CATALOG_PATH, raw_path=RAW_SNAPSHOT_PATH):
+    """Run the full build pipeline: load config, build the query, fetch via
+    fetch_fn, map/filter/dedupe, and write raw + catalog output.
 
+    fetch_fn/catalog_path/raw_path exist SPECIFICALLY so tests can substitute
+    a fake fetch function and temp-directory paths without touching the
+    network or the real data/ directory. Returns an int exit code: 0 on
+    success, 1 on config or fetch failure (VENU-06 empty/failure semantics).
+
+    A successful zero-match Overpass query is NOT an error: it writes an
+    empty catalog and returns 0 (VENU-06 empty). A failed fetch leaves
+    whatever is already at catalog_path untouched and returns non-zero
+    (D-05). Each successful call fully overwrites catalog_path via
+    write_json_atomic - no merge with prior content, no confirmation (D-12).
+    """
     try:
-        config = load_config(args.config)
+        config = load_config(config_path)
     except ConfigError as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 1
@@ -196,7 +237,7 @@ def main():
     query = build_overpass_query(config)
 
     try:
-        response = fetch_overpass(
+        response = fetch_fn(
             query,
             config["overpass_endpoint"],
             config["request_timeout_seconds"],
@@ -206,7 +247,7 @@ def main():
         print(f"ERROR: {e}", file=sys.stderr)
         return 1
 
-    write_json_atomic(RAW_SNAPSHOT_PATH, response)
+    write_json_atomic(raw_path, response)
 
     elements = response.get("elements", [])
     fetched_count = len(elements)
@@ -220,13 +261,23 @@ def main():
         else:
             venues.append(venue)
 
-    write_json_atomic(CATALOG_PATH, venues)
+    deduped_venues = dedupe_venues(venues)
+    duplicate_count = len(venues) - len(deduped_venues)
+
+    write_json_atomic(catalog_path, deduped_venues)
 
     print(
-        f"Fetched {fetched_count} elements, dropped {dropped_count} for "
-        f"missing fields, final catalog count: {len(venues)}"
+        f"Fetched: {fetched_count}, dropped (missing field): {dropped_count}, "
+        f"dropped (duplicate): {duplicate_count}, final catalog: {len(deduped_venues)}"
     )
     return 0
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Build the PopHeat venue catalog from OpenStreetMap.")
+    parser.add_argument("--config", default=DEFAULT_CONFIG_PATH, help="Path to the catalog build config JSON file")
+    args = parser.parse_args()
+    return run(args.config)
 
 
 if __name__ == "__main__":

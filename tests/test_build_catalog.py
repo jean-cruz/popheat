@@ -4,17 +4,23 @@ Covers query construction, field mapping/filtering, ID derivation, and
 config validation — all offline, no network access.
 """
 
+import io
 import json
 import os
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 
 from scripts.build_catalog import (
     ConfigError,
+    OverpassFetchError,
     build_overpass_query,
+    dedupe_venues,
     derive_id,
     load_config,
     map_element_to_venue,
+    round5,
+    run,
 )
 
 VALID_CONFIG = {
@@ -151,6 +157,128 @@ class BuildCatalogTests(unittest.TestCase):
         ]
         self.assertEqual(results[0]["name"], "Bar A")
         self.assertEqual(results[1]["name"], "Cafe B")
+
+    def test_round5_half_up_tie(self):
+        self.assertEqual(round5(41.123455), 41.12346)
+
+    def test_dedupe_empty_and_single(self):
+        self.assertEqual(dedupe_venues([]), [])
+        venue = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        self.assertEqual(dedupe_venues([venue]), [venue])
+
+    def test_dedupe_drops_boundary_duplicate(self):
+        first = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.140551, "lon": -8.61}
+        second = {"id": "node/2", "name": "Bar A", "category": "bar", "lat": 41.140554, "lon": -8.61}
+        result = dedupe_venues([first, second])
+        self.assertEqual(result, [first])
+
+    def test_dedupe_case_sensitive_names_not_merged(self):
+        first = {"id": "node/1", "name": "Café Aroma", "category": "cafe", "lat": 41.14, "lon": -8.61}
+        second = {"id": "node/2", "name": "café aroma", "category": "cafe", "lat": 41.14, "lon": -8.61}
+        result = dedupe_venues([first, second])
+        self.assertEqual(result, [first, second])
+
+    def test_dedupe_keeps_first_id_on_collision(self):
+        first = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        second = {"id": "node/2", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        result = dedupe_venues([first, second])
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["id"], "node/1")
+
+    def test_dedupe_preserves_survivor_order(self):
+        v0 = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        v1 = {"id": "node/2", "name": "Cafe B", "category": "cafe", "lat": 41.15, "lon": -8.62}
+        v2 = {"id": "node/3", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        result = dedupe_venues([v0, v1, v2])
+        self.assertEqual(result, [v0, v1])
+
+    def _write_config(self, tmp_dir):
+        config_path = os.path.join(tmp_dir, "catalog_build.json")
+        with open(config_path, "w", encoding="utf-8") as f:
+            json.dump(VALID_CONFIG, f)
+        return config_path
+
+    def test_run_empty_overpass_result_writes_empty_catalog_and_exits_zero(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = self._write_config(tmp_dir)
+            catalog_path = os.path.join(tmp_dir, "venues.json")
+            raw_path = os.path.join(tmp_dir, "venues.raw.json")
+
+            def fake_fetch_fn(query, endpoint, request_timeout, max_bytes):
+                return {"elements": []}
+
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                exit_code = run(
+                    config_path,
+                    fetch_fn=fake_fetch_fn,
+                    catalog_path=catalog_path,
+                    raw_path=raw_path,
+                )
+
+            self.assertEqual(exit_code, 0)
+            with open(catalog_path, "r", encoding="utf-8") as f:
+                self.assertEqual(json.load(f), [])
+            self.assertIn("final catalog: 0", stdout.getvalue())
+
+    def test_run_fetch_failure_leaves_existing_catalog_untouched_and_exits_nonzero(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = self._write_config(tmp_dir)
+            catalog_path = os.path.join(tmp_dir, "venues.json")
+            raw_path = os.path.join(tmp_dir, "venues.raw.json")
+
+            existing_bytes = b'[{"id": "node/1", "name": "Existing Bar", "category": "bar", "lat": 41.14, "lon": -8.61}]'
+            with open(catalog_path, "wb") as f:
+                f.write(existing_bytes)
+
+            def failing_fetch_fn(query, endpoint, request_timeout, max_bytes):
+                raise OverpassFetchError("simulated failure")
+
+            exit_code = run(
+                config_path,
+                fetch_fn=failing_fetch_fn,
+                catalog_path=catalog_path,
+                raw_path=raw_path,
+            )
+
+            self.assertNotEqual(exit_code, 0)
+            with open(catalog_path, "rb") as f:
+                self.assertEqual(f.read(), existing_bytes)
+
+    def test_run_second_call_fully_overwrites_first(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = self._write_config(tmp_dir)
+            catalog_path = os.path.join(tmp_dir, "venues.json")
+            raw_path = os.path.join(tmp_dir, "venues.raw.json")
+
+            element_a = {
+                "type": "node",
+                "id": 1,
+                "lat": 41.14,
+                "lon": -8.61,
+                "tags": {"amenity": "bar", "name": "Venue A"},
+            }
+            element_b = {
+                "type": "node",
+                "id": 2,
+                "lat": 41.15,
+                "lon": -8.62,
+                "tags": {"amenity": "cafe", "name": "Venue B"},
+            }
+
+            def fetch_a(query, endpoint, request_timeout, max_bytes):
+                return {"elements": [element_a]}
+
+            def fetch_b(query, endpoint, request_timeout, max_bytes):
+                return {"elements": [element_b]}
+
+            run(config_path, fetch_fn=fetch_a, catalog_path=catalog_path, raw_path=raw_path)
+            run(config_path, fetch_fn=fetch_b, catalog_path=catalog_path, raw_path=raw_path)
+
+            with open(catalog_path, "r", encoding="utf-8") as f:
+                catalog = json.load(f)
+            self.assertEqual(len(catalog), 1)
+            self.assertEqual(catalog[0]["name"], "Venue B")
 
 
 if __name__ == "__main__":

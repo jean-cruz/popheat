@@ -12,9 +12,9 @@ Derived directly from `specs/*.spec` (already-decided business rules) plus the I
 - [x] **VENU-01**: Venue catalog includes only OSM places tagged `amenity` = bar, pub, restaurant, cafe, fast_food, or nightclub
 - [x] **VENU-02**: Places missing name, latitude, longitude, or amenity tag are discarded from the catalog
 - [x] **VENU-03**: Venue catalog is scoped to one configured bounding box (one city area); changing coverage only requires changing that config, no code change
-- [ ] **VENU-04**: A venue is dropped as a duplicate if another entry shares the same name and coordinates rounded to 5 decimal places
-- [ ] **VENU-05**: Each venue keeps a stable identifier derived from its OSM source record
-- [ ] **VENU-06**: The venue catalog is a static snapshot regenerated on demand, not recomputed on every ingestion cycle
+- [x] **VENU-04**: A venue is dropped as a duplicate if another entry shares the same name and coordinates rounded to 5 decimal places
+- [x] **VENU-05**: Each venue keeps a stable identifier derived from its OSM source record
+- [x] **VENU-06**: The venue catalog is a static snapshot regenerated on demand, not recomputed on every ingestion cycle
 
 ### Ingestion Pipeline
 
@@ -90,9 +90,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VENU-01 | Phase 1 | Complete |
 | VENU-02 | Phase 1 | Complete |
 | VENU-03 | Phase 1 | Complete |
-| VENU-04 | Phase 1 | Pending |
-| VENU-05 | Phase 1 | Pending |
-| VENU-06 | Phase 1 | Pending |
+| VENU-04 | Phase 1 | Complete |
+| VENU-05 | Phase 1 | Complete |
+| VENU-06 | Phase 1 | Complete |
 | INGE-01 | Phase 2 | Pending |
 | INGE-02 | Phase 2 | Pending |
 | INGE-03 | Phase 2 | Pending |
