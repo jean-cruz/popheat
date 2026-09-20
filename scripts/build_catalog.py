@@ -243,7 +243,13 @@ def dedupe_venues(venues):
 def write_json_atomic(path, data):
     """Write data as JSON to path atomically: write to a temp file in the
     same directory, then os.replace() onto the final path. Ensures an
-    interrupted write can never leave a partially-written file (D-05)."""
+    interrupted write can never leave a partially-written file (D-05).
+
+    tempfile.NamedTemporaryFile creates the temp file with restrictive
+    0600 permissions regardless of the process umask, which os.replace()
+    would otherwise carry over to the final path -- explicitly chmod's to
+    0644 afterward so other OS users/service accounts (e.g. the IRIS
+    Interoperability Production reading this catalog) can read the file."""
     parent_dir = os.path.dirname(path) or "."
     os.makedirs(parent_dir, exist_ok=True)
 
@@ -253,6 +259,7 @@ def write_json_atomic(path, data):
     try:
         json.dump(data, tmp)
         tmp.close()
+        os.chmod(tmp.name, 0o644)
         os.replace(tmp.name, path)
     except BaseException:
         tmp.close()

@@ -24,6 +24,7 @@ from scripts.build_catalog import (
     map_element_to_venue,
     round5,
     run,
+    write_json_atomic,
 )
 
 VALID_CONFIG = {
@@ -430,6 +431,18 @@ class BuildCatalogTests(unittest.TestCase):
                 catalog = json.load(f)
             self.assertEqual(len(catalog), 1)
             self.assertEqual(catalog[0]["name"], "Venue B")
+
+    def test_write_json_atomic_output_is_world_readable(self):
+        """WR-05 regression: tempfile.NamedTemporaryFile creates the temp
+        file with 0600 permissions regardless of umask; os.replace() would
+        otherwise carry that restrictive mode to the final path, blocking
+        other OS users/service accounts (e.g. the IRIS Interoperability
+        Production) from reading the catalog."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_path = os.path.join(tmp_dir, "venues.json")
+            write_json_atomic(out_path, {"ok": True})
+            mode = os.stat(out_path).st_mode & 0o777
+            self.assertEqual(mode, 0o644)
 
 
 if __name__ == "__main__":
