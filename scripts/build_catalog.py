@@ -144,7 +144,10 @@ def map_element_to_venue(element, allowlist):
     name = tags.get("name")
     category = tags.get("amenity")
 
-    if name is None or str(name).strip() == "":
+    if name is None:
+        return None
+    name = str(name).strip()
+    if name == "":
         return None
 
     if category is None or category not in allowlist:
