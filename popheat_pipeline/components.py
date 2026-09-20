@@ -110,8 +110,17 @@ class CatalogPollingService(PollingBusinessService):
         self._cursor = 0
 
     def on_poll(self):
-        with open(VENUES_PATH, "r", encoding="utf-8") as f:
-            catalog = json.load(f)
+        try:
+            with open(VENUES_PATH, "r", encoding="utf-8") as f:
+                catalog = json.load(f)
+        except (OSError, json.JSONDecodeError) as exc:
+            # Same failure-isolation pattern as ScoreClassifyProcess.on_message
+            # one stage downstream (INGE-05): a missing/corrupt catalog file
+            # is logged and treated as a no-op tick rather than propagating
+            # out of the poll callback and stopping the adapter timer loop
+            # that schedules the NEXT poll tick (CR-02).
+            self.log_error(f"failed to read catalog at {VENUES_PATH}: {exc}")
+            return
 
         if not catalog:
             self.log_info(f"Catalog at {VENUES_PATH} is empty; skipping poll")
@@ -233,8 +242,14 @@ class PersistOperation(BusinessOperation):
         import iris
 
         # --- Step 1: Reading inserts (own try/except; INGE-04) ---
+        # Wrapped in an explicit IRIS transaction (tstart/tcommit/trollback)
+        # so a mid-batch _Save() failure rolls back every row already
+        # inserted for THIS batch, rather than leaving a partial,
+        # indistinguishable-from-the-next-batch set of rows with no
+        # telemetry record (CR-01 / specs/ingestion-pipeline.spec R3).
         try:
             start = time.monotonic()
+            iris.tstart()
             for reading in request.readings:
                 obj = iris.cls("PopHeat.Reading")._New()
                 obj.VenueId = reading["venue_id"]
@@ -248,8 +263,10 @@ class PersistOperation(BusinessOperation):
                 status = obj._Save()
                 if not status:
                     raise PersistenceError(f"Failed to save PopHeat.Reading: {status}")
+            iris.tcommit()
             elapsed = time.monotonic() - start
         except Exception as exc:
+            iris.trollback()
             self.log_error(f"batch persistence failed: {exc}")
             return None
 
