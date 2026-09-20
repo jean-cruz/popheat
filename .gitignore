@@ -1,0 +1,4 @@
+data/venues.json
+data/venues.raw.json
+__pycache__/
+*.pyc
