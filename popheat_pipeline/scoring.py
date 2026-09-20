@@ -113,9 +113,15 @@ def _is_number(value) -> bool:
 def _thresholds_valid(thresholds) -> bool:
     """True iff `thresholds` has exactly the shape DEFAULT_THRESHOLDS has:
     both groups present, all three levels present per group, every value a
-    number in [0, 1]. Used by both load_thresholds (HEAT-04 fallback gate)
-    and classify_heat (defensive re-check, matching the try/except-returns-
-    BAIXO contract for a shape it wasn't handed via load_thresholds)."""
+    number in [0, 1], AND each group's levels are monotonically non-
+    increasing (CRITICO >= ALTO >= MEDIO). The monotonicity check matters
+    because classify_heat evaluates _LEVELS_HIGH_TO_LOW in fixed
+    CRITICO->ALTO->MEDIO order and returns on the first match -- a config
+    with individually in-range but non-monotonic values would otherwise
+    pass validation yet silently misclassify most readings (WR-01). Used
+    by both load_thresholds (HEAT-04 fallback gate) and classify_heat
+    (defensive re-check, matching the try/except-returns-BAIXO contract
+    for a shape it wasn't handed via load_thresholds)."""
     if not isinstance(thresholds, dict):
         return False
     for group in _REQUIRED_THRESHOLD_GROUPS:
@@ -128,6 +134,10 @@ def _thresholds_valid(thresholds) -> bool:
             value = group_values[level]
             if not _is_number(value) or value < 0 or value > 1:
                 return False
+        if not (
+            group_values["CRITICO"] >= group_values["ALTO"] >= group_values["MEDIO"]
+        ):
+            return False
     return True
 
 
