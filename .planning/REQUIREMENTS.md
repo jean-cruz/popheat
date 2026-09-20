@@ -19,10 +19,10 @@ Derived directly from `specs/*.spec` (already-decided business rules) plus the I
 ### Ingestion Pipeline
 
 - [x] **INGE-01**: Ingestion is implemented as an IRIS Interoperability Production using embedded Python (PyProd)
-- [ ] **INGE-02**: Venues are processed in batches of 150, with 3 seconds between the start of one batch and the next
-- [ ] **INGE-03**: Ingestion cycles through the full venue catalog continuously, wrapping to the start after reaching the end
-- [ ] **INGE-04**: A batch of venues is scored, classified, and persisted as one atomic unit; venues are never split across pipeline stages mid-batch
-- [ ] **INGE-05**: A failure while processing one batch is recorded as an error for that batch without stopping the next scheduled batch
+- [x] **INGE-02**: Venues are processed in batches of 150, with 3 seconds between the start of one batch and the next
+- [x] **INGE-03**: Ingestion cycles through the full venue catalog continuously, wrapping to the start after reaching the end
+- [x] **INGE-04**: A batch of venues is scored, classified, and persisted as one atomic unit; venues are never split across pipeline stages mid-batch
+- [x] **INGE-05**: A failure while processing one batch is recorded as an error for that batch without stopping the next scheduled batch
 - [x] **INGE-06**: Every persisted reading carries venue identity, name, category, coordinates, popularity, heat level, and observation timestamp
 - [x] **INGE-07**: Persisting a reading always inserts a new row; historical readings are retained, never overwritten
 
@@ -39,16 +39,16 @@ Derived directly from `specs/*.spec` (already-decided business rules) plus the I
 
 - [x] **HEAT-01**: Every reading is classified into exactly one of BAIXO, MEDIO, ALTO, CRITICO
 - [x] **HEAT-02**: Nightlife categories (bar, pub, nightclub) use a lower popularity threshold scale than daytime categories
-- [ ] **HEAT-03**: Thresholds are stored as configuration, adjustable without a code change or redeploy
-- [ ] **HEAT-04**: A reading that can't be classified defaults to BAIXO rather than being left unlabeled or rejected
+- [x] **HEAT-03**: Thresholds are stored as configuration, adjustable without a code change or redeploy
+- [x] **HEAT-04**: A reading that can't be classified defaults to BAIXO rather than being left unlabeled or rejected
 
 ### Telemetry
 
 - [x] **TELE-01**: Exactly one telemetry record is written per persisted batch
 - [x] **TELE-02**: Each telemetry record captures reading count, elapsed persist time, throughput, and timestamp
-- [ ] **TELE-03**: Throughput is computed as batch size divided by elapsed time, reporting zero (not divide-by-zero or omitted) when elapsed time is zero or unavailable
-- [ ] **TELE-04**: A telemetry-recording failure never blocks persistence of the venue readings themselves
-- [ ] **TELE-05**: Operational views show only the most recent 20 batches, not the full historical telemetry log
+- [x] **TELE-03**: Throughput is computed as batch size divided by elapsed time, reporting zero (not divide-by-zero or omitted) when elapsed time is zero or unavailable
+- [x] **TELE-04**: A telemetry-recording failure never blocks persistence of the venue readings themselves
+- [x] **TELE-05**: Operational views show only the most recent 20 batches, not the full historical telemetry log
 
 ### Dashboard & API
 
@@ -94,10 +94,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VENU-05 | Phase 1 | Complete |
 | VENU-06 | Phase 1 | Complete |
 | INGE-01 | Phase 2 | Complete |
-| INGE-02 | Phase 2 | Pending |
-| INGE-03 | Phase 2 | Pending |
-| INGE-04 | Phase 2 | Pending |
-| INGE-05 | Phase 2 | Pending |
+| INGE-02 | Phase 2 | Complete |
+| INGE-03 | Phase 2 | Complete |
+| INGE-04 | Phase 2 | Complete |
+| INGE-05 | Phase 2 | Complete |
 | INGE-06 | Phase 2 | Complete |
 | INGE-07 | Phase 2 | Complete |
 | POPU-01 | Phase 2 | Complete |
@@ -108,13 +108,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | POPU-06 | Phase 2 | Complete |
 | HEAT-01 | Phase 2 | Complete |
 | HEAT-02 | Phase 2 | Complete |
-| HEAT-03 | Phase 2 | Pending |
-| HEAT-04 | Phase 2 | Pending |
+| HEAT-03 | Phase 2 | Complete |
+| HEAT-04 | Phase 2 | Complete |
 | TELE-01 | Phase 2 | Complete |
 | TELE-02 | Phase 2 | Complete |
-| TELE-03 | Phase 2 | Pending |
-| TELE-04 | Phase 2 | Pending |
-| TELE-05 | Phase 2 | Pending |
+| TELE-03 | Phase 2 | Complete |
+| TELE-04 | Phase 2 | Complete |
+| TELE-05 | Phase 2 | Complete |
 | DASH-01 | Phase 3 | Pending |
 | DASH-02 | Phase 3 | Pending |
 | DASH-03 | Phase 3 | Pending |

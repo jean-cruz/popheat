@@ -1,0 +1,12 @@
+{
+  "nightlife": {
+    "CRITICO": 0.60,
+    "ALTO": 0.40,
+    "MEDIO": 0.20
+  },
+  "daytime": {
+    "CRITICO": 0.75,
+    "ALTO": 0.50,
+    "MEDIO": 0.25
+  }
+}
