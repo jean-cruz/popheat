@@ -35,6 +35,18 @@ REQUIRED_CONFIG_KEYS = (
 
 REQUIRED_BBOX_KEYS = ("south", "west", "north", "east")
 
+NUMERIC_CONFIG_KEYS = (
+    "request_timeout_seconds",
+    "overpass_timeout_seconds",
+    "max_response_bytes",
+)
+
+
+def _is_number(value):
+    """True for int/float config values, explicitly excluding bool (which
+    is a subclass of int in Python but never a valid timeout/byte-budget)."""
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
 
 class ConfigError(Exception):
     """Raised when the build config file is missing or malformed."""
@@ -48,8 +60,13 @@ class OverpassFetchError(Exception):
 def load_config(path):
     """Load and validate the catalog build config.
 
-    Raises ConfigError with a clear message when the file is absent or any
-    of the 6 required top-level keys is missing.
+    Raises ConfigError with a clear message when the file is absent, any of
+    the 6 required top-level keys is missing, or a key's value has the
+    wrong shape/type (numeric timeout/byte-budget keys, a non-empty list
+    for amenity_allowlist, or numeric bbox coordinates) -- this keeps
+    downstream failures (e.g. urlopen's TypeError on a non-numeric timeout)
+    surfaced as a clean ConfigError/exit-1 rather than an uncaught
+    traceback.
     """
     if not os.path.isfile(path):
         raise ConfigError(f"Config file not found: {path}")
@@ -66,11 +83,32 @@ def load_config(path):
                 f"Config file at {path} is missing required key: {key}"
             )
 
+    for key in NUMERIC_CONFIG_KEYS:
+        if not _is_number(config[key]):
+            raise ConfigError(
+                f"Config file at {path} key {key!r} must be a number, "
+                f"got: {config[key]!r}"
+            )
+
+    allowlist = config["amenity_allowlist"]
+    if not isinstance(allowlist, list) or not allowlist or not all(
+        isinstance(item, str) for item in allowlist
+    ):
+        raise ConfigError(
+            f"Config file at {path} amenity_allowlist must be a non-empty "
+            f"list of strings, got: {allowlist!r}"
+        )
+
     bbox = config["bounding_box"]
     for key in REQUIRED_BBOX_KEYS:
         if not isinstance(bbox, dict) or key not in bbox:
             raise ConfigError(
                 f"Config file at {path} bounding_box is missing required key: {key}"
+            )
+        if not _is_number(bbox[key]):
+            raise ConfigError(
+                f"Config file at {path} bounding_box key {key!r} must be a "
+                f"number, got: {bbox[key]!r}"
             )
 
     return config

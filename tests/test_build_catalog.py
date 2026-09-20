@@ -189,6 +189,69 @@ class BuildCatalogTests(unittest.TestCase):
             with self.assertRaises(OverpassFetchError):
                 fetch_overpass("query", "https://example.invalid", 30, 1000)
 
+    def test_load_config_non_numeric_timeout_raises(self):
+        """WR-04 regression: a string value for a numeric key must raise
+        ConfigError, not pass validation and later crash urlopen() with a
+        TypeError."""
+        bad_config = dict(VALID_CONFIG)
+        bad_config["request_timeout_seconds"] = "30"
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, "catalog_build.json")
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(bad_config, f)
+            with self.assertRaises(ConfigError):
+                load_config(config_path)
+
+    def test_load_config_bool_timeout_raises(self):
+        """WR-04 regression: bool is a subclass of int in Python but is
+        never a valid timeout value."""
+        bad_config = dict(VALID_CONFIG)
+        bad_config["overpass_timeout_seconds"] = True
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, "catalog_build.json")
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(bad_config, f)
+            with self.assertRaises(ConfigError):
+                load_config(config_path)
+
+    def test_load_config_non_list_allowlist_raises(self):
+        """WR-04 regression: amenity_allowlist must be a non-empty list of
+        strings."""
+        bad_config = dict(VALID_CONFIG)
+        bad_config["amenity_allowlist"] = "bar"
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, "catalog_build.json")
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(bad_config, f)
+            with self.assertRaises(ConfigError):
+                load_config(config_path)
+
+    def test_load_config_empty_allowlist_raises(self):
+        bad_config = dict(VALID_CONFIG)
+        bad_config["amenity_allowlist"] = []
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, "catalog_build.json")
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(bad_config, f)
+            with self.assertRaises(ConfigError):
+                load_config(config_path)
+
+    def test_load_config_non_numeric_bbox_value_raises(self):
+        bad_config = json.loads(json.dumps(VALID_CONFIG))
+        bad_config["bounding_box"]["south"] = "41.1390"
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, "catalog_build.json")
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(bad_config, f)
+            with self.assertRaises(ConfigError):
+                load_config(config_path)
+
+    def test_load_config_accepts_valid_config(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = self._write_config(tmp_dir)
+            config = load_config(config_path)
+            self.assertEqual(config["amenity_allowlist"], VALID_CONFIG["amenity_allowlist"])
+
     def test_map_element_empty_list(self):
         elements = []
         results = [map_element_to_venue(e, VALID_CONFIG["amenity_allowlist"]) for e in elements]
