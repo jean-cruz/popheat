@@ -215,3 +215,11 @@ Note for Phase 2 planning: the live catalog currently contains 906 venues (no de
 ---
 *Phase: 01-venue-catalog-sourcing*
 *Completed: 2026-09-20*
+
+## Self-Check: PASSED
+
+- All 6 created files verified present on disk (config/catalog_build.json, scripts/__init__.py, scripts/build_catalog.py, tests/__init__.py, tests/test_build_catalog.py, .gitignore).
+- All commits verified in `git log`: `60249c6` (Task 1), `7290930` (Task 2), `ef8bf80` (SUMMARY), `750ede3` (REQUIREMENTS).
+- Re-ran unit tests (`python3 -m unittest tests.test_build_catalog`): 11/11 pass.
+- Re-ran plan-level `<verification>` ignore check: `git check-ignore -q data/venues.json data/venues.raw.json` succeeds; `config/catalog_build.json` and `scripts/build_catalog.py` remain trackable (not ignored).
+- `data/venues.json` (906 entries) and `data/venues.raw.json` confirmed present and non-empty from the live Task 1 run.
