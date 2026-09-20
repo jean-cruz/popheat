@@ -19,7 +19,7 @@ but each layer is independently buildable and verifiable before the next one dep
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Venue Catalog Sourcing** - Build a deduplicated OSM venue catalog for one city bounding box
+- [x] **Phase 1: Venue Catalog Sourcing** - Build a deduplicated OSM venue catalog for one city bounding box (completed 2026-09-20)
 - [ ] **Phase 2: IRIS Ingestion Pipeline — Scoring, Classification & Telemetry** - Stand up IRIS + a PyProd production that continuously ingests, scores, classifies, persists, and records telemetry for the venue catalog
 - [ ] **Phase 3: Dashboard & API** - Serve a live, auto-refreshing heat map and REST API over persisted readings
 - [ ] **Phase 4: Contest Submission Packaging** - Publish the paired Open Exchange app + Portuguese Developer Community article
@@ -103,7 +103,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Venue Catalog Sourcing | 2/2 | In Progress|  |
+| 1. Venue Catalog Sourcing | 2/2 | Complete    | 2026-09-20 |
 | 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 0/TBD | Not started | - |
 | 3. Dashboard & API | 0/TBD | Not started | - |
 | 4. Contest Submission Packaging | 0/TBD | Not started | - |
