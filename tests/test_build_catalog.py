@@ -4,12 +4,14 @@ Covers query construction, field mapping/filtering, ID derivation, and
 config validation — all offline, no network access.
 """
 
+import http.client
 import io
 import json
 import os
 import tempfile
 import unittest
 from contextlib import redirect_stdout
+from unittest.mock import MagicMock, patch
 
 from scripts.build_catalog import (
     ConfigError,
@@ -17,6 +19,7 @@ from scripts.build_catalog import (
     build_overpass_query,
     dedupe_venues,
     derive_id,
+    fetch_overpass,
     load_config,
     map_element_to_venue,
     round5,
@@ -159,6 +162,32 @@ class BuildCatalogTests(unittest.TestCase):
                 json.dump(incomplete_config, f)
             with self.assertRaises(ConfigError):
                 load_config(config_path)
+
+    def test_fetch_overpass_wraps_incomplete_read_as_fetch_error(self):
+        """WR-03 regression: a lower-level I/O error raised while draining
+        the response body (e.g. http.client.IncompleteRead, which is not a
+        urllib.error.URLError subclass) must be wrapped as
+        OverpassFetchError, not propagate as a raw traceback."""
+        mock_response = MagicMock()
+        mock_response.read.side_effect = http.client.IncompleteRead(b"")
+        mock_response.__enter__.return_value = mock_response
+        mock_response.__exit__.return_value = False
+
+        with patch("urllib.request.urlopen", return_value=mock_response):
+            with self.assertRaises(OverpassFetchError):
+                fetch_overpass("query", "https://example.invalid", 30, 1000)
+
+    def test_fetch_overpass_wraps_connection_reset_as_fetch_error(self):
+        """WR-03 regression: ConnectionResetError (a plain OSError subclass,
+        not always wrapped as URLError) must also be wrapped."""
+        mock_response = MagicMock()
+        mock_response.read.side_effect = ConnectionResetError("connection reset")
+        mock_response.__enter__.return_value = mock_response
+        mock_response.__exit__.return_value = False
+
+        with patch("urllib.request.urlopen", return_value=mock_response):
+            with self.assertRaises(OverpassFetchError):
+                fetch_overpass("query", "https://example.invalid", 30, 1000)
 
     def test_map_element_empty_list(self):
         elements = []

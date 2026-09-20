@@ -11,6 +11,7 @@ specs/ingestion-pipeline.spec for the business rules this implements.
 
 import argparse
 import decimal
+import http.client
 import json
 import os
 import socket
@@ -107,7 +108,7 @@ def fetch_overpass(query, endpoint, request_timeout, max_bytes):
     try:
         with urllib.request.urlopen(request, timeout=request_timeout) as response:
             body = response.read(max_bytes + 1)
-    except (urllib.error.URLError, socket.timeout) as e:
+    except (urllib.error.URLError, socket.timeout, OSError, http.client.HTTPException) as e:
         raise OverpassFetchError(f"Overpass request failed: {e}") from e
 
     if len(body) > max_bytes:
