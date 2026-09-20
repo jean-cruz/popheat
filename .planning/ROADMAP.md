@@ -64,7 +64,16 @@ Plans:
   5. Every reading is classified into exactly one of BAIXO/MEDIO/ALTO/CRITICO using nightlife vs. daytime threshold sets that are stored as adjustable configuration (no redeploy needed) and default to BAIXO when a reading can't otherwise be classified
   6. Every persisted batch writes exactly one telemetry record (reading count, elapsed persist time, throughput, timestamp) that never blocks reading persistence if telemetry recording fails, and operational views expose only the most recent 20 batches
 
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — Docker + IRIS + POPHEAT namespace + PopHeat.Production, one venue end-to-end (tracer)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 02-02-PLAN.md — Real 150/3s batching, wrap-around cycling, config-driven thresholds, failure isolation, and hardened telemetry
 
 ### Phase 3: Dashboard & API
 
