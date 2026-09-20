@@ -64,7 +64,7 @@ Plans:
   5. Every reading is classified into exactly one of BAIXO/MEDIO/ALTO/CRITICO using nightlife vs. daytime threshold sets that are stored as adjustable configuration (no redeploy needed) and default to BAIXO when a reading can't otherwise be classified
   6. Every persisted batch writes exactly one telemetry record (reading count, elapsed persist time, throughput, timestamp) that never blocks reading persistence if telemetry recording fails, and operational views expose only the most recent 20 batches
 
-**Plans**: 1/2 plans executed
+**Plans**: 2/2 plans executed
 
 Plans:
 **Wave 1**
@@ -73,7 +73,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 02-02-PLAN.md — Real 150/3s batching, wrap-around cycling, config-driven thresholds, failure isolation, and hardened telemetry
+- [x] 02-02-PLAN.md — Real 150/3s batching, wrap-around cycling, config-driven thresholds, failure isolation, and hardened telemetry
 
 ### Phase 3: Dashboard & API
 
@@ -113,6 +113,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Venue Catalog Sourcing | 2/2 | Complete    | 2026-09-20 |
-| 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 1/2 | In Progress|  |
+| 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 2/2 | In Progress|  |
 | 3. Dashboard & API | 0/TBD | Not started | - |
 | 4. Contest Submission Packaging | 0/TBD | Not started | - |
