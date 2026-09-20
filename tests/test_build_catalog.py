@@ -12,9 +12,11 @@ import unittest
 from scripts.build_catalog import (
     ConfigError,
     build_overpass_query,
+    dedupe_venues,
     derive_id,
     load_config,
     map_element_to_venue,
+    round5,
 )
 
 VALID_CONFIG = {
@@ -151,6 +153,40 @@ class BuildCatalogTests(unittest.TestCase):
         ]
         self.assertEqual(results[0]["name"], "Bar A")
         self.assertEqual(results[1]["name"], "Cafe B")
+
+    def test_round5_half_up_tie(self):
+        self.assertEqual(round5(41.123455), 41.12346)
+
+    def test_dedupe_empty_and_single(self):
+        self.assertEqual(dedupe_venues([]), [])
+        venue = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        self.assertEqual(dedupe_venues([venue]), [venue])
+
+    def test_dedupe_drops_boundary_duplicate(self):
+        first = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.140551, "lon": -8.61}
+        second = {"id": "node/2", "name": "Bar A", "category": "bar", "lat": 41.140554, "lon": -8.61}
+        result = dedupe_venues([first, second])
+        self.assertEqual(result, [first])
+
+    def test_dedupe_case_sensitive_names_not_merged(self):
+        first = {"id": "node/1", "name": "Café Aroma", "category": "cafe", "lat": 41.14, "lon": -8.61}
+        second = {"id": "node/2", "name": "café aroma", "category": "cafe", "lat": 41.14, "lon": -8.61}
+        result = dedupe_venues([first, second])
+        self.assertEqual(result, [first, second])
+
+    def test_dedupe_keeps_first_id_on_collision(self):
+        first = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        second = {"id": "node/2", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        result = dedupe_venues([first, second])
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["id"], "node/1")
+
+    def test_dedupe_preserves_survivor_order(self):
+        v0 = {"id": "node/1", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        v1 = {"id": "node/2", "name": "Cafe B", "category": "cafe", "lat": 41.15, "lon": -8.62}
+        v2 = {"id": "node/3", "name": "Bar A", "category": "bar", "lat": 41.14, "lon": -8.61}
+        result = dedupe_venues([v0, v1, v2])
+        self.assertEqual(result, [v0, v1])
 
 
 if __name__ == "__main__":
