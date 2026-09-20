@@ -87,51 +87,51 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| VENU-01 | TBD | Pending |
-| VENU-02 | TBD | Pending |
-| VENU-03 | TBD | Pending |
-| VENU-04 | TBD | Pending |
-| VENU-05 | TBD | Pending |
-| VENU-06 | TBD | Pending |
-| INGE-01 | TBD | Pending |
-| INGE-02 | TBD | Pending |
-| INGE-03 | TBD | Pending |
-| INGE-04 | TBD | Pending |
-| INGE-05 | TBD | Pending |
-| INGE-06 | TBD | Pending |
-| INGE-07 | TBD | Pending |
-| POPU-01 | TBD | Pending |
-| POPU-02 | TBD | Pending |
-| POPU-03 | TBD | Pending |
-| POPU-04 | TBD | Pending |
-| POPU-05 | TBD | Pending |
-| POPU-06 | TBD | Pending |
-| HEAT-01 | TBD | Pending |
-| HEAT-02 | TBD | Pending |
-| HEAT-03 | TBD | Pending |
-| HEAT-04 | TBD | Pending |
-| TELE-01 | TBD | Pending |
-| TELE-02 | TBD | Pending |
-| TELE-03 | TBD | Pending |
-| TELE-04 | TBD | Pending |
-| TELE-05 | TBD | Pending |
-| DASH-01 | TBD | Pending |
-| DASH-02 | TBD | Pending |
-| DASH-03 | TBD | Pending |
-| DASH-04 | TBD | Pending |
-| DASH-05 | TBD | Pending |
-| DASH-06 | TBD | Pending |
-| DASH-07 | TBD | Pending |
-| SUBM-01 | TBD | Pending |
-| SUBM-02 | TBD | Pending |
-| SUBM-03 | TBD | Pending |
-| SUBM-04 | TBD | Pending |
+| VENU-01 | Phase 1 | Pending |
+| VENU-02 | Phase 1 | Pending |
+| VENU-03 | Phase 1 | Pending |
+| VENU-04 | Phase 1 | Pending |
+| VENU-05 | Phase 1 | Pending |
+| VENU-06 | Phase 1 | Pending |
+| INGE-01 | Phase 2 | Pending |
+| INGE-02 | Phase 2 | Pending |
+| INGE-03 | Phase 2 | Pending |
+| INGE-04 | Phase 2 | Pending |
+| INGE-05 | Phase 2 | Pending |
+| INGE-06 | Phase 2 | Pending |
+| INGE-07 | Phase 2 | Pending |
+| POPU-01 | Phase 2 | Pending |
+| POPU-02 | Phase 2 | Pending |
+| POPU-03 | Phase 2 | Pending |
+| POPU-04 | Phase 2 | Pending |
+| POPU-05 | Phase 2 | Pending |
+| POPU-06 | Phase 2 | Pending |
+| HEAT-01 | Phase 2 | Pending |
+| HEAT-02 | Phase 2 | Pending |
+| HEAT-03 | Phase 2 | Pending |
+| HEAT-04 | Phase 2 | Pending |
+| TELE-01 | Phase 2 | Pending |
+| TELE-02 | Phase 2 | Pending |
+| TELE-03 | Phase 2 | Pending |
+| TELE-04 | Phase 2 | Pending |
+| TELE-05 | Phase 2 | Pending |
+| DASH-01 | Phase 3 | Pending |
+| DASH-02 | Phase 3 | Pending |
+| DASH-03 | Phase 3 | Pending |
+| DASH-04 | Phase 3 | Pending |
+| DASH-05 | Phase 3 | Pending |
+| DASH-06 | Phase 3 | Pending |
+| DASH-07 | Phase 3 | Pending |
+| SUBM-01 | Phase 4 | Pending |
+| SUBM-02 | Phase 4 | Pending |
+| SUBM-03 | Phase 4 | Pending |
+| SUBM-04 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 34 total
-- Mapped to phases: 0
-- Unmapped: 34 ⚠️ (to be filled by roadmap creation)
+- v1 requirements: 39 total (corrected during roadmap creation — the original count of 34 in this section undercounted the requirement checklist above; 39 is the actual count of listed REQ-IDs)
+- Mapped to phases: 39
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-09-20*
-*Last updated: 2026-09-20 after initial definition*
+*Last updated: 2026-09-20 after roadmap creation (4 phases, 100% coverage)*
