@@ -1,7 +1,11 @@
-<!-- PopHeat live dashboard (DASH-01, DASH-05, DASH-06). Minimal tracer slice:
-     fetches /csp/popheat/api/venues and drops a plain marker per venue on a
-     Leaflet/OSM map (D-01, D-05). Heat layer, counts/telemetry panels, status
-     badge, and polling/error-banner behavior are added in Plans 03-02/03-03.
+<!-- PopHeat live dashboard (DASH-01..DASH-06).
+
+     Renders Phase 2's persisted readings as a Leaflet/OSM map (D-01, D-05):
+     a weighted heat layer covering EVERY venue with a reading (R2/DASH-02,
+     min-weight applied so low-popularity venues stay visible) plus discrete
+     circleMarkers reserved for ALTO/CRITICO venues only (R3/DASH-03), sized
+     by severity (R4/DASH-04). Counts/telemetry panels, the status badge and
+     the 10s polling loop with error banner arrive in Plan 03-03.
 
      Served as a STATIC .html file (canonical URL:
      http://localhost:52773/csp/popheat/dashboard.html), deliberately NOT a
@@ -9,45 +13,175 @@
      machinery instead of the static-file path and 404s under a ServeFiles
      web application. This page is pure static HTML/JS with zero server-side
      ObjectScript (D-05), so it never needed CSP compilation. -->
-<!-- IMPORTANT: this is the file Plans 03-02/03-03 extend. -->
+<!-- IMPORTANT: this is the file Plan 03-03 extends. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PopHeat</title>
+<!-- Every CDN asset is pinned with Subresource Integrity + crossorigin
+     (T-03-06): a compromised or MITM'd unpkg response is rejected by the
+     browser rather than executed. Hashes are sha384 digests of the exact
+     pinned versions below. -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
   crossorigin="anonymous"/>
 <style>
   html, body { margin: 0; padding: 0; height: 100%; }
   #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+
+  /* Marker popup (03-UI-SPEC.md "long-text" resolution): the content area is
+     capped at 240px and wraps normally, so a long venue name grows the popup
+     vertically instead of being truncated with an ellipsis. */
+  .popup-content { max-width: 240px; }
+  .popup-name { font-weight: 700; }
+  .popup-level { font-size: 13px; font-weight: 600; line-height: 1.2; }
+  .popup-time { color: #3B82F6; }
 </style>
 </head>
 <body>
 <div id="map"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"
+  crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"
+  integrity="sha384-mFKkGiGvT5vo1fEyGCD3hshDdKmW3wzXW/x+fWriYJArD0R3gawT6lMvLboM22c0"
   crossorigin="anonymous"></script>
 <script>
   // Base path for every PopHeat REST endpoint (DASH-01, DASH-05, DASH-06) --
   // subsequent plans reuse this constant rather than re-deriving the path.
   const API_BASE = '/csp/popheat/api';
 
+  // Minimum heat-layer point weight (R2/DASH-02, pinned by 03-UI-SPEC.md):
+  // every venue with a reading contributes a point, and a 0.02-popularity
+  // venue is lifted to 0.15 so it stays visible rather than vanishing.
+  const MIN_HEAT_WEIGHT = 0.15;
+
+  // Marker prominence follows severity (R4/DASH-04, pinned by 03-UI-SPEC.md).
+  const CRITICO_RADIUS = 14;
+  const ALTO_RADIUS = 10;
+
+  // The green -> yellow -> orange -> red heat gradient (D-02), exact hex values
+  // locked by 03-UI-SPEC.md's Color section. These four colors encode heat
+  // level and nothing else -- never reused for chrome, status or buttons.
+  const HEAT_COLORS = {
+    BAIXO: '#2ECC71',
+    MEDIO: '#F1C40F',
+    ALTO: '#E67E22',
+    CRITICO: '#E74C3C'
+  };
+
+  // Outer-scope layer handles so the render functions below can be called
+  // repeatedly (Plan 03-03's 10s refresh, D-08) without leaking layers or
+  // leaving stale markers behind.
+  var map = null;
+  var heatLayer = null;
+  var markerLayer = null;
+
+  // Venue names and categories come from OpenStreetMap, i.e. from outside this
+  // application -- never interpolate them into popup HTML unescaped.
+  function escapeHtml(value) {
+    return String(value === null || value === undefined ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // IRIS %TimeStamp arrives as "YYYY-MM-DD HH:MM:SS.fff"; the space form is not
+  // reliably parsed by every browser, so normalize to ISO-like before parsing
+  // and fall back to the raw string rather than rendering "Invalid Date".
+  function formatLocalTime(timestamp) {
+    if (!timestamp) { return 'unknown time'; }
+    var parsed = new Date(String(timestamp).replace(' ', 'T'));
+    if (isNaN(parsed.getTime())) { return String(timestamp); }
+    return parsed.toLocaleTimeString();
+  }
+
+  // R2/DASH-02: one heat point per venue with a reading, weighted by its
+  // current popularity with MIN_HEAT_WEIGHT as a floor. Leaflet.heat sums
+  // intensities over overlapping points, so insertion order is irrelevant and
+  // two venues at (near-)identical coordinates each keep contributing their
+  // own point -- no bespoke de-duplication is wanted here.
+  function renderHeatLayer(venues) {
+    var points = venues.map(function (venue) {
+      return [venue.lat, venue.lon, Math.max(venue.popularity, MIN_HEAT_WEIGHT)];
+    });
+    if (heatLayer) {
+      map.removeLayer(heatLayer);
+      heatLayer = null;
+    }
+    heatLayer = L.heatLayer(points, {
+      radius: 25,
+      blur: 18,
+      minOpacity: 0.3,
+      max: 1.0,
+      // Same four locked colors as the markers (D-02), so the glow and the
+      // individual markers read as one scale rather than two.
+      gradient: {
+        0.2: HEAT_COLORS.BAIXO,
+        0.45: HEAT_COLORS.MEDIO,
+        0.7: HEAT_COLORS.ALTO,
+        1.0: HEAT_COLORS.CRITICO
+      }
+    }).addTo(map);
+  }
+
+  // R3/DASH-03 + R4/DASH-04: discrete markers ONLY for venues currently
+  // classified ALTO or CRITICO, CRITICO drawn larger than ALTO. BAIXO/MEDIO
+  // venues stay on the heat layer only -- and an ALTO/CRITICO venue keeps its
+  // heat point too; the marker is additive, not a replacement.
+  function renderMarkers(venues) {
+    markerLayer.clearLayers();
+    venues
+      .filter(function (venue) {
+        return venue.heatLevel === 'ALTO' || venue.heatLevel === 'CRITICO';
+      })
+      .forEach(function (venue) {
+        L.circleMarker([venue.lat, venue.lon], {
+          radius: venue.heatLevel === 'CRITICO' ? CRITICO_RADIUS : ALTO_RADIUS,
+          color: '#FFFFFF',
+          weight: 1,
+          fillColor: HEAT_COLORS[venue.heatLevel],
+          fillOpacity: 0.9
+        })
+          .bindPopup(buildPopupHtml(venue))
+          .addTo(markerLayer);
+      });
+  }
+
+  // Popup copy contract locked by 03-UI-SPEC.md. "Estimated crowdedness"
+  // labelling keeps the synthetic nature of the score explicit and keeps the
+  // CRITICO/ALTO wording about how busy a venue is -- never a safety warning.
+  function buildPopupHtml(venue) {
+    return '<div class="popup-content">' +
+      '<div class="popup-name">' + escapeHtml(venue.venueName) + '</div>' +
+      '<div class="popup-level" style="color: ' + HEAT_COLORS[venue.heatLevel] + ';">' +
+        escapeHtml(venue.category) + ' &middot; ' + escapeHtml(venue.heatLevel) + '</div>' +
+      '<div class="popup-popularity">Popularity: ' + escapeHtml(venue.popularity) + '</div>' +
+      '<div class="popup-time">as of ' + escapeHtml(formatLocalTime(venue.observedAt)) + '</div>' +
+      '</div>';
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     // Porto Ribeira/Sé/Baixa-Aliados historic center bounding box (Phase 1).
-    var map = L.map('map').setView([41.1457, -8.6112], 15);
+    map = L.map('map').setView([41.1457, -8.6112], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
+    // Created once and reused by every renderMarkers() call.
+    markerLayer = L.layerGroup().addTo(map);
+
     fetch(API_BASE + '/venues')
       .then(function (response) { return response.json(); })
       .then(function (venues) {
-        venues.forEach(function (venue) {
-          L.circleMarker([venue.lat, venue.lon]).addTo(map);
-        });
+        renderHeatLayer(venues);
+        renderMarkers(venues);
       });
   });
 </script>
