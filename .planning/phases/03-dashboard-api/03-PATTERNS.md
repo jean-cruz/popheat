@@ -9,7 +9,7 @@
 | New/Modified File | Role | Data Flow | Closest Analog | Match Quality |
 |-------------------|------|-----------|-----------------|---------------|
 | `iris/PopHeat/API.cls` (name TBD in planning, e.g. `PopHeat.REST`) | route/controller (`%CSP.REST` dispatch class) | request-response (read-only SQL query → JSON) | `iris/PopHeat/BatchTelemetry.cls` (its `RecentBatches()` `%SQLQuery`) | role-match — no REST class exists, but the embedded-SQL query style is directly reusable |
-| `iris/PopHeat/dashboard.csp` (static CSP page, name TBD) | component (static HTML+JS view) | request-response (served once, then client polls REST API) | none in repo | no analog |
+| `iris/PopHeat/dashboard.html` (static CSP page, name TBD) | component (static HTML+JS view) | request-response (served once, then client polls REST API) | none in repo | no analog |
 | `iris/merge.cpf` (modification: add `[Actions] CreateApplication` for a `/csp/popheat` web app + REST dispatch mapping) | config | n/a | `iris/merge.cpf` (existing `[Actions] CreateDatabase`/`CreateNamespace` block) | role-match — same file, same `[Actions]`-section convention |
 | `docker/init-production.sh` (modification: compile new class into `ck` LoadDir call, already covers `iris/PopHeat/*.cls` globs) | config/script | batch (one-time container init) | `docker/init-production.sh` itself | exact — no new file needed, just extend the existing `LoadDir`/compile step if the new class lives under `iris/PopHeat/` |
 
@@ -81,7 +81,7 @@ Wrap in try/catch so a failed check degrades to "Stopped" rather than erroring t
 
 ---
 
-### `iris/PopHeat/dashboard.csp` (component, static page)
+### `iris/PopHeat/dashboard.html` (component, static page)
 
 **Analog:** none in repo — greenfield. Build directly from `03-UI-SPEC.md`'s locked contract:
 - Single static HTML file, vanilla JS, Leaflet + Leaflet.heat from CDN (no build step, D-05).
@@ -145,7 +145,7 @@ No new script needed — if the new REST class and CSP page are placed under `ir
 | File | Role | Data Flow | Reason |
 |------|------|-----------|--------|
 | `iris/PopHeat/<REST class>.cls` | controller | request-response | No `%CSP.REST` class exists anywhere in the repo yet (Phase 2 was PyProd-only, no HTTP layer). Base it on ObjectScript doc-comment conventions from Reading.cls/BatchTelemetry.cls plus standard `%CSP.REST` boilerplate (`XData UrlMap`, `ClassMethod` per route) from IRIS platform conventions — not a repo analog. |
-| `iris/PopHeat/dashboard.csp` (or `.html`) | component | request-response | No frontend of any kind exists yet in the repo. Build directly from `03-UI-SPEC.md`, which is fully authoritative and locked (colors, copy, spacing, typography, pinned discretion defaults) — no codebase analog needed or expected. |
+| `iris/PopHeat/www/dashboard.html` | component | request-response | No frontend of any kind exists yet in the repo. Build directly from `03-UI-SPEC.md`, which is fully authoritative and locked (colors, copy, spacing, typography, pinned discretion defaults) — no codebase analog needed or expected. |
 
 ## Metadata
 

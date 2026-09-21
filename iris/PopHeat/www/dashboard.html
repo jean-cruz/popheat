@@ -1,7 +1,15 @@
 <!-- PopHeat live dashboard (DASH-01, DASH-05, DASH-06). Minimal tracer slice:
      fetches /csp/popheat/api/venues and drops a plain marker per venue on a
      Leaflet/OSM map (D-01, D-05). Heat layer, counts/telemetry panels, status
-     badge, and polling/error-banner behavior are added in Plans 03-02/03-03. -->
+     badge, and polling/error-banner behavior are added in Plans 03-02/03-03.
+
+     Served as a STATIC .html file (canonical URL:
+     http://localhost:52773/csp/popheat/dashboard.html), deliberately NOT a
+     .csp file: a .csp extension is routed to CSP's page-compilation
+     machinery instead of the static-file path and 404s under a ServeFiles
+     web application. This page is pure static HTML/JS with zero server-side
+     ObjectScript (D-05), so it never needed CSP compilation. -->
+<!-- IMPORTANT: this is the file Plans 03-02/03-03 extend. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
