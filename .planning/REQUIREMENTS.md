@@ -52,11 +52,11 @@ Derived directly from `specs/*.spec` (already-decided business rules) plus the I
 
 ### Dashboard & API
 
-- [ ] **DASH-01**: Venue-facing views always show each venue's latest reading only; older readings are never shown as current state
+- [x] **DASH-01**: Venue-facing views always show each venue's latest reading only; older readings are never shown as current state
 - [ ] **DASH-02**: The heat map includes every venue with at least one reading, weighted by popularity, with a minimum visible weight for low-popularity venues
 - [ ] **DASH-03**: Only ALTO/CRITICO venues get individual clickable markers; BAIXO/MEDIO venues appear on the heat layer only
 - [ ] **DASH-04**: A CRITICO marker renders larger than an ALTO marker
-- [ ] **DASH-05**: Displayed heat-level counts are computed from the same "latest reading per venue" rule as DASH-01, never inflated by historical readings
+- [x] **DASH-05**: Displayed heat-level counts are computed from the same "latest reading per venue" rule as DASH-01, never inflated by historical readings
 - [ ] **DASH-06**: The dashboard shows whether the ingestion pipeline is currently running, but keeps serving last-known data regardless of that status
 - [ ] **DASH-07**: The dashboard re-fetches venues, counts, and telemetry every 10 seconds; a fetch failure shows a visible error state rather than silently keeping stale data displayed as current
 
@@ -115,11 +115,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TELE-03 | Phase 2 | Complete |
 | TELE-04 | Phase 2 | Complete |
 | TELE-05 | Phase 2 | Complete |
-| DASH-01 | Phase 3 | Pending |
+| DASH-01 | Phase 3 | Complete |
 | DASH-02 | Phase 3 | Pending |
 | DASH-03 | Phase 3 | Pending |
 | DASH-04 | Phase 3 | Pending |
-| DASH-05 | Phase 3 | Pending |
+| DASH-05 | Phase 3 | Complete |
 | DASH-06 | Phase 3 | Pending |
 | DASH-07 | Phase 3 | Pending |
 | SUBM-01 | Phase 4 | Pending |
