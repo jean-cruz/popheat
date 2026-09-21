@@ -33,4 +33,21 @@ Index ObservedAtIdx On ObservedAt;
 
 Index VenueIdx On VenueId;
 
+/// The single latest reading per venue (DASH-01, D-04) -- the one source of
+/// truth for both the map (/venues) and the heat-level counts (/venues and
+/// /counts must never drift apart, per D-04). ObservedAt DESC picks the
+/// newest reading for each VenueId; ID DESC is a deterministic tiebreak for
+/// two readings sharing the exact same ObservedAt, since Reading is
+/// insert-only and ID increases with insert order.
+Query LatestPerVenue() As %SQLQuery
+{
+SELECT VenueId, VenueName, Category, Latitude, Longitude, Popularity, HeatLevel, ObservedAt
+FROM (
+  SELECT VenueId, VenueName, Category, Latitude, Longitude, Popularity, HeatLevel, ObservedAt,
+         ROW_NUMBER() OVER (PARTITION BY VenueId ORDER BY ObservedAt DESC, ID DESC) AS RowNum
+  FROM PopHeat.Reading
+) WHERE RowNum = 1
+ORDER BY VenueId ASC
+}
+
 }
