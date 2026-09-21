@@ -2,3 +2,9 @@ data/venues.json
 data/venues.raw.json
 __pycache__/
 *.pyc
+
+# GSD / Claude Code runtime state (never commit)
+.claude/worktrees/
+.gsd/
+.planning/milestone.lock
+.planning/state.json
