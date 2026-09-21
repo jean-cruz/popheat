@@ -21,7 +21,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Venue Catalog Sourcing** - Build a deduplicated OSM venue catalog for one city bounding box (completed 2026-09-20)
 - [x] **Phase 2: IRIS Ingestion Pipeline — Scoring, Classification & Telemetry** - Stand up IRIS + a PyProd production that continuously ingests, scores, classifies, persists, and records telemetry for the venue catalog (completed 2026-09-20)
-- [ ] **Phase 3: Dashboard & API** - Serve a live, auto-refreshing heat map and REST API over persisted readings
+- [x] **Phase 3: Dashboard & API** - Serve a live, auto-refreshing heat map and REST API over persisted readings (completed 2026-09-21)
 - [ ] **Phase 4: Contest Submission Packaging** - Publish the paired Open Exchange app + Portuguese Developer Community article
 
 ## Phase Details
@@ -128,5 +128,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Venue Catalog Sourcing | 2/2 | Complete    | 2026-09-20 |
 | 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 2/2 | Complete    | 2026-09-20 |
-| 3. Dashboard & API | 3/3 | In Progress|  |
+| 3. Dashboard & API | 3/3 | Complete    | 2026-09-21 |
 | 4. Contest Submission Packaging | 0/TBD | Not started | - |

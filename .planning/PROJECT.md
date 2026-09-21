@@ -13,14 +13,14 @@ A working, submittable IRIS PyProd application, live and functioning end-to-end 
 ### Validated
 
 - ✓ Venue catalog sourced from OpenStreetMap for one city bounding box, with eligibility/dedup rules applied — Phase 1
+- ✓ IRIS Interoperability Production (PyProd) implementing the ingestion pipeline: batching, full-catalog cycling, batch atomicity, and failure isolation — Phase 2
+- ✓ Popularity model computing a synthetic crowdedness score per venue, per category-specific daily curve — Phase 2
+- ✓ Heat level classification (BAIXO/MEDIO/ALTO/CRITICO) with nightlife vs. daytime thresholds, configurable without redeploy — Phase 2
+- ✓ Telemetry recording per-batch pipeline metrics (throughput, duration, recent-history view) — Phase 2
+- ✓ Live dashboard (heat layer + severity markers + counts) polling a REST API every 10 seconds — Phase 3
 
 ### Active
 
-- [ ] IRIS Interoperability Production (PyProd) implementing the ingestion pipeline: batching, full-catalog cycling, batch atomicity, and failure isolation
-- [ ] Popularity model computing a synthetic crowdedness score per venue, per category-specific daily curve
-- [ ] Heat level classification (BAIXO/MEDIO/ALTO/CRITICO) with nightlife vs. daytime thresholds, configurable without redeploy
-- [ ] Telemetry recording per-batch pipeline metrics (throughput, duration, recent-history view)
-- [ ] Live dashboard (heat layer + severity markers + counts) polling a REST API every 10 seconds
 - [ ] Open Exchange submission package (app + README) and Portuguese Developer Community article documenting AI tools/prompts and the PyProd approach
 
 ### Out of Scope
@@ -50,10 +50,11 @@ A working, submittable IRIS PyProd application, live and functioning end-to-end 
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Target the PyProd bonus track, not RAG | The ingestion pipeline already maps naturally onto an interoperability production; RAG has no natural fit for a heat map | — Pending |
-| Use `specs/*.spec` as the authoritative requirements source | Specs already exist, are detailed and unambiguous, and rewriting them would waste scarce time before the deadline | — Pending |
+| Target the PyProd bonus track, not RAG | The ingestion pipeline already maps naturally onto an interoperability production; RAG has no natural fit for a heat map | Shipped Phase 2 — IRIS Interoperability Production with embedded Python business hosts |
+| Use `specs/*.spec` as the authoritative requirements source | Specs already exist, are detailed and unambiguous, and rewriting them would waste scarce time before the deadline | Shipped Phases 1-3 — all requirement IDs traced to spec files |
 | Single city / single bounding box for v1 | The contest deadline leaves no time for multi-region catalog management | Shipped Phase 1 — Porto Ribeira/Sé/Baixa-Aliados historic center, config-only to change |
-| Popularity is synthetic, not real telemetry | No free, ToS-compliant live "busy" API exists; documented as a modeled estimate | — Pending |
+| Popularity is synthetic, not real telemetry | No free, ToS-compliant live "busy" API exists; documented as a modeled estimate | Shipped Phase 2 — category-specific daily curves, disclaimed in dashboard UI copy |
+| Dashboard API is unauthenticated (AutheEnabled=64) | Public, read-only, no-PII contest demo; login-free public view is the explicit deliverable | Shipped Phase 3 — accepted risk AR-03-02, documented in 03-SECURITY.md |
 | Dedup key is exact name + coordinates rounded to 5 decimals (round-half-up) | OSM has no canonical venue ID across duplicate node/way/relation entries; name+location is the only available signal | Shipped Phase 1 |
 
 ## Evolution
@@ -74,4 +75,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-09-20 after Phase 1*
+*Last updated: 2026-09-21 after Phase 3*

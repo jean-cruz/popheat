@@ -1,44 +1,44 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 03
-current_phase_name: Dashboard & API
-status: executing
-stopped_at: Phase 3 UI-SPEC approved
-last_updated: "2026-09-21T19:41:02.889Z"
+current_phase: 4
+current_phase_name: Contest Submission Packaging
+status: planning
+stopped_at: Phase 03 complete, ready to plan Phase 4
+last_updated: "2026-09-21T21:41:41.770Z"
 last_activity: 2026-09-21
-last_activity_desc: Phase 03 execution resumed (wave continue)
-state_head: 72872e3788431f805d625387075d0d9a8614222f
+last_activity_desc: Phase 03 complete, transitioned to Phase 4
+state_head: bdb934f3b32afe073782ec7c80dce7cc060786fe
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 7
   completed_plans: 7
-  percent: 50
+  percent: 75
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-09-20)
+See: .planning/PROJECT.md (updated 2026-09-21)
 
 **Core value:** A working, submittable IRIS PyProd application, live and functioning end-to-end (ingest → score → classify → persist → dashboard), by the contest deadline
-**Current focus:** Phase 03 — Dashboard & API
+**Current focus:** Phase 4 — Contest Submission Packaging
 
 ## Current Position
 
-Phase: 03 (Dashboard & API) — EXECUTING
-Plan: 2 of 3
-Status: Ready to execute
-Last activity: 2026-09-21 — Phase 03 execution resumed (wave continue)
+Phase: 4 — Contest Submission Packaging
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-09-21 — Phase 03 complete, transitioned to Phase 4
 
-Progress: [█████░░░░░] 50%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 4
+- Total plans completed: 7
 - Average duration: - min
 - Total execution time: 0 hours
 
@@ -48,6 +48,7 @@ Progress: [█████░░░░░] 50%
 |-------|-------|-------|----------|
 | 01 | 2 | - | - |
 | 02 | 2 | - | - |
+| 03 | 3 | - | - |
 
 **Recent Trend:**
 
@@ -66,6 +67,8 @@ Recent decisions affecting current work:
 - [Roadmap]: Horizontal-layers structure chosen (not vertical MVP slices) given the one-day timeline — build complete technical layers (venue catalog → IRIS PyProd pipeline → dashboard/API → submission) and integrate at the end
 - [Roadmap]: Telemetry (TELE-*) folded into the pipeline phase rather than split out — it's an operational side-effect of batch persistence, not independently verifiable without the pipeline already running
 - [Roadmap]: IRIS/Docker environment setup has no dedicated requirement ID; it is delivered as enabling infrastructure inside Phase 2 (INGE-01 requires the PyProd production it stands up)
+- [Phase 3]: Dashboard API is public/unauthenticated (AutheEnabled=64) by deliberate design (D-06) — accepted risk, not a gap, documented in 03-SECURITY.md
+- [Phase 3]: CDN-loaded Leaflet/Leaflet.heat assets pinned with Subresource Integrity; OSM-sourced venue fields HTML-escaped in popup rendering (XSS closed during 03-02 execution)
 
 ### Pending Todos
 
@@ -73,8 +76,7 @@ None yet.
 
 ### Blockers/Concerns
 
-- No IRIS environment exists yet — Phase 2 must stand up Docker + IRIS Community Edition from scratch before any pipeline work can run; this is the highest-risk step given the one-day timeline
-- Contest deadline is 2026-09-21 (one day from kickoff) — every phase must be planned and executed same-day; no slack for rework
+- Contest deadline is 2026-09-21 (today) — Phase 4 (submission packaging) is the last phase; no slack remains for rework
 
 ### Quick Tasks Completed
 
@@ -92,6 +94,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-09-20T23:10:17.025Z
-Stopped at: Phase 3 UI-SPEC approved
-Resume file: .planning/phases/03-dashboard-api/03-UI-SPEC.md
+Last session: 2026-09-21T21:41:41.770Z
+Stopped at: Phase 03 complete, ready to plan Phase 4
+Resume file: None
