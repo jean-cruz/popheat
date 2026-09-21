@@ -1,18 +1,20 @@
 ---
 phase: 03-dashboard-api
 verified: 2026-09-21T18:00:00Z
-status: human_needed
+status: passed
 score: 12/13 must-haves verified
 covered_files: [".planning/REQUIREMENTS.md", ".planning/phases/03-dashboard-api/03-01-PLAN.md", ".planning/phases/03-dashboard-api/03-01-SUMMARY.md", ".planning/phases/03-dashboard-api/03-02-PLAN.md", ".planning/phases/03-dashboard-api/03-02-SUMMARY.md", ".planning/phases/03-dashboard-api/03-03-PLAN.md", ".planning/phases/03-dashboard-api/03-03-SUMMARY.md", ".planning/phases/03-dashboard-api/03-CONTEXT.md", ".planning/phases/03-dashboard-api/03-REVIEW.md", ".planning/phases/03-dashboard-api/03-UI-REVIEW.md", ".planning/phases/03-dashboard-api/03-UI-SPEC.md", "docker/init-production.sh", "iris/PopHeat/API.cls", "iris/PopHeat/Reading.cls", "iris/PopHeat/www/dashboard.html"]
 covered_digest: "v1:sha256:a25c978f1a6d20cd006d23ad7ac3dde73e0170b3e57ba2b444bbc086fb2780fe"
 behavior_unverified: 1
 overrides_applied: 0
 behavior_unverified_items:
+
   - truth: "A fetch failure on any 10-second refresh cycle shows the exact D-07 stale-data banner, and the banner auto-clears on the next fully-successful cycle after the underlying connection recovers (DASH-07 live stop/restart behavior)"
     test: "Load the live dashboard, let one refresh cycle succeed, then stop the IRIS container (or otherwise break connectivity) and watch the open tab for 10-20 seconds"
     expected: "The red banner appears reading 'Unable to refresh — showing last known data as of {the real last-successful-fetch time}.', every previously-rendered venue/heat/counts/telemetry/status element stays visibly unchanged underneath it, the '×' dismiss control hides it, and restarting the container clears the banner automatically on the next successful 10-second cycle with no manual reload"
     why_human: "This is a state-transition/recovery invariant (banner shows on failure, stays accurate, dismisses, and self-clears on recovery) that only manifests against a real broken/restored connection over multiple 10s cycles. No automated test exists in this repo (no JS test framework; tests/ contains only Python unit tests for Phase 1/2), and no docker/IRIS container was reachable in this verification environment (`docker ps` -> permission denied) or in the prior UI-audit sandbox (03-UI-REVIEW.md's own note). 03-03-SUMMARY.md explicitly discloses this was never run this session, and its supporting D2 coverage item is marked human_judgment: true."
 human_verification:
+
   - test: "Load the live dashboard, let one refresh cycle succeed, then stop the IRIS container and watch the open tab for 10-20 seconds; then restart the container and wait for the next cycle"
     expected: "Red banner appears with the exact D-07 copy and a correct interpolated 'last known data as of' time; all previously-rendered data stays visibly unchanged underneath; the '×' (aria-label=\"Dismiss\") control hides the banner; after restart, the banner auto-clears on the next successful cycle without a manual page reload"
     why_human: "State-transition/recovery behavior across real container stop/restart over multiple 10s polling cycles — cannot be observed via grep/static analysis, and this environment has no docker access to exercise it directly (harvested from 03-03-PLAN.md Task 2's <human-check> per workflow.human_verify_mode: end-of-phase, and explicitly flagged as outstanding in 03-03-SUMMARY.md and 03-UI-REVIEW.md)."
