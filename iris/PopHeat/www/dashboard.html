@@ -38,6 +38,7 @@
     --chrome: #1F2933;      /* Secondary 30% -- top bar + floating panels */
     --page-bg: #F5F6F8;     /* Dominant 60% -- surface beneath the map */
     --accent: #3B82F6;      /* Accent 10% -- running status dot, popup time */
+    --error: #DC2626;       /* Destructive/Error -- stale-data banner only (D-07) */
     --chrome-text: #FFFFFF;
     --chrome-muted: #9AA5B1;
     --space-xs: 4px;
@@ -125,6 +126,59 @@
      color is never the sole signal. */
   .status-dot.stopped { background: transparent; border: 2px solid var(--chrome-muted); }
   #status-label.stopped { color: var(--chrome-muted); }
+
+  /* ---- Stale-data banner (D-07): dismissible, sits directly under the top
+     bar; last-known map/counts/telemetry/status data stays visible and
+     unchanged underneath it. Hidden by default; shown only from
+     recordFetchFailure(), cleared from dismissBanner() (manual) or
+     automatically by the next all-four-succeed refreshAll() cycle. ---- */
+  #stale-banner {
+    position: absolute;
+    top: var(--topbar-height);
+    left: 0; right: 0;
+    z-index: 1200;
+    box-sizing: border-box;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--error);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  /* Same specificity trap as #counts-rows / #empty-state: an author `display`
+     rule needs this explicit [hidden] companion or the box shows through. */
+  #stale-banner[hidden] { display: none; }
+
+  #stale-banner-message {
+    /* Body role: 16px / 400 / 1.5 */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* Icon-only "x" control: visible glyph is small, but the hit area is a
+     minimum 44x44px per 03-UI-SPEC.md's touch-target rule (padding, not
+     font-size, provides the extra area). */
+  #stale-banner-dismiss {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    flex: none;
+  }
+
+  #stale-banner-dismiss:hover,
+  #stale-banner-dismiss:focus {
+    color: var(--accent);
+  }
 
   /* ---- Map fills everything below the top bar, full-bleed ---- */
   #map {
@@ -288,6 +342,15 @@
   </div>
 </header>
 
+<!-- Stale-data banner (D-07), copy assembled at runtime by recordFetchFailure()
+     in the script below (exact wording locked by 03-UI-SPEC.md's Copywriting
+     Contract). Hidden by default; only a fetch failure or a fresh page load
+     with no prior success can reveal it. -->
+<div id="stale-banner" role="alert" hidden>
+  <span id="stale-banner-message"></span>
+  <button id="stale-banner-dismiss" type="button" aria-label="Dismiss">&times;</button>
+</div>
+
 <div id="map"></div>
 
 <!-- Empty state, copy locked by 03-UI-SPEC.md's Copywriting Contract. The em
@@ -412,6 +475,11 @@
   // unaffected -- response.json() always decodes as UTF-8 regardless of this page's
   // own charset, which is why accented venue names render correctly in popups.
   const MIDDOT = String.fromCharCode(183);
+
+  // Same ASCII-source constraint as MIDDOT above: the D-07 banner copy is
+  // locked verbatim with an em dash ("Unable to refresh -- showing last known
+  // data..."), built from a character code rather than a literal UTF-8 byte.
+  const EM_DASH = String.fromCharCode(8212);
 
   function formatNumber(value, maxDecimals) {
     var n = Number(value);
@@ -566,13 +634,27 @@
   }
 
   // Called for every individual fetch that fails (network error, timeout, or
-  // a non-2xx response). Plan 03-03 Task 2 makes this show the D-07 banner;
-  // by contract it never touches any other region of the page, so whatever
-  // that region last rendered stays exactly as it is.
+  // a non-2xx response). Shows the D-07 stale-data banner; by contract it
+  // never touches any other region of the page, so whatever that region last
+  // rendered (venues/heat/markers/counts/telemetry/status) stays exactly as
+  // it is underneath the banner.
   function recordFetchFailure(path, error) {
     if (window.console && console.warn) {
       console.warn('PopHeat: refresh of ' + path + ' failed', error);
     }
+    var asOf = lastSuccessfulFetchAt ? lastSuccessfulFetchAt.toLocaleTimeString() : 'unknown time';
+    document.getElementById('stale-banner-message').textContent =
+      'Unable to refresh ' + EM_DASH + ' showing last known data as of ' + asOf + '.';
+    document.getElementById('stale-banner').hidden = false;
+  }
+
+  // Hides the banner without side effects: it never clears
+  // lastSuccessfulFetchAt and never forces an immediate re-fetch. The next
+  // scheduled 10-second cycle re-shows it if the failure persists, or the
+  // cycle's own all-four-succeed path (see refreshAll) clears it silently on
+  // recovery even if the user never clicked this.
+  function dismissBanner() {
+    document.getElementById('stale-banner').hidden = true;
   }
 
   // Fetch one endpoint and hand the parsed JSON to its renderer. Resolves to
@@ -622,6 +704,10 @@
 
       if (venuesOk && countsOk && telemetryOk && statusOk) {
         lastSuccessfulFetchAt = new Date();
+        // A fully successful cycle means the connection has recovered (or
+        // never dropped) -- clear any previously-shown banner automatically,
+        // with no dependence on whether the user ever clicked dismiss.
+        dismissBanner();
       }
     } finally {
       isRefreshing = false;
@@ -640,6 +726,11 @@
 
     // Created once and reused by every renderMarkers() call.
     markerLayer = L.layerGroup().addTo(map);
+
+    // D-07: manual dismiss control. Clicking it only hides the banner (see
+    // dismissBanner) -- it never clears lastSuccessfulFetchAt or triggers an
+    // out-of-cycle fetch.
+    document.getElementById('stale-banner-dismiss').addEventListener('click', dismissBanner);
 
     // D-08: one immediate cycle, then the same cycle every 10 seconds. This
     // is the only timer on the page and nothing ever reloads or navigates
