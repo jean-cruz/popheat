@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-09-21)
 Phase: 4 — Contest Submission Packaging
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-09-21 — Phase 03 complete, transitioned to Phase 4
+Last activity: 2026-09-21 — Completed quick task 260921-q10: swap demo city bbox to São Paulo
 
 Progress: [████████░░] 75%
 
@@ -83,6 +83,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260921-g3b | commit specs | 2026-09-21 | 730dfed | [260921-g3b-commit-specs](./quick/260921-g3b-commit-specs/) |
+| 260921-q10 | swap demo city bbox to Sao Paulo (Porto -> Paulista/Jardins/Pinheiros/Vila Madalena); PopHeat.Reading purge still pending, needs docker access | 2026-09-21 | a8374f0 | [260921-q10-swap-the-demo-city-s-venue-sourcing-boun](./quick/260921-q10-swap-the-demo-city-s-venue-sourcing-boun/) |
 
 ## Deferred Items
 
