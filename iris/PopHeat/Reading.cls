@@ -50,4 +50,21 @@ FROM (
 ORDER BY VenueId ASC
 }
 
+/// Venue count per heat level (DASH-05), built on the textually identical
+/// RowNum=1-filtered subquery LatestPerVenue uses (D-04) so the map and the
+/// counts panel can never drift apart -- both answer "latest reading per
+/// venue", never "all historical readings". Levels currently held by zero
+/// venues are simply absent from this result; the API layer is responsible
+/// for always emitting all four keys.
+Query CountsByHeatLevel() As %SQLQuery
+{
+SELECT HeatLevel, COUNT(*) AS VenueCount
+FROM (
+  SELECT VenueId, VenueName, Category, Latitude, Longitude, Popularity, HeatLevel, ObservedAt,
+         ROW_NUMBER() OVER (PARTITION BY VenueId ORDER BY ObservedAt DESC, ID DESC) AS RowNum
+  FROM PopHeat.Reading
+) WHERE RowNum = 1
+GROUP BY HeatLevel
+}
+
 }
