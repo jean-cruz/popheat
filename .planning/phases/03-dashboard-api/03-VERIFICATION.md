@@ -1,7 +1,7 @@
 ---
 phase: 03-dashboard-api
 verified: 2026-09-21T18:00:00Z
-status: passed
+status: human_needed
 score: 12/13 must-haves verified
 covered_files: [".planning/REQUIREMENTS.md", ".planning/phases/03-dashboard-api/03-01-PLAN.md", ".planning/phases/03-dashboard-api/03-01-SUMMARY.md", ".planning/phases/03-dashboard-api/03-02-PLAN.md", ".planning/phases/03-dashboard-api/03-02-SUMMARY.md", ".planning/phases/03-dashboard-api/03-03-PLAN.md", ".planning/phases/03-dashboard-api/03-03-SUMMARY.md", ".planning/phases/03-dashboard-api/03-CONTEXT.md", ".planning/phases/03-dashboard-api/03-REVIEW.md", ".planning/phases/03-dashboard-api/03-UI-REVIEW.md", ".planning/phases/03-dashboard-api/03-UI-SPEC.md", "docker/init-production.sh", "iris/PopHeat/API.cls", "iris/PopHeat/Reading.cls", "iris/PopHeat/www/dashboard.html"]
 covered_digest: "v1:sha256:a25c978f1a6d20cd006d23ad7ac3dde73e0170b3e57ba2b444bbc086fb2780fe"
