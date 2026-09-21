@@ -58,7 +58,7 @@ Derived directly from `specs/*.spec` (already-decided business rules) plus the I
 - [ ] **DASH-04**: A CRITICO marker renders larger than an ALTO marker
 - [x] **DASH-05**: Displayed heat-level counts are computed from the same "latest reading per venue" rule as DASH-01, never inflated by historical readings
 - [ ] **DASH-06**: The dashboard shows whether the ingestion pipeline is currently running, but keeps serving last-known data regardless of that status
-- [ ] **DASH-07**: The dashboard re-fetches venues, counts, and telemetry every 10 seconds; a fetch failure shows a visible error state rather than silently keeping stale data displayed as current
+- [x] **DASH-07**: The dashboard re-fetches venues, counts, and telemetry every 10 seconds; a fetch failure shows a visible error state rather than silently keeping stale data displayed as current
 
 ### Contest Submission
 
@@ -121,7 +121,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DASH-04 | Phase 3 | Pending |
 | DASH-05 | Phase 3 | Complete |
 | DASH-06 | Phase 3 | Pending |
-| DASH-07 | Phase 3 | Pending |
+| DASH-07 | Phase 3 | Complete |
 | SUBM-01 | Phase 4 | Pending |
 | SUBM-02 | Phase 4 | Pending |
 | SUBM-03 | Phase 4 | Pending |
