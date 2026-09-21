@@ -88,7 +88,7 @@ Plans:
   4. The dashboard displays whether the ingestion pipeline is currently running, but keeps serving last-known data regardless of that status
   5. The dashboard auto-refreshes venues, counts, and telemetry every 10 seconds, and a fetch failure surfaces a visible error state rather than silently leaving stale data displayed as current
 
-**Plans**: 1/3 plans executed
+**Plans**: 2/3 plans executed
 
 Plans:
 **Wave 1**
@@ -97,7 +97,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 03-02-PLAN.md — Heat layer, ALTO/CRITICO markers, counts/telemetry panels, status badge, full UI-SPEC styling
+- [x] 03-02-PLAN.md — Heat layer, ALTO/CRITICO markers, counts/telemetry panels, status badge, full UI-SPEC styling
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -128,5 +128,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Venue Catalog Sourcing | 2/2 | Complete    | 2026-09-20 |
 | 2. IRIS Ingestion Pipeline — Scoring, Classification & Telemetry | 2/2 | Complete    | 2026-09-20 |
-| 3. Dashboard & API | 1/3 | In Progress|  |
+| 3. Dashboard & API | 2/3 | In Progress|  |
 | 4. Contest Submission Packaging | 0/TBD | Not started | - |
