@@ -23,7 +23,7 @@
 # re-run docker/init-production.sh from scratch.
 services:
   iris:
-    image: intersystemsdc/iris-community:latest
+    image: intersystems/iris-community:2026.2
     container_name: popheat-iris
     restart: unless-stopped
     command: ["--check-caps", "false"]

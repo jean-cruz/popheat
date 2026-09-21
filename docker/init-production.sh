@@ -16,9 +16,10 @@ IRIS_INSTANCE="IRIS"
 IRIS_NAMESPACE="POPHEAT"
 APP_DIR="/irisdev/app"
 export IRISNAMESPACE="$IRIS_NAMESPACE"
+export PATH="$PATH:/home/irisowner/.local/bin"
 
 echo "=== PopHeat: installing iris-pex-embedded-python + tzdata ==="
-pip3 install --quiet iris-pex-embedded-python tzdata
+pip3 install --quiet --break-system-packages iris-pex-embedded-python tzdata
 
 echo "=== PopHeat: verifying the ${IRIS_NAMESPACE} namespace exists (D-04) ==="
 # WR-03: grep for the literal "NS_EXISTS=" marker prefix rather than any bare
@@ -45,6 +46,15 @@ if 'sc { do \$System.Status.DisplayError(sc) }
 halt
 IRISEOF
 fi
+
+echo "=== PopHeat: setting the _SYSTEM password (for Management Portal / debugging access) ==="
+iris session "$IRIS_INSTANCE" -U%SYS <<IRISEOF
+set Properties("Password") = "adm"
+set sc = ##class(Security.Users).Modify("_SYSTEM", .Properties)
+if 'sc { do \$System.Status.DisplayError(sc) }
+do ##class(Security.Users).UnExpireUserPasswords("_SYSTEM")
+halt
+IRISEOF
 
 echo "=== PopHeat: resolving the ${IRIS_NAMESPACE} database resource (for public read access) ==="
 # Unauthenticated (AutheEnabled=64) requests run as UnknownUser, which ships
