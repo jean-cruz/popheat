@@ -4,8 +4,13 @@
      a weighted heat layer covering EVERY venue with a reading (R2/DASH-02,
      min-weight applied so low-popularity venues stay visible) plus discrete
      circleMarkers reserved for ALTO/CRITICO venues only (R3/DASH-03), sized
-     by severity (R4/DASH-04). Counts/telemetry panels, the status badge and
-     the 10s polling loop with error banner arrive in Plan 03-03.
+     by severity (R4/DASH-04), under a fixed top bar carrying the pipeline
+     status badge (R6/DASH-06) and beside floating counts (R5/DASH-05) and
+     telemetry panels. The 10s polling loop and the stale-data error banner
+     arrive in Plan 03-03.
+
+     All color, typography, spacing and copy below is the locked contract in
+     .planning/phases/03-dashboard-api/03-UI-SPEC.md -- do not re-derive it.
 
      Served as a STATIC .html file (canonical URL:
      http://localhost:52773/csp/popheat/dashboard.html), deliberately NOT a
@@ -28,20 +33,245 @@
   integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
   crossorigin="anonymous"/>
 <style>
-  html, body { margin: 0; padding: 0; height: 100%; }
-  #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+  /* ---- Global tokens (03-UI-SPEC.md: Color, Typography, Spacing Scale) ---- */
+  :root {
+    --chrome: #1F2933;      /* Secondary 30% -- top bar + floating panels */
+    --page-bg: #F5F6F8;     /* Dominant 60% -- surface beneath the map */
+    --accent: #3B82F6;      /* Accent 10% -- running status dot, popup time */
+    --chrome-text: #FFFFFF;
+    --chrome-muted: #9AA5B1;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --topbar-height: 56px;
+  }
 
-  /* Marker popup (03-UI-SPEC.md "long-text" resolution): the content area is
-     capped at 240px and wraps normally, so a long venue name grows the popup
-     vertically instead of being truncated with an ellipsis. */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--page-bg);
+    /* System font stack -- no webfont load, so there is no FOUT risk during
+       the judged live demo. */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Body role: 16px / 400 / 1.5 */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1F2933;
+  }
+
+  /* ---- Top bar: fixed 56px, title left, status badge right ---- */
+  #topbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: var(--topbar-height);
+    box-sizing: border-box;
+    padding: 0 var(--space-lg);
+    background: var(--chrome);
+    color: var(--chrome-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1100;
+  }
+
+  #brand-title {
+    /* Heading role: 20px / 600 / 1.2 */
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    display: block;
+  }
+
+  /* DASH-02 transparency: the popularity score is a synthetic model output,
+     never a live-measured crowd count. Stating that in the chrome keeps the
+     claim honest everywhere the heat colors appear. */
+  #brand-subtitle {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--chrome-muted);
+    display: block;
+    margin-top: var(--space-xs);
+  }
+
+  /* ---- Status badge (R6/DASH-06): informational only, never gating ---- */
+  #status-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    /* Label role: 13px / 600 / 1.2 */
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    flex: none;
+  }
+
+  /* Filled accent-blue dot = running. Accent is app chrome, deliberately
+     outside the heat gradient so status can never read as a heat level. */
+  .status-dot.running { background: var(--accent); border: 2px solid var(--accent); }
+  /* Hollow gray dot = stopped. The text label is always rendered too, so
+     color is never the sole signal. */
+  .status-dot.stopped { background: transparent; border: 2px solid var(--chrome-muted); }
+  #status-label.stopped { color: var(--chrome-muted); }
+
+  /* ---- Map fills everything below the top bar, full-bleed ---- */
+  #map {
+    position: absolute;
+    top: var(--topbar-height);
+    left: 0; right: 0; bottom: 0;
+    background: var(--page-bg);
+  }
+
+  /* ---- Floating panels: counts above telemetry, 32px apart ---- */
+  #panels {
+    position: absolute;
+    top: calc(var(--topbar-height) + var(--space-lg));
+    right: var(--space-lg);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    max-width: 260px;
+  }
+
+  .panel {
+    background: var(--chrome);
+    color: var(--chrome-text);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(31, 41, 51, 0.25);
+  }
+
+  .panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--chrome-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .panel-placeholder {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--chrome-muted);
+  }
+
+  /* ---- Counts panel (R5/DASH-05): four fixed rows ---- */
+  #counts-rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  /* An author `display` rule outranks the UA stylesheet's `[hidden] { display:
+     none }`, so the HTML hidden attribute alone would NOT hide these rows --
+     the four placeholder zeros would sit under the "Loading live data..."
+     placeholder and read as real counts before the first fetch resolves.
+     Every element toggled via `hidden` that also carries an author display
+     rule needs this companion selector. */
+  #counts-rows[hidden] { display: none; }
+
+  .count-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+  }
+
+  .count-value {
+    /* Display role: 28px / 600 / 1.2 -- readable across a room */
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    min-width: 2.2em;
+    text-align: right;
+  }
+
+  .count-label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- Telemetry panel ---- */
+  #telemetry-lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  #telemetry-recorded { color: var(--chrome-muted); }
+
+  /* ---- Marker popups ---- */
+  /* 03-UI-SPEC.md "long-text" resolution: the content area is capped at 240px
+     and wraps normally, so a long venue name grows the popup vertically
+     instead of being truncated with an ellipsis. */
+  .leaflet-popup-content { margin: var(--space-md); font-size: 16px; line-height: 1.5; }
   .popup-content { max-width: 240px; }
   .popup-name { font-weight: 700; }
   .popup-level { font-size: 13px; font-weight: 600; line-height: 1.2; }
-  .popup-time { color: #3B82F6; }
+  .popup-time { color: var(--accent); }
+  .popup-note { font-size: 13px; line-height: 1.2; color: #616E7C; margin-top: var(--space-xs); }
 </style>
 </head>
 <body>
+
+<header id="topbar">
+  <div id="brand">
+    <span id="brand-title">PopHeat</span>
+    <span id="brand-subtitle">Synthetic crowdedness estimates &middot; not measured crowd counts</span>
+  </div>
+  <!-- DASH-06: this badge reports the PopHeat ingestion pipeline only. It sits
+       in the app chrome, never beside venue data, and says "Pipeline" so it can
+       never be read as an individual venue's open/closed status. -->
+  <div id="status-badge" role="status" aria-live="polite"
+       title="Status of the PopHeat ingestion pipeline &mdash; not any venue's opening hours.">
+    <span id="status-dot" class="status-dot stopped" aria-hidden="true"></span>
+    <span id="status-label" class="stopped">Pipeline: Stopped</span>
+  </div>
+</header>
+
 <div id="map"></div>
+
+<div id="panels">
+  <section class="panel" id="counts-panel" aria-label="Venue count per crowdedness level">
+    <div class="panel-title">Venues by crowdedness</div>
+    <!-- Shown until the first /counts response resolves; the map's own OSM
+         tiles load independently of this. -->
+    <div class="panel-placeholder" id="counts-placeholder">Loading live data&hellip;</div>
+    <div id="counts-rows" hidden>
+      <div class="count-row"><span class="count-value" id="count-BAIXO">0</span><span class="count-label">BAIXO</span></div>
+      <div class="count-row"><span class="count-value" id="count-MEDIO">0</span><span class="count-label">MEDIO</span></div>
+      <div class="count-row"><span class="count-value" id="count-ALTO">0</span><span class="count-label">ALTO</span></div>
+      <div class="count-row"><span class="count-value" id="count-CRITICO">0</span><span class="count-label">CRITICO</span></div>
+    </div>
+  </section>
+
+  <section class="panel" id="telemetry-panel" aria-label="Ingestion telemetry">
+    <div class="panel-title">Ingestion telemetry</div>
+    <div id="telemetry-lines">
+      <div id="telemetry-batch" class="panel-placeholder">Loading live data&hellip;</div>
+      <div id="telemetry-recorded"></div>
+    </div>
+  </section>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"
   crossorigin="anonymous"></script>
@@ -72,6 +302,10 @@
     CRITICO: '#E74C3C'
   };
 
+  // Fixed render order for the counts panel -- always four rows, including a
+  // level currently held by zero venues (a normal state, not an error).
+  const HEAT_LEVELS = ['BAIXO', 'MEDIO', 'ALTO', 'CRITICO'];
+
   // Outer-scope layer handles so the render functions below can be called
   // repeatedly (Plan 03-03's 10s refresh, D-08) without leaking layers or
   // leaving stale markers behind.
@@ -98,6 +332,31 @@
     var parsed = new Date(String(timestamp).replace(' ', 'T'));
     if (isNaN(parsed.getTime())) { return String(timestamp); }
     return parsed.toLocaleTimeString();
+  }
+
+  // IRIS serves this static file with "Content-Type: text/html; charset=ISO-8859-1",
+  // and an HTTP charset header OVERRIDES <meta charset="UTF-8">. A literal UTF-8
+  // "middle dot" byte pair in this file therefore renders as mojibake ("A-circumflex
+  // dot"). KEEP THIS FILE PURE ASCII: build non-ASCII glyphs from a character code
+  // (here) or an HTML entity (in markup). Text arriving from the REST API is
+  // unaffected -- response.json() always decodes as UTF-8 regardless of this page's
+  // own charset, which is why accented venue names render correctly in popups.
+  const MIDDOT = String.fromCharCode(183);
+
+  function formatNumber(value, maxDecimals) {
+    var n = Number(value);
+    if (isNaN(n)) { return String(value); }
+    return n.toLocaleString(undefined, { maximumFractionDigits: maxDecimals });
+  }
+
+  // A non-2xx response must REJECT so the caller's catch path runs -- otherwise
+  // PopHeat.API's {"error": "query failed"} body would be rendered as if it
+  // were data. Used as the first .then() of every fetch below.
+  function requireOkJson(response) {
+    if (!response.ok) {
+      throw new Error(response.url + ' responded ' + response.status);
+    }
+    return response.json();
   }
 
   // R2/DASH-02: one heat point per venue with a reading, weighted by its
@@ -152,9 +411,9 @@
       });
   }
 
-  // Popup copy contract locked by 03-UI-SPEC.md. "Estimated crowdedness"
-  // labelling keeps the synthetic nature of the score explicit and keeps the
-  // CRITICO/ALTO wording about how busy a venue is -- never a safety warning.
+  // Popup copy contract locked by 03-UI-SPEC.md. The trailing note keeps
+  // CRITICO/ALTO explicitly about how busy a venue is -- it is a crowdedness
+  // estimate, never a safety or hazard warning (DASH-04).
   function buildPopupHtml(venue) {
     return '<div class="popup-content">' +
       '<div class="popup-name">' + escapeHtml(venue.venueName) + '</div>' +
@@ -162,11 +421,82 @@
         escapeHtml(venue.category) + ' &middot; ' + escapeHtml(venue.heatLevel) + '</div>' +
       '<div class="popup-popularity">Popularity: ' + escapeHtml(venue.popularity) + '</div>' +
       '<div class="popup-time">as of ' + escapeHtml(formatLocalTime(venue.observedAt)) + '</div>' +
+      '<div class="popup-note">Estimated crowdedness, not a safety warning.</div>' +
       '</div>';
   }
 
+  // R6/DASH-06: purely informational. This function never touches the map,
+  // counts or telemetry DOM, so a stopped pipeline leaves the last-persisted
+  // data on screen unchanged. It also never leaves the badge blank -- the
+  // /status fetch's catch handler calls it with a stopped value.
+  function renderStatus(status) {
+    var running = !!(status && status.running);
+    var dot = document.getElementById('status-dot');
+    var label = document.getElementById('status-label');
+    dot.className = running ? 'status-dot running' : 'status-dot stopped';
+    label.className = running ? '' : 'stopped';
+    label.textContent = running ? 'Pipeline: Running' : 'Pipeline: Stopped';
+  }
+
+  // R5/DASH-05: four fixed rows straight from /counts, which always emits all
+  // four keys. First successful call swaps the loading placeholder out.
+  function renderCounts(counts) {
+    HEAT_LEVELS.forEach(function (level) {
+      var value = (counts && counts[level] !== undefined && counts[level] !== null) ? counts[level] : 0;
+      var cell = document.getElementById('count-' + level);
+      cell.textContent = value;
+      cell.style.color = HEAT_COLORS[level];
+    });
+    document.getElementById('counts-placeholder').hidden = true;
+    document.getElementById('counts-rows').hidden = false;
+  }
+
+  // Newest batch only; /telemetry is already newest-first. An empty array is
+  // the legitimate "no batch yet" case -- keep the placeholder rather than
+  // dereferencing batches[0].
+  function renderTelemetry(batches) {
+    if (!batches || !batches.length) { return; }
+    var batch = batches[0];
+    var line = document.getElementById('telemetry-batch');
+    line.className = '';
+    line.textContent = 'Last batch: ' + formatNumber(batch.readingCount, 0) + ' readings ' +
+      MIDDOT + ' ' + formatNumber(batch.elapsedSeconds, 3) + 's ' +
+      MIDDOT + ' ' + formatNumber(batch.throughput, 0) + '/s';
+    document.getElementById('telemetry-recorded').textContent =
+      'Recorded ' + formatLocalTime(batch.recordedAt);
+  }
+
+  // One refresh cycle. Each endpoint is fetched independently so a failure in
+  // one never blanks the others (R6's non-gating rule generalized). Plan 03-03
+  // wraps this in the 10s interval and adds the stale-data banner.
+  function loadAll() {
+    fetch(API_BASE + '/venues')
+      .then(requireOkJson)
+      .then(function (venues) {
+        renderHeatLayer(venues);
+        renderMarkers(venues);
+      });
+
+    fetch(API_BASE + '/counts')
+      .then(requireOkJson)
+      .then(renderCounts);
+
+    fetch(API_BASE + '/telemetry')
+      .then(requireOkJson)
+      .then(renderTelemetry);
+
+    // R6/DASH-06 backstop: if the /status call itself fails or times out the
+    // badge must still say something -- it degrades to "Pipeline: Stopped"
+    // rather than going blank or throwing.
+    fetch(API_BASE + '/status')
+      .then(requireOkJson)
+      .then(renderStatus)
+      .catch(function () { renderStatus({ running: false }); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    // Porto Ribeira/Sé/Baixa-Aliados historic center bounding box (Phase 1).
+    // Porto Ribeira/Se/Baixa-Aliados historic center bounding box (Phase 1).
+    // (ASCII-only on purpose -- see the MIDDOT note above.)
     map = L.map('map').setView([41.1457, -8.6112], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -177,12 +507,7 @@
     // Created once and reused by every renderMarkers() call.
     markerLayer = L.layerGroup().addTo(map);
 
-    fetch(API_BASE + '/venues')
-      .then(function (response) { return response.json(); })
-      .then(function (venues) {
-        renderHeatLayer(venues);
-        renderMarkers(venues);
-      });
+    loadAll();
   });
 </script>
 </body>
