@@ -1,10 +1,10 @@
 ---
 schema_version: 1
-open_count: 0
+open_count: 1
 waived_count: 0
 fixed_count: 2
-total_count: 2
-last_updated: 2026-09-20T21:23:50.664Z
+total_count: 3
+last_updated: 2026-09-21T09:40:30.605Z
 ---
 
 # Broken Windows Ledger
@@ -17,6 +17,7 @@ last_updated: 2026-09-20T21:23:50.664Z
 |----|-------|------|------|------|-------------|--------|--------|-------------|-------------|
 | 1 | 02 | unrun-verify | iris/PopHeat/BatchTelemetry.cls |  | Plan 02-02 verification item 3: BatchTelemetry.cls RecentBatches() compile via $SYSTEM.OBJ.LoadDir and live query not run -- Docker daemon inaccessible in execution sandbox | fixed |  | 2026-09-20T18:24:54.295Z | 2026-09-20T21:23:50.564Z |
 | 2 | 02 | unrun-verify | popheat_pipeline/components.py |  | Plan 02-02 verification item 2: live multi-tick production run (two distinct 150-venue batches, broken-batch error isolation, BatchTelemetry accumulation) not run against real IRIS -- Docker daemon inaccessible in execution sandbox; verified instead via unit tests + live-stubbed iop instantiation trial | fixed |  | 2026-09-20T18:25:00.618Z | 2026-09-20T21:23:50.664Z |
+| 3 | 03 | unrun-verify | iris/PopHeat/API.cls |  | GET /venues returns HTTP 403 live (and /dashboard.csp 404) despite AutheEnabled=64 + UnknownUser role/resource grant + %Service_WebGateway fix; tracer <verify> could not be made to pass, root cause undiagnosed -- see 03-01-SUMMARY.md Known Issues | open |  | 2026-09-21T09:40:30.605Z |  |
 
 ````json
 [
@@ -44,6 +45,19 @@ last_updated: 2026-09-20T21:23:50.664Z
     "reason": "",
     "recorded_at": "2026-09-20T18:25:00.618Z",
     "resolved_at": "2026-09-20T21:23:50.664Z",
+    "milestone": null
+  },
+  {
+    "id": 3,
+    "kind": "unrun-verify",
+    "phase": "03",
+    "file": "iris/PopHeat/API.cls",
+    "line": null,
+    "description": "GET /venues returns HTTP 403 live (and /dashboard.csp 404) despite AutheEnabled=64 + UnknownUser role/resource grant + %Service_WebGateway fix; tracer <verify> could not be made to pass, root cause undiagnosed -- see 03-01-SUMMARY.md Known Issues",
+    "status": "open",
+    "reason": "",
+    "recorded_at": "2026-09-21T09:40:30.605Z",
+    "resolved_at": null,
     "milestone": null
   }
 ]

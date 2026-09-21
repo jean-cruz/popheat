@@ -1,0 +1,47 @@
+<!-- PopHeat live dashboard (DASH-01, DASH-05, DASH-06). Minimal tracer slice:
+     fetches /csp/popheat/api/venues and drops a plain marker per venue on a
+     Leaflet/OSM map (D-01, D-05). Heat layer, counts/telemetry panels, status
+     badge, and polling/error-banner behavior are added in Plans 03-02/03-03. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PopHeat</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin="anonymous"/>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; }
+  #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin="anonymous"></script>
+<script>
+  // Base path for every PopHeat REST endpoint (DASH-01, DASH-05, DASH-06) --
+  // subsequent plans reuse this constant rather than re-deriving the path.
+  const API_BASE = '/csp/popheat/api';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Porto Ribeira/Sé/Baixa-Aliados historic center bounding box (Phase 1).
+    var map = L.map('map').setView([41.1457, -8.6112], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    fetch(API_BASE + '/venues')
+      .then(function (response) { return response.json(); })
+      .then(function (venues) {
+        venues.forEach(function (venue) {
+          L.circleMarker([venue.lat, venue.lon]).addTo(map);
+        });
+      });
+  });
+</script>
+</body>
+</html>
