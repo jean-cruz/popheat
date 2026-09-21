@@ -1,9 +1,9 @@
 {
   "bounding_box": {
-    "south": 41.1390,
-    "west": -8.6200,
-    "north": 41.1510,
-    "east": -8.6020
+    "south": -23.575,
+    "west": -46.675,
+    "north": -23.545,
+    "east": -46.635
   },
   "amenity_allowlist": ["bar", "pub", "restaurant", "cafe", "fast_food", "nightclub"],
   "overpass_endpoint": "https://overpass-api.de/api/interpreter",

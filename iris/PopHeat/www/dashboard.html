@@ -715,9 +715,9 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    // Porto Ribeira/Se/Baixa-Aliados historic center bounding box (Phase 1).
+    // Sao Paulo Paulista/Jardins/Pinheiros/Vila Madalena bounding box.
     // (ASCII-only on purpose -- see the MIDDOT note above.)
-    map = L.map('map').setView([41.1457, -8.6112], 15);
+    map = L.map('map').fitBounds([[-23.575, -46.675], [-23.545, -46.635]], { padding: [20, 20] });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
