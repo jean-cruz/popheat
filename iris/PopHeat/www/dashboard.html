@@ -6,8 +6,9 @@
      circleMarkers reserved for ALTO/CRITICO venues only (R3/DASH-03), sized
      by severity (R4/DASH-04), under a fixed top bar carrying the pipeline
      status badge (R6/DASH-06) and beside floating counts (R5/DASH-05) and
-     telemetry panels. The 10s polling loop and the stale-data error banner
-     arrive in Plan 03-03.
+     telemetry panels. Everything is re-fetched and re-rendered every 10
+     seconds (R7/DASH-07, D-08) with no page reload; a failed cycle surfaces
+     the D-07 stale-data banner over unchanged last-known data.
 
      All color, typography, spacing and copy below is the locked contract in
      .planning/phases/03-dashboard-api/03-UI-SPEC.md -- do not re-derive it.
@@ -18,7 +19,6 @@
      machinery instead of the static-file path and 404s under a ServeFiles
      web application. This page is pure static HTML/JS with zero server-side
      ObjectScript (D-05), so it never needed CSP compilation. -->
-<!-- IMPORTANT: this is the file Plan 03-03 extends. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,6 +132,47 @@
     top: var(--topbar-height);
     left: 0; right: 0; bottom: 0;
     background: var(--page-bg);
+  }
+
+  /* ---- Empty state (03-UI-SPEC.md "empty"): /venues returned zero rows ---- */
+  /* Sits over the map so the OSM base tiles keep rendering underneath; only
+     the data layers are absent. Shown ONLY on a successful-but-empty /venues
+     response -- a failed fetch is the banner's job, never this element's. */
+  #empty-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    max-width: 360px;
+    box-sizing: border-box;
+    padding: var(--space-lg);
+    background: var(--chrome);
+    color: var(--chrome-text);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(31, 41, 51, 0.25);
+    text-align: center;
+  }
+
+  /* Same specificity trap as #counts-rows: the author `position`/display
+     context needs an explicit [hidden] companion or the box shows through. */
+  #empty-state[hidden] { display: none; }
+
+  #empty-state h2 {
+    /* Heading role: 20px / 600 / 1.2 */
+    margin: 0 0 var(--space-sm);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  #empty-state p {
+    /* Body role: 16px / 400 / 1.5 */
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--chrome-muted);
   }
 
   /* ---- Floating panels: counts above telemetry, 32px apart ---- */
@@ -249,6 +290,13 @@
 
 <div id="map"></div>
 
+<!-- Empty state, copy locked by 03-UI-SPEC.md's Copywriting Contract. The em
+     dash is an entity because this file must stay pure ASCII (see MIDDOT). -->
+<div id="empty-state" role="status" aria-live="polite" hidden>
+  <h2>No readings yet</h2>
+  <p>The ingestion pipeline hasn't completed its first batch. This page will update automatically within a few seconds &mdash; no action needed.</p>
+</div>
+
 <div id="panels">
   <section class="panel" id="counts-panel" aria-label="Venue count per crowdedness level">
     <div class="panel-title">Venues by crowdedness</div>
@@ -305,6 +353,28 @@
   // Fixed render order for the counts panel -- always four rows, including a
   // level currently held by zero venues (a normal state, not an error).
   const HEAT_LEVELS = ['BAIXO', 'MEDIO', 'ALTO', 'CRITICO'];
+
+  // R7/DASH-07, D-08: the client re-fetches everything every 10 seconds. This
+  // is the spec's literal number, deliberately NOT derived from Phase 2's
+  // 3-second ingestion cadence -- the two are independent.
+  const REFRESH_INTERVAL_MS = 10000;
+
+  // Per-request deadline, shorter than the interval so one wedged connection
+  // (a half-open TCP socket to a container that just went away) can never
+  // hold the isRefreshing guard forever and silently stop all refreshes. A
+  // timed-out request is a failed request: it goes through recordFetchFailure.
+  const FETCH_TIMEOUT_MS = 8000;
+
+  // In-flight guard: while a cycle's fetches are still outstanding, the next
+  // scheduled tick is skipped instead of starting an overlapping cycle -- an
+  // older, slower response can therefore never land after (and overwrite) a
+  // newer one.
+  let isRefreshing = false;
+
+  // Set only when ALL FOUR fetches of a cycle succeeded; this is the "as of"
+  // time the D-07 stale-data banner reports. A partially successful cycle
+  // renders what it got but does not advance this timestamp.
+  let lastSuccessfulFetchAt = null;
 
   // Outer-scope layer handles so the render functions below can be called
   // repeatedly (Plan 03-03's 10s refresh, D-08) without leaking layers or
@@ -427,8 +497,10 @@
 
   // R6/DASH-06: purely informational. This function never touches the map,
   // counts or telemetry DOM, so a stopped pipeline leaves the last-persisted
-  // data on screen unchanged. It also never leaves the badge blank -- the
-  // /status fetch's catch handler calls it with a stopped value.
+  // data on screen unchanged. The badge is never blank: the markup ships with
+  // "Pipeline: Stopped" so a /status fetch that fails before the first success
+  // leaves that default in place; a failure AFTER a success keeps the last
+  // known value under the D-07 banner, like every other region.
   function renderStatus(status) {
     var running = !!(status && status.running);
     var dot = document.getElementById('status-dot');
@@ -466,32 +538,94 @@
       'Recorded ' + formatLocalTime(batch.recordedAt);
   }
 
-  // One refresh cycle. Each endpoint is fetched independently so a failure in
-  // one never blanks the others (R6's non-gating rule generalized). Plan 03-03
-  // wraps this in the 10s interval and adds the stale-data banner.
-  function loadAll() {
-    fetch(API_BASE + '/venues')
+  // Removes both data layers from the map while leaving the OSM base tiles in
+  // place. Used by the empty state, which is "tiles, no data" by contract.
+  function clearDataLayers() {
+    if (heatLayer) {
+      map.removeLayer(heatLayer);
+      heatLayer = null;
+    }
+    markerLayer.clearLayers();
+  }
+
+  // R2/R3 entry point for a successful /venues response. A successfully
+  // parsed EMPTY array is its own explicit state (03-UI-SPEC.md "empty"): the
+  // "No readings yet" box appears over the still-rendering base tiles. It is
+  // NOT the error path -- a failed fetch never reaches this function, so the
+  // empty state can never be shown because of a network problem.
+  function renderVenues(venues) {
+    var emptyState = document.getElementById('empty-state');
+    if (!venues || !venues.length) {
+      clearDataLayers();
+      emptyState.hidden = false;
+      return;
+    }
+    emptyState.hidden = true;
+    renderHeatLayer(venues);
+    renderMarkers(venues);
+  }
+
+  // Called for every individual fetch that fails (network error, timeout, or
+  // a non-2xx response). Plan 03-03 Task 2 makes this show the D-07 banner;
+  // by contract it never touches any other region of the page, so whatever
+  // that region last rendered stays exactly as it is.
+  function recordFetchFailure(path, error) {
+    if (window.console && console.warn) {
+      console.warn('PopHeat: refresh of ' + path + ' failed', error);
+    }
+  }
+
+  // Fetch one endpoint and hand the parsed JSON to its renderer. Resolves to
+  // true on success and false on ANY failure -- it never rejects, so the four
+  // regions in a cycle are fully independent: one endpoint failing can neither
+  // abort the others nor feed them undefined/null.
+  function fetchRegion(path, render) {
+    var controller = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = controller
+      ? setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT_MS)
+      : null;
+    var options = controller ? { signal: controller.signal } : {};
+    return fetch(API_BASE + path, options)
       .then(requireOkJson)
-      .then(function (venues) {
-        renderHeatLayer(venues);
-        renderMarkers(venues);
+      .then(function (data) {
+        render(data);
+        return true;
+      })
+      .catch(function (error) {
+        recordFetchFailure(path, error);
+        return false;
+      })
+      .finally(function () {
+        if (timer !== null) { clearTimeout(timer); }
       });
+  }
 
-    fetch(API_BASE + '/counts')
-      .then(requireOkJson)
-      .then(renderCounts);
+  // One refresh cycle (R7/DASH-07). The four endpoints are fetched
+  // concurrently and awaited independently -- each has its own success/failure
+  // path via fetchRegion, so there is no shared catch that could let one
+  // rejection suppress the other three renders (R6's non-gating rule
+  // generalized). isRefreshing is released in `finally` so a thrown renderer
+  // bug cannot wedge the loop either.
+  async function refreshAll() {
+    if (isRefreshing) { return; }
+    isRefreshing = true;
+    try {
+      var venuesDone = fetchRegion('/venues', renderVenues);
+      var countsDone = fetchRegion('/counts', renderCounts);
+      var telemetryDone = fetchRegion('/telemetry', renderTelemetry);
+      var statusDone = fetchRegion('/status', renderStatus);
 
-    fetch(API_BASE + '/telemetry')
-      .then(requireOkJson)
-      .then(renderTelemetry);
+      var venuesOk = await venuesDone;
+      var countsOk = await countsDone;
+      var telemetryOk = await telemetryDone;
+      var statusOk = await statusDone;
 
-    // R6/DASH-06 backstop: if the /status call itself fails or times out the
-    // badge must still say something -- it degrades to "Pipeline: Stopped"
-    // rather than going blank or throwing.
-    fetch(API_BASE + '/status')
-      .then(requireOkJson)
-      .then(renderStatus)
-      .catch(function () { renderStatus({ running: false }); });
+      if (venuesOk && countsOk && telemetryOk && statusOk) {
+        lastSuccessfulFetchAt = new Date();
+      }
+    } finally {
+      isRefreshing = false;
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -507,7 +641,11 @@
     // Created once and reused by every renderMarkers() call.
     markerLayer = L.layerGroup().addTo(map);
 
-    loadAll();
+    // D-08: one immediate cycle, then the same cycle every 10 seconds. This
+    // is the only timer on the page and nothing ever reloads or navigates
+    // the document -- "live" means re-render in place, never a page reload.
+    refreshAll();
+    setInterval(refreshAll, REFRESH_INTERVAL_MS);
   });
 </script>
 </body>
