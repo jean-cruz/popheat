@@ -3,13 +3,19 @@
 #   docker compose exec iris sh /irisdev/app/docker/init-production.sh
 #
 # Steps (D-05): install iop + tzdata -> ensure the POPHEAT namespace exists
-# (D-04 fallback in case merge.cpf didn't take effect) -> compile the two
-# Persistent classes -> `iop --init` the IOP support classes into POPHEAT
-# (required once per namespace before the first `iop --migrate` -- omitting
-# it fails registration with "IRIS could not find a class required during
-# component registration") -> migrate settings.py -> enable auto-start ->
-# start the production for this run too (SetAutoStart only affects the NEXT
-# instance start).
+# (D-04 fallback in case merge.cpf didn't take effect) -> enable %Service_CallIn
+# (required by `iop`, which runs as a plain external python3 process bridging
+# into IRIS via Callin -- the community image ships this service disabled, and
+# merge.cpf's [Actions] section only creates databases/namespaces, not
+# security services, so without this every `iop` invocation below fails with
+# "IrisStart failed: IRIS_ACCESSDENIED (-15)", surfaced as an opaque
+# `Error: <MagicMock ...>` once the embedded-python wrapper falls back to a
+# mock stub) -> compile the two Persistent classes -> `iop --init` the IOP
+# support classes into POPHEAT (required once per namespace before the first
+# `iop --migrate` -- omitting it fails registration with "IRIS could not find
+# a class required during component registration") -> migrate settings.py ->
+# enable auto-start -> start the production for this run too (SetAutoStart
+# only affects the NEXT instance start).
 set -e
 
 IRIS_INSTANCE="IRIS"
@@ -46,6 +52,14 @@ if 'sc { do \$System.Status.DisplayError(sc) }
 halt
 IRISEOF
 fi
+
+echo "=== PopHeat: enabling %Service_CallIn (required by iop's external python3 process) ==="
+iris session "$IRIS_INSTANCE" -U%SYS <<IRISEOF
+set props("Enabled") = 1
+set sc = ##class(Security.Services).Modify("%Service_CallIn", .props)
+if 'sc { do \$System.Status.DisplayError(sc) }
+halt
+IRISEOF
 
 echo "=== PopHeat: setting the _SYSTEM password (for Management Portal / debugging access) ==="
 iris session "$IRIS_INSTANCE" -U%SYS <<IRISEOF
@@ -157,7 +171,22 @@ halt
 IRISEOF
 
 echo "=== PopHeat: starting PopHeat.Production for this run ==="
-iop --start PopHeat.Production --detach || echo "(already running -- ok on re-run)"
+# WR-04: do NOT use `iop --start`/`iop -u` for this (verified live) -- iop
+# runs as an external python3 process bridging into IRIS via Callin, and the
+# business-host jobs it spins up end up parented to that short-lived CLI
+# connection: they get created successfully (iop --status even reports
+# NeedsUpdate=0 right after) but die the moment the CLI process exits, so
+# CatalogPollingService/ScoreClassifyProcess/PersistOperation never actually
+# run and the dashboard is permanently stuck on "No readings yet". Driving
+# the exact same Ens.Director calls from inside a real `iris session`
+# terminal instead makes IRIS own the jobs properly, so they persist.
+iris session "$IRIS_INSTANCE" -U"$IRIS_NAMESPACE" <<IRISEOF
+set sc = ##class(Ens.Director).StartProduction("PopHeat.Production")
+if 'sc { do \$System.Status.DisplayError(sc) }
+set sc = ##class(Ens.Director).UpdateProduction()
+if 'sc { do \$System.Status.DisplayError(sc) }
+halt
+IRISEOF
 
 echo "=== PopHeat: status ==="
 iop --status || true
